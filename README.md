@@ -1,5 +1,6 @@
 # COSC473FEHPocketTactician
 A project for Dr. Ghani's COSC 473 class by Ethan Turner, Chris Nelson, and Mathias Botti
+View the project here! https://banzerschreck.github.io/COSC473FEHPocketTactician/
 
 Some helpful links for use during development:
 
