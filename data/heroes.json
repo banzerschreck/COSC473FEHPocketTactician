@@ -1,0 +1,68 @@
+{
+  "hero":{
+    "name": "Abel",
+    "title": "The Panther",
+    "color": "Blue",
+    "weapon": "Lance",
+    "movetype": "Cavalry",
+    "rarity": "3to4starpool",
+    "assets": {
+      "portrait": "assets/AbelPortrait.png",
+      "main": "assets/Abel.png"
+    },
+    "stats":{
+      "5star1": {"hp":[16,17,18], "atk":[6,7,8], "spd":[7,8,9], "def":[7,8,9], "res":[5,6,7]},
+      "5star40": {"hp":[35,39,42], "atk":[30,33,36], "spd":[29,32,35], "def":[22,25,28], "res":[22,25,29]},
+      "4star1": {"hp":[15,16,17], "atk":[5,6,7], "spd":[7,8,9], "def":[7,8,9], "res":[4,5,6]},
+      "4star40": {"hp":[33,36,39], "atk":[27,30,33], "spd":[27,30,33], "def":[21,24,27], "res":[20,23,26]},
+      "3star1": {"hp":[15,16,17], "atk":[5,6,7],	"spd":[6,7,8], "def":[6,7,8], "res":[4,5,6]},
+      "3star40": {"hp":[32,35,38], "atk":[26,29,32], "spd":[25,28,31], "def":[19,22,25], "res":[19,22,25]}
+    },
+    "skills":{
+      {"name": "Iron Lance", "rarity": 1, "type": "Weapon"},
+      {"name": "Steel Lance", "rarity": 2, "type": "Weapon"},
+      {"name": "Brave Lance", "rarity": 3, "type": "Weapon"},
+      {"name": "Brave Lance+", "rarity": 5, "type": "Weapon"},
+      {"name": "Holy Vestments", "rarity": 3, "type": "Special"},
+      {"name": "Aegis", "rarity": 4, "type": "Special"},
+      {"name": "HP +3", "rarity": 3, "type": "A"},
+      {"name": "HP +4", "rarity": 4, "type": "A"},
+      {"name": "HP +5", "rarity": 5, "type": "A"},
+      {"name": "Swordbreaker 1", "rarity": 1, "type": "B"},
+      {"name": "Swordbreaker 2", "rarity": 2, "type": "B"},
+      {"name": "Swordbreaker 3", "rarity": 4, "type": "B"}
+    }
+  },
+  {
+    "name": "Alfonse",
+    "title": "Prince of Askr",
+    "color": "Red",
+    "weapon": "Sword",
+    "movetype": "Infantry",
+    "rarity": "limited4star",
+    "assets": {
+      "portrait": "assets/AlfonsePortrait.png",
+      "main": "assets/Alfonse.png"
+    },
+    "stats":{
+      5star1: {19, 9, 6, 8, 5},
+      5star40: {43, 35, 25, 32, 22},
+      4star1: {18, 9, 5, 8, 4},
+      4star40: {40, 33, 23, 30, 20}
+    },
+    "skills":{
+      {"name":"Iron Sword", "rarity": 1, "type": "Weapon"},
+      {"name":"Steel Sword", "rarity": 3, "type": "Weapon"},
+      {"name":"Silver Sword", "rarity": 4, "type": "Weapon"},
+      {"name":"Fólkvangr", "rarity": 5, "type": "Weapon"},
+      {"name":"Daylight", "rarity": 2, "type": "Special"},
+      {"name":"Sol", "rarity": 4, "type": "Special"},
+      {"name":"Death Blow 1", "rarity": 1, "type": "A"},
+      {"name":"Death Blow 2", "rarity": 2, "type": "A"},
+      {"name":"Death Blow 3", "rarity": 4, "type": "A"},
+      {"name":"Spur Atk 1", "rarity": 3, "type": "C"},
+      {"name":"Spur Atk 2", "rarity": 4, "type": "C"},
+      {"name":"Spur Atk 3", "rarity": 5, "type": "C"}
+    }
+  }
+}
