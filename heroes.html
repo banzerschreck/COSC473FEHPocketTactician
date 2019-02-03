@@ -2,36 +2,78 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>View Heroes</title>
+    <script type="text/javascript">
+      /* 
+	   * TODO:
+       *   Generate list of Heroes found in JSON database... DONE
+       *   Allow user to select Hero from list... DONE
+       *   Display selected Hero's data on HTML page... IN PROGRESS
+       */
+ 	 var data = null; //constant to hold JSON data once it's been loaded
+      /*
+       * sends an AJAX XMLHttpRequest to our JSON data to load it into the page
+       */
+      function loadData () {
+        const request = new XMLHttpRequest();
+        request.open('GET', 'data/heroes.json');
+        request.onload = () => {
+          data = JSON.parse(request.responseText);
+          buildHeroesList();
+        };
+        request.send();
+      }
+	  /*
+	   * builds list of heroes found in the database
+	   * items can be clicked to show that hero's data
+	   */
+	  function buildHeroesList() {
+	    var s = "<ul>";
+	    for (var i=0; i<data.length; i++) {
+		  s+="<li><a href=\"javascript:displayHeroData("+data[i].id+")\">";
+		  s+=data[i].name+": "+data[i].title+"</a></li>";
+		}
+		s+="</ul>";
+		document.getElementById("select").innerHTML = s;
+	  }
+	  /*
+	   * displays selected hero's data on the page
+	   */
+	  function displayHeroData(heroid) {
+	    var s = "";
+		var hero = data[heroid];
+		s+= "<img src=\"data/assets/"+hero.name+".png\">"
+		//name and title
+		s+= hero.name+": "+hero.title+"<br />";
+		//weapon, color, and movement
+		s+= hero.color+" "+hero.weapon+" "+hero.movetype+"<br />";
+		//stats
+		s+= "<h3>Stats</h3>";
+		s+= "<table><tr><th>Rarity/Lvl</th><th>HP</th><th>Atk</th><th>Spd</th><th>Def</th><th>Res</th></tr>";
+		for (const o of hero.stats) {
+		  s+="<tr><td>"+o.rank+"</td><td>"+o.hp+"</td><td>"+o.atk+"</td><td>"+o.spd+"</td><td>"+o.def+"</td><td>"+o.res+"</td></tr>";
+		}
+		s+= "</table>";
+		//skills
+		s+= "<h3>Skills</h3>";
+		s+= "<table><tr><th>Skill Name</th><th>Rarity</th><th>Skill Type</th></tr>";
+		for (const o of hero.skills) {
+		  s+= "<tr><td>"+o.name+"</td><td>"+o.rarity+"</td><td>"+o.type+"</td></tr>";
+		}
+		document.getElementById("hero").innerHTML = s;
+      }
+      //Runs loadData() as soon as page is loaded
+      document.addEventListener("DOMContentLoaded", () => {loadData(); });
+    </script>
   </head>
-  <script type="text/javascript">
-    /*
-     * this function sends an AJAX XMLHttpRequest to our JSON data to load it into the page
-     * once it's in the page we can do stuff with it like displaying all available Heroes
-     * TODO: rewrite JSON so it parses properly
-    */
-    function loadData () {
-      const request = new XMLHttpRequest();
-      request.open('GET', 'data/heroes.json');
-      request.onload = () => {
-        const data = JSON.parse(request.responseText);
-        displayData(data);
-        console.warn("Failed to parse Hero data");
-        //console.log(request.responseText);
-      };
-      request.send();
-    }
-    /*
-     * function for displaying data after it's been read in
-     * currently just displays read data into the console (press F12 in firefox or chrome)
-    */
-    function displayData(data) {
-      console.log(data);
-    }
-    //Runs loadData() function as soon as page is loaded
-    document.addEventListener("DOMContentLoaded", () => {loadData(); });
-  </script>
   
   <body>
-    Press F12 to see if data loading worked
+	<h1>Select a Hero:</h1>
+	<div id="select">
+	    
+	</div>
+	
+	<div id="hero">
+	  
+	</div>
   </body>
 </html>
