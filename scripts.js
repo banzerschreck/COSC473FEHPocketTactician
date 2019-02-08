@@ -143,18 +143,19 @@ function displaySkillData(skillId) {
     //Refines
     s += "Refines: <br />";
     s += "<table><tr><th>Refine</th><th>Stats</th><th>Effect</th></tr>";
+    skill.refines.neweffect ? p = skill.refines.neweffect : p = "";
     //Eff refine
     if (skill.refines.eff) {
-      s += "<tr><td>Effect</td><td>" + skill.refines.eff.stats + "</td><td>" + skill.refines.neweffect + "<br />"+ skill.refines.eff.effect + "</td></tr>";
+      s += "<tr><td>Effect</td><td>" + skill.refines.eff.stats + "</td><td>" + p + "<br /><span>" + skill.refines.eff.effect + "</span></td></tr>";
     }
     //atk refine
-    s += "<tr><td>Attack</td><td>" + skill.refines.atk.stats + "</td><td>" + skill.refines.neweffect + "</td></tr>";
+    s += "<tr><td>Attack</td><td>" + skill.refines.atk.stats + "</td><td>" + p + "</td></tr>";
     //spd refine
-    s += "<tr><td>Speed</td><td>" + skill.refines.spd.stats + "</td><td>" + skill.refines.neweffect + "</td></tr>";
+    s += "<tr><td>Speed</td><td>" + skill.refines.spd.stats + "</td><td>" + p + "</td></tr>";
     //def refine
-    s += "<tr><td>Defense</td><td>" + skill.refines.def.stats + "</td><td>" + skill.refines.neweffect + "</td></tr>";
+    s += "<tr><td>Defense</td><td>" + skill.refines.def.stats + "</td><td>" + p + "</td></tr>";
     //res refine
-    s += "<tr><td>Resistance</td><td>" + skill.refines.res.stats + "</td><td>" + skill.refines.neweffect + "</td></tr>";
+    s += "<tr><td>Resistance</td><td>" + skill.refines.res.stats + "</td><td>" + p + "</td></tr>";
     s += "</table>";
     s += "Refine Type: " + skill.refines.type + "<br />";
   }
