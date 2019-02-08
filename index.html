@@ -1,32 +1,60 @@
-<html>
+﻿<html>
   <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>FEH Pocket Tactician</title>
+    <!--TODO: Move CSS into it's own file-->
+    <style>
+      body {
+        /*background-image: url("https://serenesforest.net/wp-content/gallery/fire-emblem-heroes-etc/Heroes-Emblem-2.jpg");*/
+        background-position: center;
+        background-color: white;
+        background-size: 1000px 750px;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+      }
+
+      .title {
+        text-align: center;
+        color: black;
+        /*text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;*/
+        font-size: 24pt;
+      }
+
+      img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
+
+      ul.nav {
+        top: 0;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        overflow: hidden;
+      }
+
+      nav {
+        position: sticky;
+        top: 0;
+        text-align: center;
+      }
+    </style>
   </head>
+  
   <body>
-    <img src=https://www.spriters-resource.com/resources/sheets/87/90212.png>
     <div class="title">
-      <p>Coming Soon!&trade;</p>
+      <p>Fire Emblem Heroes Pocket Tactician!</p>
     </div>
+    <img src=https://www.spriters-resource.com/resources/sheets/87/90212.png />
+    <nav>
+      <ul class="nav">
+        <li><a href="login.html">Login</a></li>
+        <li><a href="heroes.html">View Heroes</a></li>
+        <li><a href="skills.html">View Skills</a></li>
+        <li><a href="admin.html">Admin Page</a></li>
+      </ul>
+    </nav>
   </body>
-  <style>
-    body {
-      background-image: url("https://serenesforest.net/wp-content/gallery/fire-emblem-heroes-etc/Heroes-Emblem-2.jpg");
-      background-position: center;
-      background-color: black;
-      background-size: 1000px 750px;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-    }
-    .title {
-      text-align: center;
-      color: white;
-      text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-      font-size: 24pt;
-    }
-    img {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      width: 50%;
-    }
 </html>
