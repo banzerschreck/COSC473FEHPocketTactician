@@ -1,59 +1,98 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Admin Page</title>
-	<link rel="stylesheet" type="text/css" href="admin.css">
-</head>
-<body>
-	<H1>Data page</H1>
-	<div class="data">
-		<h1>Id</h1>
-	<form>
-		<label for="Name">Name: </label>
-		<input id="Name" type="text" name="Name" required>
-		<label for="Title">Title: </label>
-		<input id="Title" type="text" name="Title" required>
-		<label for="Color">Color: </label>
-		<input id="Color" type="text" name="Color" required>
-		<label for="Weapon">Weapon: </label>
-		<input id="Weapon" type="text" name="Weapon" required>
-		<label for="Move Type">Move Type: </label>
-		<input id="Move Type" type="text" name="Move Type" required>
-		<label for="Rarity">Rarity: </label>
-		<input id="Rarity" type="text" name="Rarity" required>
-		<label for="Assets">Assets: </label>
-		<input id="Assets" type="text" name="Assets" required>
-		<label for="Portrait">Portrait: </label>
-		<input id="Portrait" type="text" name="Portrait" required>
-		<label for="Main">Main: </label>
-		<input id="Main" type="text" name="Main" required>
-	</div>
-	<h1>Stats</h1>
-	<div>
-		<label for="Rank">Rank: </label>
-		<input id="Rank" type="text" name="Rank" required>
-		<label for="HP">HP: </label>
-		<input id="HP" type="text" name="HP" required>
-		<label for="Attack">Attack: </label>
-		<input id="Attack" type="text" name="Attack" required>
-		<label for="Speed">Speed: </label>
-		<input id="Speed" type="text" name="Speed" required>
-		<label for="Defense">Defense: </label>
-		<input id="Defense" type="text" name="Defense" required>
-		<label for="Resistance">Resistance: </label>
-		<input id="Resistance" type="text" name="Resistance" required>
-	</div>
-	<h1>Skills</h1>
-	<div>
-		<label for="Name">Name: </label>
-		<input id="Name" type="text" name="Name" required>
-		<label for="Rarity">rarity: </label>
-		<input id="Rarity" type="text" name="Rarity" required>
-		<label for="Type">Type: </label>
-		<input id="Type" type="text" name="Type" required>
-		</div>
-		<br />
-		<input type="submit">
-	</form>
-</body>
+  <head>
+    <title>FEH Pocket Tactician - Admin Page</title>
+    <link rel="stylesheet" type="text/css" href="admin.css">
+  </head>
+  <body>
+    <a href="index.html"><input type="submit" value="Return"></a>
+    <div id="hero">
+      <h1>Add a Hero</h1>
+      <form>
+        <h2>Id</h2>
+        <label for="Name">Name: </label>
+        <input id="Name" type="text" name="Name" required>
+        <label for="Title">Title: </label>
+        <input id="Title" type="text" name="Title" required>
+        <label for="Color">Color: </label>
+        <input id="Color" type="text" name="Color" required>
+        <label for="Weapon">Weapon: </label>
+        <input id="Weapon" type="text" name="Weapon" required>
+        <label for="Move Type">Move Type: </label>
+        <input id="Move Type" type="text" name="Move Type" required>
+        <label for="Rarity">Rarity: </label>
+        <input id="Rarity" type="text" name="Rarity" required>
+        <label for="Assets">Assets: </label>
+        <input id="Assets" type="text" name="Assets" required>
+        <label for="Portrait">Portrait: </label>
+        <input id="Portrait" type="text" name="Portrait" required>
+        <label for="Main">Main: </label>
+        <input id="Main" type="text" name="Main" required>
+        
+        <h2>Stats</h2>
+        <label for="Rank">Rank: </label>
+        <input id="Rank" type="text" name="Rank" required>
+        <label for="HP">HP: </label>
+        <input id="HP" type="text" name="HP" required>
+        <label for="Attack">Attack: </label>
+        <input id="Attack" type="text" name="Attack" required>
+        <label for="Speed">Speed: </label>
+        <input id="Speed" type="text" name="Speed" required>
+        <label for="Defense">Defense: </label>
+        <input id="Defense" type="text" name="Defense" required>
+        <label for="Resistance">Resistance: </label>
+        <input id="Resistance" type="text" name="Resistance" required>
+        
+        <h2>Skills</h2>
+        <label for="Name">Name: </label>
+        <input id="Name" type="text" name="Name" required>
+        <label for="Rarity">rarity: </label>
+        <input id="Rarity" type="text" name="Rarity" required>
+        <label for="Type">Type: </label>
+        <input id="Type" type="text" name="Type" required>
+        
+        <br />
+        <input type="submit" value="Add Hero">
+      </form>
+    </div>
+    
+    <div id="skill">
+      <h1>Add a Skill</h1>
+      <form>
+        Name:<input type="text" id="sName" required>
+        Class:<select id="sClass">
+          <option value="Melee">Melee</option>
+        </select>
+        Color:<select id="sColor">
+          <option value="Red">Red</option>
+        </select>
+        Asset location:<input type="text" id="sAsset" required>
+        SP Cost:<input type="number" id="sSP" required>
+        <h2>Stats</h2>
+        HP:<input type="number" id="sHP">
+        Atk:<input type="number" id="sAtk">
+        Spd:<input type="number" id="sSpd">
+        Def:<input type="number" id="sDef">
+        Res:<input type="number" id="sRes">
+        <br /><input type="checkbox" id="sRefineable">Refineable?
+        <div id="sRefines">
+          <h2>Refines</h2>
+          Refine type:<select id="sRefineType">
+            <option value="Stones">Stones</option>
+            <option value="Dew">Dew</option>
+          </select>
+          Refine Material Cost:<input type="number" id="sRefineCost">
+          SP Cost:<input type="number" id="sRefineSP">
+          <br /><input type="checkbox" id="sNewEffect">Has New Effect?
+          New Effect:<input type="text" id="sNewEffect">
+          <h2>Stats:</h2>
+          <!--TODO: implement stats via javascript-->
+          <!--Melee weapons give +5hp and +2atk or +3spd or +4def or +4res-->
+          <!--Ranged weapons give +2hp and +1atk or +2spd or +3def or +3res-->
+          Under construction, sorry :o
+        </div>
+        <br /><input type="submit" value="Add skill">
+      </form>
+    </div>
+  </body>
 </html>
