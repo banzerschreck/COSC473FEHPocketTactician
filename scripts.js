@@ -1,8 +1,7 @@
 /* 
  * TODO:
- *  add logic to skill data to avoid undefined effect for stone refined weapons
  */
-const heroesURL = 'data/heroes.json';
+const heroesURL = 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/473pockettactician-jcxsp/service/http/incoming_webhook/getHeroes';
 const skillsURL = 'data/skills.json';
 
 var heroData = new Object();
@@ -11,8 +10,9 @@ var heroData = new Object();
  * calls displayHeroesList() to show list of heroes on the page
  */
 function buildHeroesList() {
-  var request = new XMLHttpRequest();
+  const request = new XMLHttpRequest();
   console.log("Attempting to load heroes from JSON...");
+  request.open("GET", heroesURL);
   request.onload = () => {
     if(request.status===200) {
       try {
@@ -40,8 +40,9 @@ function displayHeroesList() {
   
   var s = "<ul>";
   for (var i=0; i<heroData.length; i++) {
-    s+="<li><a href=\"javascript:displayHeroData("+heroData[i].id+")\">";
-    s+=heroData[i].name+": "+heroData[i].title+"</a></li>";
+    s+="<li><a href=\"javascript:displayHeroData("+i+")\">";
+    s += heroData[i].name + ": " + heroData[i].title + "</a></li>";
+    console.log("Added hero #" + i + ": " + heroData[i].name);
   }
   s+="</ul>";
   
@@ -53,7 +54,7 @@ function displayHeroesList() {
  */
 function displayHeroData(heroid) { 
   var s = "";
-  var hero = heroData[heroid]; 
+  var hero = heroData[heroid];
   
   console.log("Displaying hero data for id = ", heroid);  
 
@@ -61,21 +62,30 @@ function displayHeroData(heroid) {
   //name and title
   s+= hero.name+": "+hero.title+"<br />";
   //weapon, color, and movement
-  s+= hero.color+" "+hero.weapon+" "+hero.movetype+"<br />";
+  s+= "<img src=\'data/assets/skills/"+hero.color+hero.weapon+".png\'><img src=\'data/assets/skills/"+hero.movetype+".png\'><br />";
   //stats
   s+= "<h3>Stats</h3>";
-  s+= "<table><tr><th>Rarity/Lvl</th><th>HP</th><th>Atk</th><th>Spd</th><th>Def</th><th>Res</th></tr>";
+  s += "<table><tr><th>Rarity/Lvl</th><th>HP</th><th>Atk</th><th>Spd</th><th>Def</th><th>Res</th></tr>";
+  console.log(hero.stats);
   for (const o of hero.stats) {
-    s+="<tr><td>"+o.rank+"</td><td>"+o.hp+"</td><td>"+o.atk+"</td><td>"+o.spd+"</td><td>"+o.def+"</td><td>"+o.res+"</td></tr>";
+    s+="<tr><td>"+o.rank+"</td>";
+    s+="<td>"+o.hp+"</td>";
+    s+="<td>"+o.atk+"</td>";
+    s+="<td>"+o.spd+"</td>";
+    s+="<td>"+o.def+"</td>";
+    s+="<td>"+o.res+"</td></tr>";
   }
   s+= "</table>";
   //skills
   s+= "<h3>Skills</h3>";
-  s+= "<table><tr><th>Skill Name</th><th>Rarity</th><th>Skill Type</th></tr>";
+  s += "<table><tr><th>Skill Name</th><th>Rarity</th><th>Skill Type</th></tr>";
+  console.log(hero.skills);
   for (const o of hero.skills) {
-    s+= "<tr><td>"+o.name+"</td><td>"+o.rarity+"</td><td>"+o.type+"</td></tr>";
+    s+="<tr><td>"+o.name+"</td>";
+    s+="<td><img src=\"data/assets/ui/stars-"+o.rarity+"star.png\"></img></td>";
+    s+="<td><img src=\"data/assets/skills/"+o.type+".png\"></td></tr>";
   }
-
+  s+="</table>";
   document.getElementById("hero").innerHTML = s;
 }
 

@@ -1,24 +1,25 @@
-<!DOCTYPE html>
 <html>
   <head>
     <title>Login or Register</title>
   </head>
+  
   <body>
-    <a href="index.html"><input type="submit" value="Return"></a>
+    <a href="./index.html"><input type="submit" value="Return"></a>
     <h3>Login</h3>
-    <form>
+    <form method="POST" action="login(username, email)">
       Username:<input type="text" name="username" required><br />
       Password:<input type="password" name="password" required></input><br />
       <input type="submit" value="Login">
     </form>
     <a href="recover.html?f=pass">Forgot password?</a>
     <a href="recover.html?f=name">Forgot username?</a>
-    <form>
+		
+    <form method="POST" action="register(username, email, password">
       <h3>Register an Account</h3>
       Username:<input type="text" id="username" required><br />
       Email:<input type="email" id="email" required><br />
       Password:<input type="password" id="password" required><br />
-      Confirm Password:<input type="password" id="password" required><br />
+      Confirm Password:<input type="password" id="" required><br />
       <input type="submit" value="Register">
     </form>
   </body>
