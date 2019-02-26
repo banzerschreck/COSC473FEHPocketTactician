@@ -2,7 +2,7 @@
  * TODO:
  */
 const heroesURL = 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/473pockettactician-jcxsp/service/http/incoming_webhook/getHeroes';
-const skillsURL = 'data/skills.json';
+const skillsURL = 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/473pockettactician-jcxsp/service/http/incoming_webhook/getSkills';
 
 var heroData = new Object();
 /*
@@ -58,7 +58,7 @@ function displayHeroData(heroid) {
   
   console.log("Displaying hero data for id = ", heroid);  
 
-  s += "<img src=\"data/" + hero.assets.portrait + "\"/><br />";
+  s += "<img src=\"data/" + hero.assets.main + "\"/><br />";
   //name and title
   s+= hero.name+": "+hero.title+"<br />";
   //weapon, color, and movement
@@ -66,24 +66,35 @@ function displayHeroData(heroid) {
   //stats
   s+= "<h3>Stats</h3>";
   s += "<table><tr><th>Rarity/Lvl</th><th>HP</th><th>Atk</th><th>Spd</th><th>Def</th><th>Res</th></tr>";
-  console.log(hero.stats);
-  for (const o of hero.stats) {
-    s+="<tr><td>"+o.rank+"</td>";
-    s+="<td>"+o.hp+"</td>";
-    s+="<td>"+o.atk+"</td>";
-    s+="<td>"+o.spd+"</td>";
-    s+="<td>"+o.def+"</td>";
-    s+="<td>"+o.res+"</td></tr>";
+  //console.log(hero.stats);
+  if (hero.hasIV) {
+    for (const o of hero.stats) {
+      s+="<tr><td>"+o.rank+"</td>";
+      s += "<td>" + o.hp[0].$numberLong + ", " + o.hp[1].$numberLong + ", " + o.hp[2].$numberLong+"</td>";
+      s += "<td>" + o.atk[0].$numberLong + ", " + o.atk[1].$numberLong + ", " + o.atk[2].$numberLong+"</td>";
+      s += "<td>" + o.spd[0].$numberLong + ", " + o.spd[1].$numberLong + ", " + o.spd[2].$numberLong+"</td>";
+      s += "<td>" + o.def[0].$numberLong + ", " + o.def[1].$numberLong + ", " + o.def[2].$numberLong+"</td>";
+      s += "<td>" + o.res[0].$numberLong + ", " + o.res[1].$numberLong + ", " + o.res[2].$numberLong+"</td></tr>";
+    }
+  } else {
+    for (const o of hero.stats) {
+      s += "<tr><td>" + o.rank.$numberLong+"</td>";
+      s += "<td>" + o.hp.$numberLong+"</td>";
+      s += "<td>" + o.atk.$numberLong+"</td>";
+      s += "<td>" + o.spd.$numberLong+"</td>";
+      s += "<td>" + o.def.$numberLong+"</td>";
+      s += "<td>" + o.res.$numberLong+"</td></tr>";
+    }
   }
   s+= "</table>";
   //skills
-  s+= "<h3>Skills</h3>";
+  s += "<h3>Skills</h3>";
   s += "<table><tr><th>Skill Name</th><th>Rarity</th><th>Skill Type</th></tr>";
   console.log(hero.skills);
   for (const o of hero.skills) {
-    s+="<tr><td>"+o.name+"</td>";
-    s+="<td><img src=\"data/assets/ui/stars-"+o.rarity+"star.png\"></img></td>";
-    s+="<td><img src=\"data/assets/skills/"+o.type+".png\"></td></tr>";
+    s += "<tr><td>"+o.name+"</td>";
+    s += "<td><img src=\"data/assets/ui/stars-" + o.rarity+"star.png\"></img></td>";
+    s += "<td><img src=\"data/assets/skills/" + o.type+".png\"></td></tr>";
   }
   s+="</table>";
   document.getElementById("hero").innerHTML = s;
@@ -97,7 +108,7 @@ var skillsData = new Object();
  */
 function buildSkillsList() {
   var request = new XMLHttpRequest();
-  console.log("Loading skills from JSON...");
+  console.log("Loading skills...");
   request.onload = () => {
     if (request.status===200) {
       try {
@@ -124,7 +135,7 @@ function displaySkillsList() {
 
   var s = "<ul>";
   for (var i=0; i<skillsData.length; i++) {
-    s+="<li><a href=\"javascript:displaySkillData("+skillsData[i].id+")\">";
+    s+="<li><a href=\"javascript:displaySkillData("+i+")\">";
     s+= skillsData[i].name;
     s+="</a></li>";
   }
@@ -139,36 +150,91 @@ function displaySkillData(skillId) {
   var p = "";
   var skill = skillsData[skillId];
 
-  console.log("Displaying skill data for id = ", skillId);
+  console.log("Displaying skill data for skill #", skillId);
 
   s += "<h3>" + skill.name + "</h3>";
   s += "<img src=\"data/" + skill.assets + "\"><br />";
-  s += "Stats: " + skill.stats + "<br />";
+  s += "Stats: ";
+  s += skill.stats[0].$numberDouble + ", ";
+  s += skill.stats[1].$numberDouble + ", ";
+  s += skill.stats[2].$numberDouble + ", ";
+  s += skill.stats[3].$numberDouble + ", ";
+  s += skill.stats[4].$numberDouble + "<br />";
   skill.effect ? p = skill.effect : p = "";
   s += "Effect: " + p + "<br />";
-  s += "SP: " + skill.sp + "<br />";
+  s += "SP: " + skill.sp.$numberDouble + "<br />";
   skill.prf ? p = "No" : p = "Yes";
   s += "Can be inherited?: " + p + "<br />";
   if (skill.refines) {
     //Refines
     s += "Refines: <br />";
-    s += "<table><tr><th>Refine</th><th>Stats</th><th>Effect</th></tr>";
-    skill.refines.neweffect ? p = skill.refines.neweffect : p = "";
+    s += "<table><tr><th>Refine</th><th>Stats</th>";
+    if (skill.refines.neweffect) {
+      p = skill.refines.neweffect ;
+      s += "<th>Effect</th></tr>";
+    } else {
+      p = "";
+      s += "</tr>";
+    }
     //Eff refine
     if (skill.refines.eff) {
-      s += "<tr><td>Effect</td><td>" + skill.refines.eff.stats + "</td><td>" + p + "<br /><span>" + skill.refines.eff.effect + "</span></td></tr>";
+      s += "<tr><td>Effect</td><td>" + skill.refines.eff.stats[0].$numberDouble + ", "
+        + skill.refines.eff.stats[1].$numberDouble + ", "
+        + skill.refines.eff.stats[2].$numberDouble + ", "
+        + skill.refines.eff.stats[3].$numberDouble + ", "
+        + skill.refines.eff.stats[4].$numberDouble + "</td>";
+      if (skill.effect) {
+        s += "<td>" + p + "<br /><span>" + skill.refines.eff.effect + "</span></td></tr>";
+      } else {
+        s += "</tr>";
+      }
     }
     //atk refine
-    s += "<tr><td>Attack</td><td>" + skill.refines.atk.stats + "</td><td>" + p + "</td></tr>";
+    s += "<tr><td>Attack</td><td>" + skill.refines.atk.stats[0].$numberDouble + ", "
+      + skill.refines.atk.stats[1].$numberDouble + ", "
+      + skill.refines.atk.stats[2].$numberDouble + ", "
+      + skill.refines.atk.stats[3].$numberDouble + ", "
+      + skill.refines.atk.stats[4].$numberDouble + "</td>";
+    if (skill.effect) {
+      s += "<td>" + p + "</td></tr>";
+    } else {
+      s += "</tr>";
+    }
     //spd refine
-    s += "<tr><td>Speed</td><td>" + skill.refines.spd.stats + "</td><td>" + p + "</td></tr>";
+    s += "<tr><td>Speed</td><td>" + skill.refines.spd.stats[0].$numberDouble + ", "
+      + skill.refines.spd.stats[1].$numberDouble + ", "
+      + skill.refines.spd.stats[2].$numberDouble + ", "
+      + skill.refines.spd.stats[3].$numberDouble + ", "
+      + skill.refines.spd.stats[4].$numberDouble + "</td>";
+    if (skill.effect) {
+      s += "<td>" + p + "</td></tr>";
+    } else {
+      s += "</tr>";
+    }
     //def refine
-    s += "<tr><td>Defense</td><td>" + skill.refines.def.stats + "</td><td>" + p + "</td></tr>";
+    s += "<tr><td>Defense</td><td>" + skill.refines.def.stats[0].$numberDouble + ", "
+      + skill.refines.def.stats[1].$numberDouble + ", "
+      + skill.refines.def.stats[2].$numberDouble + ", "
+      + skill.refines.def.stats[3].$numberDouble + ", "
+      + skill.refines.def.stats[4].$numberDouble + "</td>";
+    if (skill.effect) {
+      s += "<td>" + p + "</td></tr>";
+    } else {
+      s += "</tr>";
+    }
     //res refine
-    s += "<tr><td>Resistance</td><td>" + skill.refines.res.stats + "</td><td>" + p + "</td></tr>";
+    s += "<tr><td>Resistance</td><td>" + skill.refines.res.stats[0].$numberDouble + ", "
+      + skill.refines.res.stats[1].$numberDouble + ", "
+      + skill.refines.res.stats[2].$numberDouble + ", "
+      + skill.refines.res.stats[3].$numberDouble + ", "
+      + skill.refines.res.stats[4].$numberDouble + "</td>";
+    if (skill.effect) {
+      s += "<td>" + p + "</td></tr>";
+    } else {
+      s += "</tr>";
+    }
     s += "</table>";
     s += "Refine Type: " + skill.refines.type + "<br />";
   }
-
   document.getElementById("skill").innerHTML = s;
 }
