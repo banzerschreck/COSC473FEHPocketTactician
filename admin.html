@@ -162,7 +162,7 @@
           for (var i = 5; i >= document.getElementById('hRarity').value; i--) {
             if (document.getElementById('hIVs').checked) {
               data += "{\"rank\":\"" + i + " Star Level 1\",";
-              data += "\"hp:\"[" + document.getElementById('hp' + i + 'l1bane').value + "," +
+              data += "\"hp\":[" + document.getElementById('hp' + i + 'l1bane').value + "," +
                 document.getElementById('hp' + i + 'l1neut').value + "," +
                 document.getElementById('hp' + i + 'l1boon').value + "],";
               data += "\"atk\":[" + document.getElementById('atk' + i + 'l1bane').value + "," +
@@ -209,9 +209,10 @@
               data += "\"atk\":" + document.getElementById('atk' + i + 'l40').value + ",";
               data += "\"spd\":" + document.getElementById('spd' + i + 'l40').value + ",";
               data += "\"def\":" + document.getElementById('def' + i + 'l40').value + ",";
-              if (i == document.getElementById('hRarity')) {
+              if (i == document.getElementById('hRarity').value) {
                 data += "\"res\":" + document.getElementById('res' + i + 'l40').value + "}";
               } else {
+                console.log("i: " + i + " hRarity: " + document.getElementById('hRarity'));
                 data += "\"res\":" + document.getElementById('res' + i + 'l40').value + "},";
               }
             }
