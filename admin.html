@@ -110,7 +110,25 @@
         var row = button.parentNode.parentNode;
         table.deleteRow(row.rowIndex);
       }
-      
+
+      function sRefineStatsTableEffect() {
+        var table = document.getElementById("sRefineStatsTable");
+        var rows = table.getElementsByTagName("tr").length;
+        if (rows == 5 && document.getElementById("sHasEffectRefine").checked) {
+          var row = table.insertRow(rows);
+          var s = "<td>Eff</td>"
+            + "<td><input type=\"number\" id=\"sEffRefineHPStat\" value=\"0\"/></td>"
+            + "<td><input type=\"number\" id=\"sEffRefineAtkStat\" value=\"0\"/></td>"
+            + "<td><input type=\"number\" id=\"sEffRefineSpdStat\" value=\"0\"/></td>"
+            + "<td><input type=\"number\" id=\"sEffRefineDefStat\" value=\"0\"/></td>"
+            + "<td><input type=\"number\" id=\"sEffRefineResStat\" value=\"0\"/></td>"
+            + "<td>Effect:<input type=\"text\" id=\"sEffRefineEffect\"/></td>";
+          row.innerHTML = s;
+        } else if(rows == 6){
+          table.deleteRow(rows-1);
+        }
+      }
+
       function show(id) {
         var e = document.getElementById(id);
         var divs = document.getElementsByClassName("hideable");
@@ -120,6 +138,9 @@
           divs[i].style.display = "none";
         }
         e.style.display = "block";
+        if (id == "addSkill") {
+          showSkillSubForms();
+        }
       }
       
       function sendHeroData() {
@@ -211,9 +232,9 @@
           data += "],";
           data += "\"hasIV\":" + document.getElementById("hIVs").checked;
           data += "}";
-          console.log("Data:\n" + data);
+          console.log("Hero Data:\n" + data);
           //alert("Sending Hero data to database: \n" + data);
-          const url = "https://webhooks.mongodb-stitch.com/api/client/v2.0/app/473pockettactician-jcxsp/service/http/incoming_webhook/addHero";
+          /*const url = "https://webhooks.mongodb-stitch.com/api/client/v2.0/app/473pockettactician-jcxsp/service/http/incoming_webhook/addHero";
           var http = new XMLHttpRequest();
           http.open('POST', url, true);
           http.setRequestHeader('Content-Type', 'application/json');
@@ -223,22 +244,128 @@
           });
           http.onloadend = function () {
             console.log("Hero Data sent to database! Did it work? I have no idea!");
-          };
+          };*/
         }
       }
       
       function sendSkillData() {
-        alert("Send Hero Data: Doesn't work yet, sorry :(");
+        //alert("Send Hero Data: Doesn't work yet, sorry :(");
+        var form = document.getElementById("skillForm");
+        form.onsubmit = function (e) {
+          e.preventDefault();
+          
+          var data = "{\"name\":\"" + document.getElementById("sName").value + "\",";
+          data += "\"class\":\"" + document.getElementById("sClass").value + "\",";
+          data += "\"effect\":\"" + document.getElementById("sEffect").value + "\",";
+          data += "\"assets\":\"" + document.getElementById("sAsset").value + "\",";
+          data += "\"sp\":" + document.getElementById("sSP").value + ",";
+          data += "\"inheritable\":" + document.getElementById("sCanInherit").checked;
+          if(document.getElementById("sClass").value == "weapon") {
+            data += ",\"color\":\"" + document.getElementById("sColor").value + "\",";
+            data += "\"type\":" + document.getElementById("sType").value + "\",";
+            data += "\"range\":";
+            var type = document.getElementById("sType").value
+            if (type == "melee" || type == "beast" || type == "dragon") {
+              data += "1,";
+            } else {
+              data += "2,";
+            }
+            data += "\"stats\":[";
+            data += document.getElementById("sHP").value + ",";
+            data += document.getElementById("sAtk").value + ",";
+            data += document.getElementById("sSpd").value + ",";
+            data += document.getElementById("sDef").value + ",";
+            data += document.getElementById("sRes").value;
+            data += "]";
+            if (document.getElementById("sRefineable").checked) {
+              data += ",\"refines\":{";
+              if (document.getElementById("sHasNewEffect").checked) {
+                data += "\"neweffect\":\"" + document.getElementById("sNewEffect").value + "\",";
+              }
+              data += "\"type\":\"" + document.getElementById("sRefineType").value + "\",";
+              data += "\"cost\":" + document.getElementById("sRefineCost").value + "\",";
+              data += "\"sp\":" + document.getElementById("sRefineSP").value + "\",";
+              data += "\"atk\":{\"stats\":[" + document.getElementById("sAtkRefineHPStat").value + ","
+                + document.getElementById("sAtkRefineAtkStat").value + ","
+                + document.getElementById("sAtkRefineSpdStat").value + ","
+                + document.getElementById("sAtkRefineDefStat").value + ","
+                + document.getElementById("sAtkRefineResStat").value + "]},";
+              data += "\"spd\":{\"stats\":[" + document.getElementById("sSpdRefineHPStat").value + ","
+                + document.getElementById("sSpdRefineAtkStat").value + ","
+                + document.getElementById("sSpdRefineSpdStat").value + ","
+                + document.getElementById("sSpdRefineDefStat").value + ","
+                + document.getElementById("sSpdRefineResStat").value + "]},";
+              data += "\"def\":{\"stats\":[" + document.getElementById("sDefRefineHPStat").value + ","
+                + document.getElementById("sDefRefineAtkStat").value + ","
+                + document.getElementById("sDefRefineSpdStat").value + ","
+                + document.getElementById("sDefRefineDefStat").value + ","
+                + document.getElementById("sDefRefineResStat").value + "]},";
+              data += "\"res\":{\"stats\":[" + document.getElementById("sResRefineHPStat").value + ","
+                + document.getElementById("sResRefineAtkStat").value + ","
+                + document.getElementById("sResRefineSpdStat").value + ","
+                + document.getElementById("sResRefineDefStat").value + ","
+                + document.getElementById("sResRefineResStat").value + "]}";
+              if (document.getElementById("sHasNewEffect").checked) {
+                data += ",\"eff\":{\"stats\":[" + document.getElementById("sEffRefineHPStat").value + ","
+                  + document.getElementById("sEffRefineAtkStat").value + ","
+                  + document.getElementById("sEffRefineSpdStat").value + ","
+                  + document.getElementById("sEffRefineDefStat").value + ","
+                  + document.getElementById("sEffRefineResStat").value + "],";
+                data += "\"effect\":\"" + document.getElementById("sEffRefineEffect") + "\"}";
+              }
+            }
+            data += "}";
+          } else if(document.getElementById("sClass").value == "special") {
+            data += ",\"cooldown\":" + document.getElementById("sCooldown").value + "}";
+          } else if(document.getElementById("sClass").value == "assist") {
+            data += ",\"range:\"" + document.getElementById("sRange").value + "}";
+          }
+          console.log("Skill Data:\n" + data);
+        }
       }
       
+      function showSkillSubForms() {
+        const weaponForm = document.getElementById("sIsWeapon");
+        const specialForm = document.getElementById("sIsSpecial");
+        const skillClass = document.getElementById("sClass");
+        weaponForm.style.display = "none";
+        specialForm.style.display = "none";
+        document.getElementById("sIsRefineable").style.display = "none";
+        document.getElementById("sRefineNewEffect").style.display = "none";
+        document.getElementById("sHasRange").style.display = "none";
+        if (skillClass.value == "weapon") {
+          weaponForm.style.display = "block";
+          if (document.getElementById("sColor").value == "multicolor") {
+            var s = "<option value=\"beast\">Beast</option>"
+              + "<option value=\"dragon\">Dragon</option>"
+              + "<option value=\"bow\">Bow</option>"
+              + "<option value=\"dagger\">Dagger</option>";
+          } else if (document.getElementById("sColor").value == "colorless") {
+            var s = "<option value=\"staff\">Staff</option>";
+          } else {
+            var s = "<option value=\"melee\">Melee</option>"
+              + "<option value=\"tome\">Tome</option>";
+          }
+          document.getElementById("sType").innerHTML = s;
+          if(document.getElementById("sRefineable").checked) {
+            document.getElementById("sIsRefineable").style.display = "block";
+          }
+          if(document.getElementById("sHasNewEffect").checked) {
+            document.getElementById("sRefineNewEffect").style.display = "block";
+          }
+        } else if (skillClass.value == "special") {
+          specialForm.style.display = "block";
+        } else if (skillClass.value == "assist") {
+          document.getElementById("sHasRange").style.display = "block";
+        }
+      }
+
       function init() {
         show("addHero");
         genHeroStatsFields();
       }
     </script>
   </head>
-  
-  
   
   <body onload="init()">
     <a href="./index.html"><input type="submit" value="Return"></a>
@@ -328,33 +455,49 @@
 <!--------------------------------------------------------------------------------------------->
     <div id="addSkill" class="hideable">
       <h1>Add a Skill</h1>
-      <form>
+      <form id="skillForm">
         Name:<input type="text" id="sName" required>
-        Class:<select id="sClass">
+        Class:<select id="sClass" onchange="showSkillSubForms()">
           <option value="weapon">Weapon</option>
           <option value="assist">Assist</option>
           <option value="special">Special</option>
           <option value="a">A</option>
           <option value="b">B</option>
           <option value="c">C</option>
+          <option value="seal">Seal</option>
         </select>
+        Effect:<input type="text" id="sEffect">
+        Asset location:<input type="text" id="sAsset" required>
+        SP Cost:<input type="number" id="sSP" value="0" required>
+        <input type="checkbox" id="sCanInherit">Is Inheritable?
+        <div id="sHasRange">
+          Range:<input type="number" id="sRange" value="0">
+        </div>
         <div id="sIsWeapon">
-          Color:<select id="sColor">
+          Color:<select id="sColor" onchange="showSkillSubForms()">
             <option value="red">Red</option>
             <option value="blue">Blue</option>
             <option value="green">Green</option>
             <option value="colorless">Colorless</option>
+            <option value="multicolor">Multicolor</option>
           </select>
-          Asset location:<input type="text" id="sAsset" required>
-          SP Cost:<input type="number" id="sSP" required>
+          Type:<select id="sType">
+            <option value="melee">Melee</option>
+            <option value="beast">Beast</option>
+            <option value="dragon">Dragon</option>
+            <option value="dagger">Dagger</option>
+            <option value="tome">Tome</option>
+            <option value="bow">Bow</option>
+            <option value="staff">Staff</option>
+          </select>
           <h2>Stats</h2>
-          HP:<input type="number" id="sHP" required>
-          Atk:<input type="number" id="sAtk" required>
-          Spd:<input type="number" id="sSpd" required>
-          Def:<input type="number" id="sDef" required>
-          Res:<input type="number" id="sRes" required>
-          <br /><input type="checkbox" id="sRefineable">Refineable?
-          <div id="sIsRefinable">
+          HP:<input type="number" id="sHP" value="0">
+          Atk:<input type="number" id="sAtk" value="0">
+          Spd:<input type="number" id="sSpd" value="0">
+          Def:<input type="number" id="sDef" value="0">
+          Res:<input type="number" id="sRes" value="0"><br />
+          <br /><input type="checkbox" id="sRefineable" onchange="showSkillSubForms()">Refineable?
+          <div id="sIsRefineable">
             <h2>Refines</h2>
             Refine type:<select id="sRefineType">
               <option value="Stones">Stones</option>
@@ -362,14 +505,53 @@
             </select>
             Refine Material Cost:<input type="number" id="sRefineCost">
             SP Cost:<input type="number" id="sRefineSP">
-            <br /><input type="checkbox" id="sNewEffect">Has New Effect?
-            New Effect:<input type="text" id="sNewEffect">
-            <!--TODO: implement stats via javascript-->
-            <!--Melee weapons give +5hp and +2atk or +3spd or +4def or +4res-->
-            <!--Ranged weapons give +2hp and +1atk or +2spd or +3def or +3res-->
+            <br /><input type="checkbox" id="sHasNewEffect" onchange="showSkillSubForms()">Has New Effect?
+            <div id="sRefineNewEffect">
+              New Effect:<input type="text" id="sNewEffect">
+            </div>
+            <h3>Refine Stats</h3>
+            <input type="checkbox" id="sHasEffectRefine" onchange="sRefineStatsTableEffect()" />Has Effect Refine?
+            <table id="sRefineStatsTable">
+              <tr><th>Refine Type</th><th>HP</th><th>Atk</th><th>Spd</th><th>Def</th><th>Res</th></tr>
+              <tr>
+                <td>Atk</td>
+                <td><input type="number" id="sAtkRefineHPStat" value="0" /></td>
+                <td><input type="number" id="sAtkRefineAtkStat" value="0" /></td>
+                <td><input type="number" id="sAtkRefineSpdStat" value="0" /></td>
+                <td><input type="number" id="sAtkRefineDefStat" value="0" /></td>
+                <td><input type="number" id="sAtkRefineResStat" value="0" /></td>
+              </tr>
+              <tr>
+                <td>Spd</td>
+                <td><input type="number" id="sSpdRefineHPStat" value="0" /></td>
+                <td><input type="number" id="sSpdRefineAtkStat" value="0" /></td>
+                <td><input type="number" id="sSpdRefineSpdStat" value="0" /></td>
+                <td><input type="number" id="sSpdRefineDefStat" value="0" /></td>
+                <td><input type="number" id="sSpdRefineResStat" value="0" /></td>
+              </tr>
+              <tr>
+                <td>Def</td>
+                <td><input type="number" id="sDefRefineHPStat" value="0" /></td>
+                <td><input type="number" id="sDefRefineAtkStat" value="0" /></td>
+                <td><input type="number" id="sDefRefineSpdStat" value="0" /></td>
+                <td><input type="number" id="sDefRefineDefStat" value="0" /></td>
+                <td><input type="number" id="sDefRefineResStat" value="0" /></td>
+              </tr>
+              <tr>
+                <td>Res</td>
+                <td><input type="number" id="sResRefineHPStat" value="0" /></td>
+                <td><input type="number" id="sResRefineAtkStat" value="0" /></td>
+                <td><input type="number" id="sResRefineSpdStat" value="0" /></td>
+                <td><input type="number" id="sResRefineDefStat" value="0" /></td>
+                <td><input type="number" id="sResRefineResStat" value="0" /></td>
+              </tr>
+            </table>
           </div>
         </div>
-        <br /><input type="submit" value="Add skill" onclick="sendSkillData()">
+        <div id="sIsSpecial">
+          Cooldown:<input type="number" id="sCooldown" value="0">
+        </div>
+        <br /><input type="submit" value="Add Skill" onclick="sendSkillData()">
       </form>
     </div>
 <!------------------------------------------------------------------------------------------>
