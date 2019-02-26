@@ -284,7 +284,7 @@
                 data += "\"neweffect\":\"" + document.getElementById("sNewEffect").value + "\",";
               }
               data += "\"type\":\"" + document.getElementById("sRefineType").value + "\",";
-              data += "\"cost\":" + document.getElementById("sRefineCost").value + "\",";
+              data += "\"cost\":" + document.getElementById("sRefineCost").value + ",";
               data += "\"sp\":" + document.getElementById("sRefineSP").value + "\",";
               data += "\"atk\":{\"stats\":[" + document.getElementById("sAtkRefineHPStat").value + ","
                 + document.getElementById("sAtkRefineAtkStat").value + ","
@@ -312,8 +312,9 @@
                   + document.getElementById("sEffRefineSpdStat").value + ","
                   + document.getElementById("sEffRefineDefStat").value + ","
                   + document.getElementById("sEffRefineResStat").value + "],";
-                data += "\"effect\":\"" + document.getElementById("sEffRefineEffect") + "\"}";
+                data += "\"effect\":\"" + document.getElementById("sEffRefineEffect").value + "\"}";
               }
+              data += "}";
             }
             data += "}";
           } else if(document.getElementById("sClass").value == "special") {
