@@ -1,504 +1,150 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" type="text/css" href="index.css">
     <title>FEH Pocket Tactician - Admin Page</title>
     <meta charset="utf-8"/>
     <link rel="stylesheet" type="text/css" href="admin.css">
-    <script type="text/javascript">    
+    <script type="text/javascript">
       function genHeroStatsFields() {
         var field = document.getElementById("hRarity")
         var rarity = field.options[field.selectedIndex].value;
         var s = "";
-        var input = document.getElementById('hIVs');
-        //console.log(input.value);
-        if (input.checked) {
-          for (var i = 5; i >= rarity && i >2; i--) {
-            s += "<tr><td>"+i+" Star Level 1</td>";
-            s += "<td>Bane:<input id=\"hp" + i + "l1bane\" type = \"number\" value = 0 required>";
-            s += "Neutral:<input id=\"hp" + i + "l1neut\" type = \"number\" value = 0 required>";
-            s += "Boon:<input id=\"hp" + i + "l1boon\" type = \"number\" value = 0 required></td>";
-            s += "<td>Bane:<input id=\"atk" + i + "l1bane\" type = \"number\" value = 0 required>";
-            s += "Neutral:<input id=\"atk" + i + "l1neut\" type = \"number\" value = 0 required>";
-            s += "Boon:<input id=\"atk" + i + "l1boon\" type = \"number\" value = 0 required></td>";
-            s += "<td>Bane:<input id=\"spd" + i + "l1bane\" type = \"number\" value = 0 required>";
-            s += "Neutral:<input id=\"spd" + i + "l1neut\" type = \"number\" value = 0 required>";
-            s += "Boon:<input id=\"spd" + i + "l1boon\" type = \"number\" value = 0 required></td>";
-            s += "<td>Bane:<input id=\"def" + i + "l1bane\" type = \"number\" value = 0 required>";
-            s += "Neutral:<input id=\"def" + i + "l1neut\" type = \"number\" value = 0 required>";
-            s += "Boon:<input id=\"def" + i + "l1boon\" type = \"number\" value = 0 required></td>";
-            s += "<td>Bane:<input id=\"res" + i + "l1bane\" type = \"number\" value = 0 required>";
-            s += "Neutral:<input id=\"res" + i + "l1neut\" type = \"number\" value = 0 required>";
-            s += "Boon:<input id=\"res" + i + "l1boon\" type = \"number\" value = 0 required></td>";
-            s += "<tr><td>" + i + " Star Level 40</td>";
-            s += "<td>Bane:<input id=\"hp" + i + "l40bane\" type = \"number\" value = 0 required>";
-            s += "Neutral:<input id=\"hp" + i + "l40neut\" type = \"number\" value = 0 required>";
-            s += "Boon:<input id=\"hp" + i + "l40boon\" type = \"number\" value = 0 required></td>";
-            s += "<td>Bane:<input id=\"atk" + i + "l40bane\" type = \"number\" value = 0 required>";
-            s += "Neutral:<input id=\"atk" + i + "l40neut\" type = \"number\" value = 0 required>";
-            s += "Boon:<input id=\"atk" + i + "l40boon\" type = \"number\" value = 0 required></td>";
-            s += "<td>Bane:<input id=\"spd" + i + "l40bane\" type = \"number\" value = 0 required>";
-            s += "Neutral:<input id=\"spd" + i + "l40neut\" type = \"number\" value = 0 required>";
-            s += "Boon:<input id=\"spd" + i + "l40boon\" type = \"number\" value = 0 required></td>";
-            s += "<td>Bane:<input id=\"def" + i + "l40bane\" type = \"number\" value = 0 required>";
-            s += "Neutral:<input id=\"def" + i + "l40neut\" type = \"number\" value = 0 required>";
-            s += "Boon:<input id=\"def" + i + "l40boon\" type = \"number\" value = 0 required></td>";
-            s += "<td>Bane:<input id=\"res" + i + "l40bane\" type = \"number\" value = 0 required>";
-            s += "Neutral:<input id=\"res" + i + "l40neut\" type = \"number\" value = 0 required>";
-            s += "Boon:<input id=\"res" + i + "l40boon\" type = \"number\" value = 0 required></td>";
-          }
-          if (rarity <= 2) {
-            for (var i = 2; i >= rarity; i--) {
-              s += "<tr><td>"+i+" Star Level 1</td>";
-              s += "<td><input id=\"hp" + i + "l1\" type=\"number\" value = 0 required></td>";
-              s += "<td><input id=\"atk" + i + "l1\" type=\"number\" value = 0 required></td>";
-              s += "<td><input id=\"spd" + i + "l1\" type=\"number\" value = 0 required></td>";
-              s += "<td><input id=\"def" + i + "l1\" type=\"number\" value = 0 required></td>";
-              s += "<td><input id=\"res" + i + "l1\" type=\"number\" value = 0 required></td>";
-              s += "<tr><td>" + i + " Star Level 40</td>";
-              s += "<td><input id=\"hp" + i + "l40\" type=\"number\" value = 0 required></td>";
-              s += "<td><input id=\"atk" + i + "l40\" type=\"number\" value = 0 required></td>";
-              s += "<td><input id=\"spd" + i + "l40\" type=\"number\" value = 0 required></td>";
-              s += "<td><input id=\"def" + i + "l40\" type=\"number\" value = 0 required></td>";
-              s += "<td><input id=\"res" + i + "l40\" type=\"number\" value = 0 required></td>";
-            }
-          }
-        } else {
-          for (var i = 5; i >= rarity; i--) {
-            s += "<tr><td>"+i+" Star Level 1</td>";
-            s += "<td><input id=\"hp" + i + "l1\" type=\"number\" value = 0 required></td>";
-            s += "<td><input id=\"atk" + i + "l1\" type=\"number\" value = 0 required></td>";
-            s += "<td><input id=\"spd" + i + "l1\" type=\"number\" value = 0 required></td>";
-            s += "<td><input id=\"def" + i + "l1\" type=\"number\" value = 0 required></td>";
-            s += "<td><input id=\"res" + i + "l1\" type=\"number\" value = 0 required></td>";
-            s += "<tr><td>" + i + " Star Level 40</td>";
-            s += "<td><input id=\"hp" + i + "l40\" type=\"number\" value = 0 required></td>";
-            s += "<td><input id=\"atk" + i + "l40\" type=\"number\" value = 0 required></td>";
-            s += "<td><input id=\"spd" + i + "l40\" type=\"number\" value = 0 required></td>";
-            s += "<td><input id=\"def" + i + "l40\" type=\"number\" value = 0 required></td>";
-            s += "<td><input id=\"res" + i + "l40\" type=\"number\" value = 0 required></td>";
-          }
+        for (var i = 5; i >= rarity; i--) {
+          s += "<tr><td>"+i+" Star Level 1</td>";
+          s += "<td><input id=\"hp" + i + "l1\" type=\"number\" required></td>";
+          s += "<td><input id=\"atk" + i + "l1\" type=\"number\" required></td>";
+          s += "<td><input id=\"spd" + i + "l1\" type=\"number\" required></td>";
+          s += "<td><input id=\"def" + i + "l1\" type=\"number\" required></td>";
+          s += "<td><input id=\"res" + i + "l1\" type=\"number\" required></td>";
+          s += "<tr><td>" + i + " Star Level 40</td>";
+          s += "<td><input id=\"hp" + i + "l40\" type=\"number\" required></td>";
+          s += "<td><input id=\"atk" + i + "l40\" type=\"number\" required></td>";
+          s += "<td><input id=\"spd" + i + "l40\" type=\"number\" required></td>";
+          s += "<td><input id=\"def" + i + "l40\" type=\"number\" required></td>";
+          s += "<td><input id=\"res" + i + "l40\" type=\"number\" required></td>";
         }
         document.getElementById("hStatsBody").innerHTML = s;
       }
-      
-      function hsTableAddNewSkill() {
-        var table = document.getElementById('heroSkillsTable');
-        var rows = table.getElementsByTagName("tr").length;
-        var row = table.insertRow(rows);
-        var s = "<tr id=\"hSTRow" + rows + "\"><td><input id=\"hs" + rows + "Name\" type=\"text\" required></td>"
-          + "<td><select id=\"hs" + rows + "Rarity\" required>"
-          + "<option value=5>5 Stars</option>"
-          + "<option value=4>4 Stars</option>"
-          + "<option value=3>3 Stars</option>"
-          + "<option value=2>2 Stars</option>"
-          + "<option value=1>1 Stars</option>"
-          + "</select></td>"
-          + "<td><select id=\"hs"+ rows +"Type\" required>"
-          + "<option value=\"Weapon\">Weapon</option>"
-          + "<option value=\"Assist\">Assist</option>"
-          + "<option value=\"Special\">Special</option>"
-          + "<option value=\"A\">A</option>"
-          + "<option value=\"B\">B</option>"
-          + "<option value=\"C\">C</option>"
-          + "</select></td>"
-          + "<td><input type=\"button\" value=\"Remove\" onclick=\"hsTableRemoveSkill(this)\"></tr>";
-        row.innerHTML += s;
-      }
-      
-      function hsTableRemoveSkill(button) {
-        var table = document.getElementById('heroSkillsTable');
-        var row = button.parentNode.parentNode;
-        table.deleteRow(row.rowIndex);
-      }
-
-      function sRefineStatsTableEffect() {
-        var table = document.getElementById("sRefineStatsTable");
-        var rows = table.getElementsByTagName("tr").length;
-        if (rows == 5 && document.getElementById("sHasEffectRefine").checked) {
-          var row = table.insertRow(rows);
-          var s = "<td>Eff</td>"
-            + "<td><input type=\"number\" id=\"sEffRefineHPStat\" value=\"0\"/></td>"
-            + "<td><input type=\"number\" id=\"sEffRefineAtkStat\" value=\"0\"/></td>"
-            + "<td><input type=\"number\" id=\"sEffRefineSpdStat\" value=\"0\"/></td>"
-            + "<td><input type=\"number\" id=\"sEffRefineDefStat\" value=\"0\"/></td>"
-            + "<td><input type=\"number\" id=\"sEffRefineResStat\" value=\"0\"/></td>"
-            + "<td>Effect:<input type=\"text\" id=\"sEffRefineEffect\"/></td>";
-          row.innerHTML = s;
-        } else if(rows == 6){
-          table.deleteRow(rows-1);
-        }
-      }
-
       function show(id) {
+      /* TODO: Fix: var in for loop is null on body load for some reason?
         var e = document.getElementById(id);
         var divs = document.getElementsByClassName("hideable");
-        //console.log(divs);
-        for(var i = 0; i < divs.length; i++) {
-          //console.log(x);
-          divs[i].style.display = "none";
+        console.log(divs);
+        for(var x in divs) {
+          x.style.border = "5px solid red";
         }
-        e.style.display = "block";
-        if (id == "addSkill") {
-          showSkillSubForms();
-        }
+        //e.style.border = "5px solid red";*/
       }
-      
-      function sendHeroData() {
-        var form = document.getElementById("heroForm");
-        form.onsubmit = function (e) {
-          e.preventDefault();
-          //alert("Send Hero Data: Doesn't work yet, sorry :(");
-          var data = "{";
-          data += "\"name\":\"" + document.getElementById('hName').value + "\",";
-          data += "\"title\":\"" + document.getElementById('hTitle').value + "\",";
-          data += "\"color\":\"" + document.getElementById('hColor').value + "\",";
-          data += "\"weapon\":\"" + document.getElementById('hWeaponType').value + "\",";
-          data += "\"movetype\":\"" + document.getElementById('hMoveType').value + "\",";
-          data += "\"rarity\":" + document.getElementById('hRarity').value + ",";
-          data += "\"assets\":{";
-          data += "\"portrait\":\"" + document.getElementById('hPortrait').value + "\",";
-          data += "\"main\":\"" + document.getElementById('hMain').value + "\"},";
-          data += "\"stats\":[";
-          for (var i = 5; i >= document.getElementById('hRarity').value; i--) {
-            if (document.getElementById('hIVs').checked) {
-              data += "{\"rank\":\"" + i + " Star Level 1\",";
-              data += "\"hp\":[" + document.getElementById('hp' + i + 'l1bane').value + "," +
-                document.getElementById('hp' + i + 'l1neut').value + "," +
-                document.getElementById('hp' + i + 'l1boon').value + "],";
-              data += "\"atk\":[" + document.getElementById('atk' + i + 'l1bane').value + "," +
-                document.getElementById('atk' + i + 'l1neut').value + "," +
-                document.getElementById('atk' + i + 'l1boon').value + "],";
-              data += "\"spd\":[" + document.getElementById('spd' + i + 'l1bane').value + "," +
-                document.getElementById('spd' + i + 'l1neut').value + "," +
-                document.getElementById('spd' + i + 'l1boon').value + "],";
-              data += "\"def\":[" + document.getElementById('def' + i + 'l1bane').value + "," +
-                document.getElementById('def' + i + 'l1neut').value + "," +
-                document.getElementById('def' + i + 'l1boon').value + "],";
-              data += "\"res\":[" + document.getElementById('res' + i + 'l1bane').value + "," +
-                document.getElementById('res' + i + 'l1neut').value + "," +
-                document.getElementById('res' + i + 'l1boon').value + "]},";
-              data += "{\"rank\":\"" + i + " Star Level 40\",";
-              data += "\"hp\":[" + document.getElementById('hp' + i + 'l40bane').value + "," +
-                document.getElementById('hp' + i + 'l40neut').value + "," +
-                document.getElementById('hp' + i + 'l40boon').value + "],";
-              data += "\"atk\":[" + document.getElementById('atk' + i + 'l40bane').value + "," +
-                document.getElementById('atk' + i + 'l40neut').value + "," +
-                document.getElementById('atk' + i + 'l40boon').value + "],";
-              data += "\"spd\":[" + document.getElementById('spd' + i + 'l40bane').value + "," +
-                document.getElementById('spd' + i + 'l40neut').value + "," +
-                document.getElementById('spd' + i + 'l40boon').value + "],";
-              data += "\"def\":[" + document.getElementById('def' + i + 'l40bane').value + "," +
-                document.getElementById('def' + i + 'l40neut').value + "," +
-                document.getElementById('def' + i + 'l40boon').value + "],";
-              data += "\"res\":[" + document.getElementById('res' + i + 'l40bane').value + "," +
-                document.getElementById('res' + i + 'l40neut').value + ",";
-              if (i == document.getElementById('hRarity').value) {
-                data += document.getElementById('res' + i + 'l40boon').value + "]}";
-              } else {
-                data += document.getElementById('res' + i + 'l40boon').value + "]},";
-              }
-            } else {
-              data += "{\"rank\":\"" + i + " Star Level 1\",";
-              data += "\"hp\":" + document.getElementById('hp' + i + 'l1').value + ",";
-              data += "\"atk\":" + document.getElementById('atk' + i + 'l1').value + ",";
-              data += "\"spd\":" + document.getElementById('spd' + i + 'l1').value + ",";
-              data += "\"def\":" + document.getElementById('def' + i + 'l1').value + ",";
-              data += "\"res\":" + document.getElementById('res' + i + 'l1').value + "},";
-              data += "{\"rank\":\"" + i + " Star Level 40\",";
-              data += "\"hp\":" + document.getElementById('hp' + i + 'l40').value + ",";
-              data += "\"atk\":" + document.getElementById('atk' + i + 'l40').value + ",";
-              data += "\"spd\":" + document.getElementById('spd' + i + 'l40').value + ",";
-              data += "\"def\":" + document.getElementById('def' + i + 'l40').value + ",";
-              if (i == document.getElementById('hRarity').value) {
-                data += "\"res\":" + document.getElementById('res' + i + 'l40').value + "}";
-              } else {
-                console.log("i: " + i + " hRarity: " + document.getElementById('hRarity'));
-                data += "\"res\":" + document.getElementById('res' + i + 'l40').value + "},";
-              }
-            }
-          }
-          data += "],";
-          data += "\"skills\":[";
-          var numSkills = document.getElementById("heroSkillsTable").getElementsByTagName("tr").length;
-          for (var i = 1; i < numSkills; i++) {
-            rowCells = document.getElementById("heroSkillsTable").getElementsByTagName("tr")[i].getElementsByTagName("td");
-            data += "{\"name\":\"" + rowCells[0].childNodes[0].value + "\",";
-            data += "\"rarity\":\"" + rowCells[1].childNodes[0].value + "\",";
-            if (i == numSkills - 1) {
-              data += "\"type\":\"" + rowCells[2].childNodes[0].value + "\"}";
-            } else {
-              data += "\"type\":\"" + rowCells[2].childNodes[0].value + "\"},";
-            }
-          }
-          data += "],";
-          data += "\"hasIV\":" + document.getElementById("hIVs").checked;
-          data += "}";
-          console.log("Hero Data:\n" + data);
-          //alert("Sending Hero data to database: \n" + data);
-          /*const url = "https://webhooks.mongodb-stitch.com/api/client/v2.0/app/473pockettactician-jcxsp/service/http/incoming_webhook/addHero";
-          var http = new XMLHttpRequest();
-          http.open('POST', url, true);
-          http.setRequestHeader('Content-Type', 'application/json');
-          http.send({
-            query: {},
-            body: data
-          });
-          http.onloadend = function () {
-            console.log("Hero Data sent to database! Did it work? I have no idea!");
-          };*/
-        }
-      }
-      
-      function sendSkillData() {
-        //alert("Send Hero Data: Doesn't work yet, sorry :(");
-        var form = document.getElementById("skillForm");
-        form.onsubmit = function (e) {
-          e.preventDefault();
-          
-          var data = "{\"name\":\"" + document.getElementById("sName").value + "\",";
-          data += "\"class\":\"" + document.getElementById("sClass").value + "\",";
-          data += "\"effect\":\"" + document.getElementById("sEffect").value + "\",";
-          data += "\"assets\":\"" + document.getElementById("sAsset").value + "\",";
-          data += "\"sp\":" + document.getElementById("sSP").value + ",";
-          data += "\"inheritable\":" + document.getElementById("sCanInherit").checked;
-          if(document.getElementById("sClass").value == "weapon") {
-            data += ",\"color\":\"" + document.getElementById("sColor").value + "\",";
-            data += "\"type\":" + document.getElementById("sType").value + "\",";
-            data += "\"range\":";
-            var type = document.getElementById("sType").value
-            if (type == "melee" || type == "beast" || type == "dragon") {
-              data += "1,";
-            } else {
-              data += "2,";
-            }
-            data += "\"stats\":[";
-            data += document.getElementById("sHP").value + ",";
-            data += document.getElementById("sAtk").value + ",";
-            data += document.getElementById("sSpd").value + ",";
-            data += document.getElementById("sDef").value + ",";
-            data += document.getElementById("sRes").value;
-            data += "]";
-            if (document.getElementById("sRefineable").checked) {
-              data += ",\"refines\":{";
-              if (document.getElementById("sHasNewEffect").checked) {
-                data += "\"neweffect\":\"" + document.getElementById("sNewEffect").value + "\",";
-              }
-              data += "\"type\":\"" + document.getElementById("sRefineType").value + "\",";
-              data += "\"cost\":" + document.getElementById("sRefineCost").value + "\",";
-              data += "\"sp\":" + document.getElementById("sRefineSP").value + "\",";
-              data += "\"atk\":{\"stats\":[" + document.getElementById("sAtkRefineHPStat").value + ","
-                + document.getElementById("sAtkRefineAtkStat").value + ","
-                + document.getElementById("sAtkRefineSpdStat").value + ","
-                + document.getElementById("sAtkRefineDefStat").value + ","
-                + document.getElementById("sAtkRefineResStat").value + "]},";
-              data += "\"spd\":{\"stats\":[" + document.getElementById("sSpdRefineHPStat").value + ","
-                + document.getElementById("sSpdRefineAtkStat").value + ","
-                + document.getElementById("sSpdRefineSpdStat").value + ","
-                + document.getElementById("sSpdRefineDefStat").value + ","
-                + document.getElementById("sSpdRefineResStat").value + "]},";
-              data += "\"def\":{\"stats\":[" + document.getElementById("sDefRefineHPStat").value + ","
-                + document.getElementById("sDefRefineAtkStat").value + ","
-                + document.getElementById("sDefRefineSpdStat").value + ","
-                + document.getElementById("sDefRefineDefStat").value + ","
-                + document.getElementById("sDefRefineResStat").value + "]},";
-              data += "\"res\":{\"stats\":[" + document.getElementById("sResRefineHPStat").value + ","
-                + document.getElementById("sResRefineAtkStat").value + ","
-                + document.getElementById("sResRefineSpdStat").value + ","
-                + document.getElementById("sResRefineDefStat").value + ","
-                + document.getElementById("sResRefineResStat").value + "]}";
-              if (document.getElementById("sHasNewEffect").checked) {
-                data += ",\"eff\":{\"stats\":[" + document.getElementById("sEffRefineHPStat").value + ","
-                  + document.getElementById("sEffRefineAtkStat").value + ","
-                  + document.getElementById("sEffRefineSpdStat").value + ","
-                  + document.getElementById("sEffRefineDefStat").value + ","
-                  + document.getElementById("sEffRefineResStat").value + "],";
-                data += "\"effect\":\"" + document.getElementById("sEffRefineEffect") + "\"}";
-              }
-            }
-            data += "}";
-          } else if(document.getElementById("sClass").value == "special") {
-            data += ",\"cooldown\":" + document.getElementById("sCooldown").value + "}";
-          } else if(document.getElementById("sClass").value == "assist") {
-            data += ",\"range:\"" + document.getElementById("sRange").value + "}";
-          }
-          console.log("Skill Data:\n" + data);
-        }
-      }
-      
-      function showSkillSubForms() {
-        const weaponForm = document.getElementById("sIsWeapon");
-        const specialForm = document.getElementById("sIsSpecial");
-        const skillClass = document.getElementById("sClass");
-        weaponForm.style.display = "none";
-        specialForm.style.display = "none";
-        document.getElementById("sIsRefineable").style.display = "none";
-        document.getElementById("sRefineNewEffect").style.display = "none";
-        document.getElementById("sHasRange").style.display = "none";
-        if (skillClass.value == "weapon") {
-          weaponForm.style.display = "block";
-          if (document.getElementById("sColor").value == "multicolor") {
-            var s = "<option value=\"beast\">Beast</option>"
-              + "<option value=\"dragon\">Dragon</option>"
-              + "<option value=\"bow\">Bow</option>"
-              + "<option value=\"dagger\">Dagger</option>";
-          } else if (document.getElementById("sColor").value == "colorless") {
-            var s = "<option value=\"staff\">Staff</option>";
-          } else {
-            var s = "<option value=\"melee\">Melee</option>"
-              + "<option value=\"tome\">Tome</option>";
-          }
-          document.getElementById("sType").innerHTML = s;
-          if(document.getElementById("sRefineable").checked) {
-            document.getElementById("sIsRefineable").style.display = "block";
-          }
-          if(document.getElementById("sHasNewEffect").checked) {
-            document.getElementById("sRefineNewEffect").style.display = "block";
-          }
-        } else if (skillClass.value == "special") {
-          specialForm.style.display = "block";
-        } else if (skillClass.value == "assist") {
-          document.getElementById("sHasRange").style.display = "block";
-        }
-      }
-
       function init() {
         show("addHero");
         genHeroStatsFields();
       }
     </script>
   </head>
-  
   <body onload="init()">
     <a href="./index.html"><input type="submit" value="Return"></a>
     <input type="submit" value="Add a Hero" onclick="show('addHero')">
     <input type="submit" value="Add a Skill" onclick="show('addSkill')">
-    <input type="submit" value="Add a Stage" onclick="show('addStage')">
     <div id="addHero" class="hideable">
-      <h1>Add a Hero</h1>
-      <form id="heroForm">
-        Name:<input id="hName" type="text" required>
-        Title:<input id="hTitle" type="text" required><br />
-        Color:<select id="hColor" required>
+      <div class="add">
+        <p>Add a Hero</p>
+      </div>
+      <div class="form">
+      <form>
+        <ul>
+        <li class="option" >Name: <input id="hName" type="text" required></li>
+        <li class="option" >Title: <input id="hTitle" type="text" required></li>
+        <li class="option" >Color: <select id="hColor" required>
           <option value="red">Red</option>
           <option value="blue">Blue</option>
           <option value="green">Green</option>
           <option value="colorless">Colorless</option>
-        </select>
-        Weapon Type:<select id="hWeaponType" required>
+        </select></li>
+        <li class="option" >Weapon Type: <select id="hWeaponType" required>
           <option value="melee">Melee</option>
           <option value="bow">Bow</option>
           <option value="staff">Staff</option>
           <option value="dagger">Dagger</option>
           <option value="beast">Beast</option>
           <option value="dragon">Dragon</option>
-        </select>
-        Move Type:<select id="hMoveType" required>
+        </select></li>
+        <li class="option" >Move Type: <select id="hMoveType" required>
           <option value="infantry">Infantry</option>
           <option value="cavalry">Cavalry</option>
           <option value="armor">Armor</option>
           <option value="flier">Flier</option>
-        </select>
-        Lowest Available Rarity:<select id="hRarity" onchange="genHeroStatsFields()" required>
-          <option value=5 selected>5 Stars Only</option>
-          <option value=4>4 Stars</option>
-          <option value=3>3 Stars</option>
-          <option value=2>2 Stars</option>
-          <option value=1>1 Star</option>
-        </select>
-        
+        </select></li>
+        <li class="option" >Lowest Available Rarity: <select id="hRarity" onchange="genHeroStatsFields()" required>
+          <option value="5" selected>5 Stars Only</option>
+          <option value="4">4 Stars</option>
+          <option value="3">3 Stars</option>
+          <option value="2">2 Stars</option>
+          <option value="1">1 Star</option>
+        </select></li>
+      </ul>
+        <div class="option">
         <h2>Asset locations</h2>
-        Portrait:<input id="hPortrait" type="text" required>
-        Main:<input id="hMain" type="text" required>
+        <label>Portrait:</label>
+        <input id="hPortrait" type="text" required>
+        <label>Main:</label>
+        <input id="hMain" type="text" required>
         
         <h2>Stats</h2>
-        <input type="checkbox" id="hIVs" onclick="genHeroStatsFields()">Has IVs?
         <table>
           <tr><th>Rank</th><th>HP</th><th>Atk</th><th>Spd</th><th>Def</th><th>Res</th></tr>
           <tbody id="hStatsBody"></tbody>
         </table>
         
         <h2>Skills</h2>
-        <table id="heroSkillsTable">
-          <tr><th>Name</th><th>Rarity</th><th>Type</th></tr>
-          <tr><td><input id="hs1Name" type="text" required></td>
-            <td><select id="hs1Rarity" required>
-              <option value=5>5 Stars</option>
-              <option value=4>4 Stars</option>
-              <option value=3>3 Stars</option>
-              <option value=2>2 Stars</option>
-              <option value=1>1 Stars</option>
-            </select></td>
-            <td><select id="hs1Type" required>
-              <option value="Weapon">Weapon</option>
-              <option value="Assist">Assist</option>
-              <option value="Special">Special</option>
-              <option value="A">A</option>
-              <option value="B">B</option>
-              <option value="C">C</option>
-            </select></td>
-            <td><input type="button" value="Remove" onclick="hsTableRemoveSkill(this)"></tr>
-        </table>
-        <input type="button" value="Add Another Skill" onclick="hsTableAddNewSkill()">
-        <!---
         Name:<input id="hsName" type="text" required>
         Rarity:<select id="hsRarity" required>
-          <option value=5>5 Stars</option>
-          <option value=4>4 Stars</option>
-          <option value=3>3 Stars</option>
-          <option value=2>2 Stars</option>
-          <option value=1>1 Stars</option>
+          <option value="5">5 Stars</option>
+          <option value="4">4 Stars</option>
+          <option value="3">3 Stars</option>
+          <option value="2">2 Stars</option>
+          <option value="1">1 Stars</option>
         </select> 
-        --->
         <br />
-        <input type="submit" value="Add Hero" onclick="sendHeroData()">
+        <input type="submit" value="Add Hero">
       </form>
+    </div>
+    </div>
     </div>
 <!--------------------------------------------------------------------------------------------->
     <div id="addSkill" class="hideable">
-      <h1>Add a Skill</h1>
-      <form id="skillForm">
+      <div class="add">
+        <p>Add a Skill</p>
+      </div>
+      <div class="form">
+        <div class="option">
+      <form>
         Name:<input type="text" id="sName" required>
-        Class:<select id="sClass" onchange="showSkillSubForms()">
+        Class:<select id="sClass">
           <option value="weapon">Weapon</option>
           <option value="assist">Assist</option>
           <option value="special">Special</option>
           <option value="a">A</option>
           <option value="b">B</option>
           <option value="c">C</option>
-          <option value="seal">Seal</option>
         </select>
-        Effect:<input type="text" id="sEffect">
-        Asset location:<input type="text" id="sAsset" required>
-        SP Cost:<input type="number" id="sSP" value="0" required>
-        <input type="checkbox" id="sCanInherit">Is Inheritable?
-        <div id="sHasRange">
-          Range:<input type="number" id="sRange" value="0">
-        </div>
         <div id="sIsWeapon">
-          Color:<select id="sColor" onchange="showSkillSubForms()">
+          Color:<select id="sColor">
             <option value="red">Red</option>
             <option value="blue">Blue</option>
             <option value="green">Green</option>
             <option value="colorless">Colorless</option>
-            <option value="multicolor">Multicolor</option>
           </select>
-          Type:<select id="sType">
-            <option value="melee">Melee</option>
-            <option value="beast">Beast</option>
-            <option value="dragon">Dragon</option>
-            <option value="dagger">Dagger</option>
-            <option value="tome">Tome</option>
-            <option value="bow">Bow</option>
-            <option value="staff">Staff</option>
-          </select>
+          Asset location:<input type="text" id="sAsset" required>
+          SP Cost:<input type="number" id="sSP" required>
           <h2>Stats</h2>
-          HP:<input type="number" id="sHP" value="0">
-          Atk:<input type="number" id="sAtk" value="0">
-          Spd:<input type="number" id="sSpd" value="0">
-          Def:<input type="number" id="sDef" value="0">
-          Res:<input type="number" id="sRes" value="0"><br />
-          <br /><input type="checkbox" id="sRefineable" onchange="showSkillSubForms()">Refineable?
-          <div id="sIsRefineable">
+          HP:<input type="number" id="sHP">
+          Atk:<input type="number" id="sAtk">
+          Spd:<input type="number" id="sSpd">
+          Def:<input type="number" id="sDef">
+          Res:<input type="number" id="sRes">
+          <br /><input type="checkbox" id="sRefineable">Refineable?
+          <div id="sIsRefinable">
             <h2>Refines</h2>
             Refine type:<select id="sRefineType">
               <option value="Stones">Stones</option>
@@ -506,58 +152,17 @@
             </select>
             Refine Material Cost:<input type="number" id="sRefineCost">
             SP Cost:<input type="number" id="sRefineSP">
-            <br /><input type="checkbox" id="sHasNewEffect" onchange="showSkillSubForms()">Has New Effect?
-            <div id="sRefineNewEffect">
-              New Effect:<input type="text" id="sNewEffect">
-            </div>
-            <h3>Refine Stats</h3>
-            <input type="checkbox" id="sHasEffectRefine" onchange="sRefineStatsTableEffect()" />Has Effect Refine?
-            <table id="sRefineStatsTable">
-              <tr><th>Refine Type</th><th>HP</th><th>Atk</th><th>Spd</th><th>Def</th><th>Res</th></tr>
-              <tr>
-                <td>Atk</td>
-                <td><input type="number" id="sAtkRefineHPStat" value="0" /></td>
-                <td><input type="number" id="sAtkRefineAtkStat" value="0" /></td>
-                <td><input type="number" id="sAtkRefineSpdStat" value="0" /></td>
-                <td><input type="number" id="sAtkRefineDefStat" value="0" /></td>
-                <td><input type="number" id="sAtkRefineResStat" value="0" /></td>
-              </tr>
-              <tr>
-                <td>Spd</td>
-                <td><input type="number" id="sSpdRefineHPStat" value="0" /></td>
-                <td><input type="number" id="sSpdRefineAtkStat" value="0" /></td>
-                <td><input type="number" id="sSpdRefineSpdStat" value="0" /></td>
-                <td><input type="number" id="sSpdRefineDefStat" value="0" /></td>
-                <td><input type="number" id="sSpdRefineResStat" value="0" /></td>
-              </tr>
-              <tr>
-                <td>Def</td>
-                <td><input type="number" id="sDefRefineHPStat" value="0" /></td>
-                <td><input type="number" id="sDefRefineAtkStat" value="0" /></td>
-                <td><input type="number" id="sDefRefineSpdStat" value="0" /></td>
-                <td><input type="number" id="sDefRefineDefStat" value="0" /></td>
-                <td><input type="number" id="sDefRefineResStat" value="0" /></td>
-              </tr>
-              <tr>
-                <td>Res</td>
-                <td><input type="number" id="sResRefineHPStat" value="0" /></td>
-                <td><input type="number" id="sResRefineAtkStat" value="0" /></td>
-                <td><input type="number" id="sResRefineSpdStat" value="0" /></td>
-                <td><input type="number" id="sResRefineDefStat" value="0" /></td>
-                <td><input type="number" id="sResRefineResStat" value="0" /></td>
-              </tr>
-            </table>
+            <br /><input type="checkbox" id="sNewEffect">Has New Effect?
+            New Effect:<input type="text" id="sNewEffect">
+            <!--TODO: implement stats via javascript-->
+            <!--Melee weapons give +5hp and +2atk or +3spd or +4def or +4res-->
+            <!--Ranged weapons give +2hp and +1atk or +2spd or +3def or +3res-->
           </div>
         </div>
-        <div id="sIsSpecial">
-          Cooldown:<input type="number" id="sCooldown" value="0">
-        </div>
-        <br /><input type="submit" value="Add Skill" onclick="sendSkillData()">
+        <br /><input type="submit" value="Add skill">
       </form>
     </div>
-<!------------------------------------------------------------------------------------------>
-    <div id="addStage" class="hideable">
-      <h1> under construction :(</h1>
+    </div>
     </div>
   </body>
 </html>
