@@ -19,3 +19,6 @@ https://fireemblem.gamepress.gg/heroes
 
 Map data:
 https://feheroes.gamepedia.com/Story_Maps
+
+Good View Hero layout to emulate?
+https://feh-stuff.github.io/unit-builder/

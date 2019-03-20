@@ -9,7 +9,7 @@ var heroData = new Object();
  * sends an AJAX XMLHttpRequest to our JSON data to load it into the page
  * calls displayHeroesList() to show list of heroes on the page
  */
-function buildHeroesList() {
+function getHeroData() {
   const request = new XMLHttpRequest();
   console.log("Attempting to load heroes from JSON...");
   request.open("GET", heroesURL);
@@ -19,7 +19,7 @@ function buildHeroesList() {
         heroData = JSON.parse(request.responseText);
         console.log("Parsed JSON file!");
         console.log(heroData);
-        displayHeroesList();
+        return heroData;
       } catch (e) {
         console.warn(e);
         alert("Something broke! Press F12 to check console");
@@ -30,6 +30,7 @@ function buildHeroesList() {
   };
   request.open('GET', heroesURL);
   request.send();
+  
 }
 /*
  * builds list of heroes found in the database
@@ -37,7 +38,6 @@ function buildHeroesList() {
  */
 function displayHeroesList() {
   console.log("Building Heroes list...");
-  
   var s = "<ul>";
   for (var i=0; i<heroData.length; i++) {
     s+="<li><a href=\"javascript:displayHeroData("+i+")\">";
@@ -60,7 +60,7 @@ function displayHeroData(heroid) {
 
   s += "<img src=\"data/" + hero.assets.main + "\"/><br />";
   //name and title
-  s+= hero.name+": "+hero.title+"<br />";
+  s+= "<h2>"+hero.name+": "+hero.title+"</h2><br />";
   //weapon, color, and movement
   s+= "<img src=\'data/assets/skills/"+hero.color+hero.weapon+".png\'><img src=\'data/assets/skills/"+hero.movetype+".png\'><br />";
   //stats
@@ -70,20 +70,20 @@ function displayHeroData(heroid) {
   if (hero.hasIV) {
     for (const o of hero.stats) {
       s+="<tr><td>"+o.rank+"</td>";
-      s += "<td>" + o.hp[0].$numberLong + ", " + o.hp[1].$numberLong + ", " + o.hp[2].$numberLong+"</td>";
-      s += "<td>" + o.atk[0].$numberLong + ", " + o.atk[1].$numberLong + ", " + o.atk[2].$numberLong+"</td>";
-      s += "<td>" + o.spd[0].$numberLong + ", " + o.spd[1].$numberLong + ", " + o.spd[2].$numberLong+"</td>";
-      s += "<td>" + o.def[0].$numberLong + ", " + o.def[1].$numberLong + ", " + o.def[2].$numberLong+"</td>";
-      s += "<td>" + o.res[0].$numberLong + ", " + o.res[1].$numberLong + ", " + o.res[2].$numberLong+"</td></tr>";
+      s += "<td>" + o.hp[0].$numberInt + ", " + o.hp[1].$numberInt + ", " + o.hp[2].$numberInt+"</td>";
+      s += "<td>" + o.atk[0].$numberInt + ", " + o.atk[1].$numberInt + ", " + o.atk[2].$numberInt+"</td>";
+      s += "<td>" + o.spd[0].$numberInt + ", " + o.spd[1].$numberInt + ", " + o.spd[2].$numberInt+"</td>";
+      s += "<td>" + o.def[0].$numberInt + ", " + o.def[1].$numberInt + ", " + o.def[2].$numberInt+"</td>";
+      s += "<td>" + o.res[0].$numberInt + ", " + o.res[1].$numberInt + ", " + o.res[2].$numberInt+"</td></tr>";
     }
   } else {
     for (const o of hero.stats) {
-      s += "<tr><td>" + o.rank.$numberLong+"</td>";
-      s += "<td>" + o.hp.$numberLong+"</td>";
-      s += "<td>" + o.atk.$numberLong+"</td>";
-      s += "<td>" + o.spd.$numberLong+"</td>";
-      s += "<td>" + o.def.$numberLong+"</td>";
-      s += "<td>" + o.res.$numberLong+"</td></tr>";
+      s += "<tr><td>" + o.rank+"</td>";
+      s += "<td>" + o.hp.$numberInt+"</td>";
+      s += "<td>" + o.atk.$numberInt+"</td>";
+      s += "<td>" + o.spd.$numberInt+"</td>";
+      s += "<td>" + o.def.$numberInt+"</td>";
+      s += "<td>" + o.res.$numberInt+"</td></tr>";
     }
   }
   s+= "</table>";
@@ -106,7 +106,7 @@ var skillsData = new Object();
  * sends AJAX request to skills JSON database
  * calls displaySkillsList() to display list of skills on page
  */
-function buildSkillsList() {
+function getSkillData() {
   var request = new XMLHttpRequest();
   console.log("Loading skills...");
   request.onload = () => {
@@ -115,7 +115,6 @@ function buildSkillsList() {
         skillsData = JSON.parse(request.responseText);
         console.log("Parsed JSON file!");
         console.log(skillsData);
-        displaySkillsList();
       } catch (e) {
         console.warn(e);
         alert("Something broke! Press F12 to check console");
@@ -151,90 +150,102 @@ function displaySkillData(skillId) {
   var skill = skillsData[skillId];
 
   console.log("Displaying skill data for skill #", skillId);
+  console.log(skillsData[skillId]);
 
   s += "<h3>" + skill.name + "</h3>";
-  s += "<img src=\"data/" + skill.assets + "\"><br />";
-  s += "Stats: ";
-  s += skill.stats[0].$numberDouble + ", ";
-  s += skill.stats[1].$numberDouble + ", ";
-  s += skill.stats[2].$numberDouble + ", ";
-  s += skill.stats[3].$numberDouble + ", ";
-  s += skill.stats[4].$numberDouble + "<br />";
+  if(skill.class=="weapon") {
+    s += "<img src=\"data/assets/skills/" + skill.color + skill.type + ".png\"><br />";
+  } else {
+    s += "<img src=\"data/assets/skills/" + skill.class + ".png\"><br />";
+  }
   skill.effect ? p = skill.effect : p = "";
   s += "Effect: " + p + "<br />";
-  s += "SP: " + skill.sp.$numberDouble + "<br />";
-  skill.prf ? p = "No" : p = "Yes";
+  s += "SP: " + skill.sp.$numberInt + "<br />";
+  skill.inheritable ? p = "Yes" : p = "No";
   s += "Can be inherited?: " + p + "<br />";
-  if (skill.refines) {
-    //Refines
-    s += "Refines: <br />";
-    s += "<table><tr><th>Refine</th><th>Stats</th>";
-    if (skill.refines.neweffect) {
-      p = skill.refines.neweffect ;
-      s += "<th>Effect</th></tr>";
-    } else {
-      p = "";
-      s += "</tr>";
-    }
-    //Eff refine
-    if (skill.refines.eff) {
-      s += "<tr><td>Effect</td><td>" + skill.refines.eff.stats[0].$numberDouble + ", "
-        + skill.refines.eff.stats[1].$numberDouble + ", "
-        + skill.refines.eff.stats[2].$numberDouble + ", "
-        + skill.refines.eff.stats[3].$numberDouble + ", "
-        + skill.refines.eff.stats[4].$numberDouble + "</td>";
+  
+  if(skill.class=="weapon") {
+    s += "Stats: ";
+    s += skill.stats[0].$numberInt + ", ";
+    s += skill.stats[1].$numberInt + ", ";
+    s += skill.stats[2].$numberInt + ", ";
+    s += skill.stats[3].$numberInt + ", ";
+    s += skill.stats[4].$numberInt + "<br />";
+    if (skill.refines) {//Refines
+      s += "Refines: <br />";
+      s += "Refine Type: " + skill.refines.type;
+      s += " Refine Cost: " + skill.refines.cost.$numberInt;
+      s += "<table><tr><th>Refine</th><th>Stats</th>";
+      if (skill.refines.neweffect) {
+        p = skill.refines.neweffect ;
+        s += "<th>Effect</th></tr>";
+      } else {
+        p = "";
+        s += "</tr>";
+      }
+      //Eff refine
+      if (skill.refines.eff) {
+        s += "<tr><td>Effect</td><td>" + skill.refines.eff.stats[0].$numberInt + ", "
+          + skill.refines.eff.stats[1].$numberInt + ", "
+          + skill.refines.eff.stats[2].$numberInt + ", "
+          + skill.refines.eff.stats[3].$numberInt + ", "
+          + skill.refines.eff.stats[4].$numberInt + "</td>";
+        if (skill.effect) {
+          s += "<td>" + p + "<br /><span>" + skill.refines.eff.effect + "</span></td></tr>";
+        } else {
+          s += "</tr>";
+        }
+      }
+      //atk refine
+      s += "<tr><td>Attack</td><td>" + skill.refines.atk.stats[0].$numberInt + ", "
+        + skill.refines.atk.stats[1].$numberInt + ", "
+        + skill.refines.atk.stats[2].$numberInt + ", "
+        + skill.refines.atk.stats[3].$numberInt + ", "
+        + skill.refines.atk.stats[4].$numberInt + "</td>";
       if (skill.effect) {
-        s += "<td>" + p + "<br /><span>" + skill.refines.eff.effect + "</span></td></tr>";
+        s += "<td>" + p + "</td></tr>";
       } else {
         s += "</tr>";
       }
+      //spd refine
+      s += "<tr><td>Speed</td><td>" + skill.refines.spd.stats[0].$numberInt + ", "
+        + skill.refines.spd.stats[1].$numberInt + ", "
+        + skill.refines.spd.stats[2].$numberInt + ", "
+        + skill.refines.spd.stats[3].$numberInt + ", "
+        + skill.refines.spd.stats[4].$numberInt + "</td>";
+      if (skill.effect) {
+        s += "<td>" + p + "</td></tr>";
+      } else {
+        s += "</tr>";
+      }
+      //def refine
+      s += "<tr><td>Defense</td><td>" + skill.refines.def.stats[0].$numberInt + ", "
+        + skill.refines.def.stats[1].$numberInt + ", "
+        + skill.refines.def.stats[2].$numberInt + ", "
+        + skill.refines.def.stats[3].$numberInt + ", "
+        + skill.refines.def.stats[4].$numberInt + "</td>";
+      if (skill.effect) {
+        s += "<td>" + p + "</td></tr>";
+      } else {
+        s += "</tr>";
+      }
+      //res refine
+      s += "<tr><td>Resistance</td><td>" + skill.refines.res.stats[0].$numberInt + ", "
+        + skill.refines.res.stats[1].$numberInt + ", "
+        + skill.refines.res.stats[2].$numberInt + ", "
+        + skill.refines.res.stats[3].$numberInt + ", "
+        + skill.refines.res.stats[4].$numberInt + "</td>";
+      if (skill.effect) {
+        s += "<td>" + p + "</td></tr>";
+      } else {
+        s += "</tr>";
+      }
+      s += "</table>";
     }
-    //atk refine
-    s += "<tr><td>Attack</td><td>" + skill.refines.atk.stats[0].$numberDouble + ", "
-      + skill.refines.atk.stats[1].$numberDouble + ", "
-      + skill.refines.atk.stats[2].$numberDouble + ", "
-      + skill.refines.atk.stats[3].$numberDouble + ", "
-      + skill.refines.atk.stats[4].$numberDouble + "</td>";
-    if (skill.effect) {
-      s += "<td>" + p + "</td></tr>";
-    } else {
-      s += "</tr>";
-    }
-    //spd refine
-    s += "<tr><td>Speed</td><td>" + skill.refines.spd.stats[0].$numberDouble + ", "
-      + skill.refines.spd.stats[1].$numberDouble + ", "
-      + skill.refines.spd.stats[2].$numberDouble + ", "
-      + skill.refines.spd.stats[3].$numberDouble + ", "
-      + skill.refines.spd.stats[4].$numberDouble + "</td>";
-    if (skill.effect) {
-      s += "<td>" + p + "</td></tr>";
-    } else {
-      s += "</tr>";
-    }
-    //def refine
-    s += "<tr><td>Defense</td><td>" + skill.refines.def.stats[0].$numberDouble + ", "
-      + skill.refines.def.stats[1].$numberDouble + ", "
-      + skill.refines.def.stats[2].$numberDouble + ", "
-      + skill.refines.def.stats[3].$numberDouble + ", "
-      + skill.refines.def.stats[4].$numberDouble + "</td>";
-    if (skill.effect) {
-      s += "<td>" + p + "</td></tr>";
-    } else {
-      s += "</tr>";
-    }
-    //res refine
-    s += "<tr><td>Resistance</td><td>" + skill.refines.res.stats[0].$numberDouble + ", "
-      + skill.refines.res.stats[1].$numberDouble + ", "
-      + skill.refines.res.stats[2].$numberDouble + ", "
-      + skill.refines.res.stats[3].$numberDouble + ", "
-      + skill.refines.res.stats[4].$numberDouble + "</td>";
-    if (skill.effect) {
-      s += "<td>" + p + "</td></tr>";
-    } else {
-      s += "</tr>";
-    }
-    s += "</table>";
-    s += "Refine Type: " + skill.refines.type + "<br />";
+  } else if(skill.class=="special") {
+    s += "Cooldown: " + skill.cooldown.$numberInt + "<br />";
+  } else if(skill.class=="assist") {
+    s += "Range: " + skill.range.$numberInt + "<br />";
   }
   document.getElementById("skill").innerHTML = s;
 }

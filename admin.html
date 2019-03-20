@@ -4,6 +4,8 @@
     <title>FEH Pocket Tactician - Admin Page</title>
     <meta charset="utf-8"/>
     <link rel="stylesheet" type="text/css" href="admin.css">
+    <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.1.1/stitch.js"></script>
+    <script type="text/javascript" src="scripts.js"></script>
     <script type="text/javascript">    
       function genHeroStatsFields() {
         var field = document.getElementById("hRarity")
@@ -233,7 +235,7 @@
           data += "],";
           data += "\"hasIV\":" + document.getElementById("hIVs").checked;
           data += "}";
-          console.log("Hero Data:\n" + data);
+          console.log(JSON.parse(data));
           //alert("Sending Hero data to database: \n" + data);
           /*const url = "https://webhooks.mongodb-stitch.com/api/client/v2.0/app/473pockettactician-jcxsp/service/http/incoming_webhook/addHero";
           var http = new XMLHttpRequest();
@@ -243,9 +245,32 @@
             query: {},
             body: data
           });
-          http.onloadend = function () {
-            console.log("Hero Data sent to database! Did it work? I have no idea!");
+          console.log(http.response);
+          /*http.onloadend = function () {
+            console.log(response);
           };*/
+          const client = stitch.Stitch.initializeDefaultAppClient('473pockettactician-jcxsp');
+          const db = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('PocketTactician');
+          //login with anonymous credentials (we'll change this next iteration)
+          client.auth.loginWithCredential(new stitch.AnonymousCredential()
+          ).then(user =>
+            //insert hero into collection
+            db.collection('Heroes').insertOne(JSON.parse(data))
+          ).then(
+            db.collection('Heroes').find({name:document.getElementById('hName').value}).asArray(),
+          ).then(found => {
+            //return success message to user
+            if(found) {
+              alert("Successfully added to collection!"),
+              location.reload()
+            } else {
+              alert("Failed to add to collection, but no error was returned. Please check Stitch logs for more info")
+            }
+          }).catch(err => {
+            //return failure message to user
+            alert("Failed to add Hero, check console for details"),
+            console.error(err)
+          });
         }
       }
       
@@ -258,12 +283,11 @@
           var data = "{\"name\":\"" + document.getElementById("sName").value + "\",";
           data += "\"class\":\"" + document.getElementById("sClass").value + "\",";
           data += "\"effect\":\"" + document.getElementById("sEffect").value + "\",";
-          data += "\"assets\":\"" + document.getElementById("sAsset").value + "\",";
           data += "\"sp\":" + document.getElementById("sSP").value + ",";
           data += "\"inheritable\":" + document.getElementById("sCanInherit").checked;
           if(document.getElementById("sClass").value == "weapon") {
             data += ",\"color\":\"" + document.getElementById("sColor").value + "\",";
-            data += "\"type\":" + document.getElementById("sType").value + "\",";
+            data += "\"type\":\"" + document.getElementById("sType").value + "\",";
             data += "\"range\":";
             var type = document.getElementById("sType").value
             if (type == "melee" || type == "beast" || type == "dragon") {
@@ -284,8 +308,8 @@
                 data += "\"neweffect\":\"" + document.getElementById("sNewEffect").value + "\",";
               }
               data += "\"type\":\"" + document.getElementById("sRefineType").value + "\",";
-              data += "\"cost\":" + document.getElementById("sRefineCost").value + "\",";
-              data += "\"sp\":" + document.getElementById("sRefineSP").value + "\",";
+              data += "\"cost\":" + document.getElementById("sRefineCost").value + ",";
+              data += "\"sp\":" + document.getElementById("sRefineSP").value + ",";
               data += "\"atk\":{\"stats\":[" + document.getElementById("sAtkRefineHPStat").value + ","
                 + document.getElementById("sAtkRefineAtkStat").value + ","
                 + document.getElementById("sAtkRefineSpdStat").value + ","
@@ -312,16 +336,42 @@
                   + document.getElementById("sEffRefineSpdStat").value + ","
                   + document.getElementById("sEffRefineDefStat").value + ","
                   + document.getElementById("sEffRefineResStat").value + "],";
-                data += "\"effect\":\"" + document.getElementById("sEffRefineEffect") + "\"}";
+                data += "\"effect\":\"" + document.getElementById("sEffRefineEffect").value + "\"}";
               }
+              data += "}";
             }
             data += "}";
           } else if(document.getElementById("sClass").value == "special") {
             data += ",\"cooldown\":" + document.getElementById("sCooldown").value + "}";
           } else if(document.getElementById("sClass").value == "assist") {
-            data += ",\"range:\"" + document.getElementById("sRange").value + "}";
+            data += ",\"range\":" + document.getElementById("sRange").value + "}";
+          } else {
+            data += "}";
           }
           console.log("Skill Data:\n" + data);
+          
+          const client = stitch.Stitch.initializeDefaultAppClient('473pockettactician-jcxsp');
+          const db = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('PocketTactician');
+          //login with anonymous credentials (we'll change this next iteration)
+          client.auth.loginWithCredential(new stitch.AnonymousCredential()
+          ).then(user =>
+            //insert skill into collection
+            db.collection('Skills').insertOne(JSON.parse(data))
+          ).then(
+            db.collection('Skills').find({name:document.getElementById('sName').value}).asArray(),
+          ).then(found => {
+            //return success message to user
+            if(found) {
+              alert("Successfully added to collection!"),
+              location.reload()
+            } else {
+              alert("Failed to add to collection, but no error was returned. Please check Stitch logs for more info")
+            }
+          }).catch(err => {
+            //return failure message to user
+            alert("Failed to add Skill, check console for details"),
+            console.error(err)
+          });
         }
       }
       
@@ -371,8 +421,12 @@
   <body onload="init()">
     <a href="./index.html"><input type="submit" value="Return"></a>
     <input type="submit" value="Add a Hero" onclick="show('addHero')">
+    <input type="submit" value="Edit Heroes" onclick="show('editHeroes');getHeroData()">
     <input type="submit" value="Add a Skill" onclick="show('addSkill')">
+    <input type="submit" value="Edit Skills" onclick="show('editHeroes')">
     <input type="submit" value="Add a Stage" onclick="show('addStage')">
+    <input type="submit" value="Edit Stages" onclick="show('editHeroes')">
+    
     <div id="addHero" class="hideable">
       <h1>Add a Hero</h1>
       <form id="heroForm">
@@ -468,7 +522,6 @@
           <option value="seal">Seal</option>
         </select>
         Effect:<input type="text" id="sEffect">
-        Asset location:<input type="text" id="sAsset" required>
         SP Cost:<input type="number" id="sSP" value="0" required>
         <input type="checkbox" id="sCanInherit">Is Inheritable?
         <div id="sHasRange">
@@ -558,6 +611,18 @@
 <!------------------------------------------------------------------------------------------>
     <div id="addStage" class="hideable">
       <h1> under construction :(</h1>
+    </div>
+    
+    <div id="editHeroes" class="hideable">
+      <h1>Edit Heroes</h1>
+    </div>
+    
+    <div id="editSkills" class="hideable">
+    
+    </div>
+    
+    <div id="editStages" class="hideable">
+    
     </div>
   </body>
 </html>

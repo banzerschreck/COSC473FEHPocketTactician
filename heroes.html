@@ -1,17 +1,21 @@
 ﻿<html>
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <title>View Heroes</title>
-  <script type="text/javascript" src="scripts.js"></script>
-  <style>
-    td {
-      border: 1px solid black;
-    }
-  </style>
-</head>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>View Heroes</title>
+    <script type="text/javascript" src="scripts.js"></script>
+    <script>
+      function init() {
+        getHeroData();
+      }
+    </script>
+    <style>
+      td {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
 
-  <!--TODO: move data fields out of scripts.js into here-->
-  <body onload="buildHeroesList();">
+  <body onload="init();">
     <nav>
       <ul>
         <li><a href="./index.html">Return</a></li>
