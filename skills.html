@@ -5,8 +5,13 @@
     <script type="text/javascript" src="scripts.js"></script>
     <script>
       function init(){
-        getSkillData();
-        displaySkillsList();
+        fetch(skillsURL)
+        .then(res => res.json())
+        .then((res) => {
+          console.log(res);
+          skillsData = res;
+          displaySkillsList();
+        });
       }
     </script>
     <style>
