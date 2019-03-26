@@ -2,6 +2,7 @@
   <head>
     <title>Login or Register</title>
     <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.3.0/stitch.js"></script>
+    <script src='createAccount.js'></script> 
   </head>
   
   <body>
@@ -21,7 +22,8 @@
       Email:<input type="email" id="email" required><br />
       Password:<input type="password" id="password" required><br />
       Confirm Password:<input type="password" id="" required><br />
-      <input type="submit" value="Register">
+      <button onclick='createAccount();'>Register</button>
+      <!-- <input type="submit" value="Register"> -->
     </form>
   </body>
 </html>
