@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Register</title>
+    <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.3.0/stitch.js"></script>
+    <script>
+        function register(email, password) {
+            const emailPassClient = Stitch.defaultAppClient.auth.getProviderClient(UserPasswordAuthProviderClient.factory);
+            emailPassClient.registerWithEmail(email, password)
+            .then(() => {
+                console.log("Successfully sent account confirmation email!");
+                Document.getElementById("confirm").setInnerHTML("Please check your email to confirm your account!");
+            })
+            .catch(err => {
+                console.log("Error registering new user: ", err);
+            });
+        }
+    </script>
+</head>
+<body>
+    <div id="confirm"></div>
+</body>
+</html>
