@@ -252,11 +252,13 @@
           const client = stitch.Stitch.initializeDefaultAppClient('473pockettactician-jcxsp');
           const db = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('PocketTactician');
           //login with anonymous credentials (we'll change this next iteration)
-          client.auth.loginWithCredential(new stitch.AnonymousCredential())
-          //insert hero into collection
-          .then(user => db.collection('Heroes').insertOne(JSON.parse(data)))
-          .then(db.collection('Heroes').find({name:document.getElementById('hName').value}).asArray())
-          .then(found => {
+          client.auth.loginWithCredential(new stitch.AnonymousCredential()
+          ).then(user =>
+            //insert hero into collection
+            db.collection('Heroes').insertOne(JSON.parse(data))
+          ).then(
+            db.collection('Heroes').find({name:document.getElementById('hName').value}).asArray(),
+          ).then(found => {
             //return success message to user
             if(found) {
               alert("Successfully added to collection!"),

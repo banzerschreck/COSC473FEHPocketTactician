@@ -5,13 +5,7 @@
     <script type="text/javascript" src="scripts.js"></script>
     <script>
       function init() {
-        fetch(heroesURL)
-        .then(res => res.json())
-        .then((res) => {
-          console.log(res);
-          heroData = res;
-          displayHeroesList();
-        });
+        getHeroData();
       }
     </script>
     <style>

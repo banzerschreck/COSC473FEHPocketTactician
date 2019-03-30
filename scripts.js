@@ -6,6 +6,33 @@ const skillsURL = 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/473po
 
 var heroData = new Object();
 /*
+ * sends an AJAX XMLHttpRequest to our JSON data to load it into the page
+ * calls displayHeroesList() to show list of heroes on the page
+ */
+function getHeroData() {
+  const request = new XMLHttpRequest();
+  console.log("Attempting to load heroes from JSON...");
+  request.open("GET", heroesURL);
+  request.onload = () => {
+    if(request.status===200) {
+      try {
+        heroData = JSON.parse(request.responseText);
+        console.log("Parsed JSON file!");
+        console.log(heroData);
+        return heroData;
+      } catch (e) {
+        console.warn(e);
+        alert("Something broke! Press F12 to check console");
+      }
+    } else {
+      console.warn("Failed to retrieve hero data, got response code ", request.status);
+    }
+  };
+  request.open('GET', heroesURL);
+  request.send();
+  
+}
+/*
  * builds list of heroes found in the database
  * items can be clicked to show that hero's data
  */
@@ -75,6 +102,30 @@ function displayHeroData(heroid) {
 
 //------------------------------Skills-----------------------------------------------
 var skillsData = new Object();
+/*
+ * sends AJAX request to skills JSON database
+ * calls displaySkillsList() to display list of skills on page
+ */
+function getSkillData() {
+  var request = new XMLHttpRequest();
+  console.log("Loading skills...");
+  request.onload = () => {
+    if (request.status===200) {
+      try {
+        skillsData = JSON.parse(request.responseText);
+        console.log("Parsed JSON file!");
+        console.log(skillsData);
+      } catch (e) {
+        console.warn(e);
+        alert("Something broke! Press F12 to check console");
+      }
+    } else {
+      console.warn("Failed to retrieve skills data, got response code ", request.status);
+    }
+  };
+  request.open('GET', skillsURL);
+  request.send();
+}
 /* 
  * builds a clickable list of skills found in JSON database in a container called "select"
  */

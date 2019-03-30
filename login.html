@@ -1,62 +1,27 @@
-
 <html>
   <head>
-      <meta charset="utf-8" />
     <title>Login or Register</title>
-    <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.3.2/stitch.js"></script>
-    <script>
-      const client = stitch.Stitch.initializeDefaultAppClient('473pockettactician-jcxsp');
-      const app = stitch.Stitch.defaultAppClient;
-      const db = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('PocketTactician');
-    
-      function login(email, password) {
-        const credential = new stitch.UserPasswordCredential(email, password);
-        app.auth.loginWithCredential(credential)
-        .then(authedUser => console.log("Successfully logged in with id: ${authedUser.id}"))
-        .catch(err => console.error("Failed to login: ${err}"));
-      }
-
-      function register(email, password) {
-        const emailPassClient = Stitch.defaultAppClient.auth.getProviderClient(UserPasswordAuthProviderClient.factory);
-        emailPassClient.registerWithEmail(email, password)
-        .then(() => {
-          console.log("Successfully sent account confirmation email!");
-          document.getElementById("confirm").setInnerHTML("Please check your email to confirm your account!");
-        })
-        .catch(err => {
-          console.log("Error registering new user: ", err);
-        });
-      }
-      
-      function checkPasswords() {
-        const pass1 = document.getElementById("pass1");
-        const pass2 = document.getElementById("pass2");
-        if (pass1.value != pass2.value) pass2.setCustomValidity("Passwords must match");
-        else pass2.setCustomValidity('');
-      }
-    </script>
+    <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.3.0/stitch.js"></script>
   </head>
   
   <body>
     <a href="./index.html"><input type="submit" value="Return"></a>
     <h3>Login</h3>
-    <form onsubmit="login(email, password)">
-      Email:<input type="text" name="email" required><br />
-      Password:<input type="password" name="password" required><br />
+    <form method="POST" action="login(username, email)">
+      Username:<input type="text" name="username" required><br />
+      Password:<input type="password" name="password" required></input><br />
       <input type="submit" value="Login">
     </form>
-    
-    <a href="./reset.html">Reset your password</a>
-    <!--a href="recover.html?f=pass">Forgot password?</a>
-    <a href="recover.html?f=name">Forgot username?</a--->
+    <a href="recover.html?f=pass">Forgot password?</a>
+    <a href="recover.html?f=name">Forgot username?</a>
 		
-    <form method="POST" action="register(email, pass2)">
+    <form method="POST" action="register(username, email, password">
       <h3>Register an Account</h3>
+      Username:<input type="text" id="username" required><br />
       Email:<input type="email" id="email" required><br />
-      Password:<input type="password" id="pass1" onchange="checkPasswords()" required><br />
-      Confirm Password:<input type="password" id="pass2" onchange="checkPasswords()" required><br />
+      Password:<input type="password" id="password" required><br />
+      Confirm Password:<input type="password" id="" required><br />
       <input type="submit" value="Register">
     </form>
-    
   </body>
 </html>
