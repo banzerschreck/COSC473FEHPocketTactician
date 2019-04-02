@@ -208,8 +208,10 @@ function login(email, password) {
   const credential = new stitch.UserPasswordCredential(email, password);
   Stitch.defaultAppClient.auth.loginWithCredential(credential)
     .then(authedUser => console.log("Successfully logged in with id: " + authedUser.id))
-    .catch(err => console.error("Failed to login: ${err}"));
+    .catch(err => console.error("Failed to login: " + err));
 }
+
+
 
 function register(email, password) {
   console.log("Registering " + email + ", " + password);
@@ -259,17 +261,16 @@ function sendPassResetEmail(email) {
     });
 }
 
-function resetPassword() {
+function resetPassword(newPassword) {
   // Parse the URL query parameters
   const url = window.location.search;
   const params = new URLSearchParams(url);
   const token = params.get('token');
   const tokenId = params.get('tokenId');
-  const newPassword = document.getElementById("pass2").value;
 
   // Confirm the user's email/password account
   emailPassClient.resetPassword(token, tokenId, newPassword).then(() => {
-    console.log("Successfully reset password!");
+    alert("Successfully reset password!");
   }).catch(err => {
     console.log("Error resetting password:", err);
     });

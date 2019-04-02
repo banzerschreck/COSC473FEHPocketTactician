@@ -9,9 +9,9 @@
 </head>
 <body>
   <a href="./index.html"><input type="submit" value="Return"></a>
-  <form onsubmit="resetPassword(); return false">
-    Enter New Password:<input type="password" name="pass1" onchange="checkPasswords()" required><br />
-    Confirm Password:<input type="password" name="pass2" onchange="checkPasswords()" required><br />
+  <form onsubmit="resetPassword(pass2.value); return false">
+    Enter New Password:<input type="password" id="pass1" onchange="checkPasswords()" required><br />
+    Confirm Password:<input type="password" id="pass2" onchange="checkPasswords()" required><br />
     <input type="submit" value="Reset Password">
   </form>
 </body>
