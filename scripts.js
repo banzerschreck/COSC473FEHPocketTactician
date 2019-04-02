@@ -29,11 +29,11 @@ function displayHeroData(heroid) {
   
   console.log("Displaying hero data for id = ", heroid);  
 
-  s += "<img src=\"../data/" + hero.assets.main + "\"/><br />";
+  s += "<img src=\"data/" + hero.assets.main + "\"/><br />";
   //name and title
   s+= "<h2>"+hero.name+": "+hero.title+"</h2><br />";
   //weapon, color, and movement
-  s+= "<img src=\'../data/assets/skills/"+hero.color+hero.weapon+".png\'><img src=\'../data/assets/skills/"+hero.movetype+".png\'><br />";
+  s+= "<img src=\'data/assets/skills/"+hero.color+hero.weapon+".png\'><img src=\'data/assets/skills/"+hero.movetype+".png\'><br />";
   //stats
   s+= "<h3>Stats</h3>";
   s += "<table><tr><th>Rarity/Lvl</th><th>HP</th><th>Atk</th><th>Spd</th><th>Def</th><th>Res</th></tr>";
@@ -64,8 +64,8 @@ function displayHeroData(heroid) {
   console.log(hero.skills);
   for (const o of hero.skills) {
     s += "<tr><td>"+o.name+"</td>";
-    s += "<td><img src=\"../data/assets/ui/stars-" + o.rarity+"star.png\"></img></td>";
-    s += "<td><img src=\"../data/assets/skills/" + o.type+".png\"></td></tr>";
+    s += "<td><img src=\"data/assets/ui/stars-" + o.rarity+"star.png\"></img></td>";
+    s += "<td><img src=\"data/assets/skills/" + o.type+".png\"></td></tr>";
   }
   s+="</table>";
   document.getElementById("hero").innerHTML = s;
