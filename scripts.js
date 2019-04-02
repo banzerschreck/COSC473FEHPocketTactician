@@ -207,8 +207,22 @@ const emailPassClient = Stitch.defaultAppClient.auth.getProviderClient(UserPassw
 function login(email, password) {
   const credential = new stitch.UserPasswordCredential(email, password);
   Stitch.defaultAppClient.auth.loginWithCredential(credential)
-    .then(authedUser => console.log("Successfully logged in with id: " + authedUser.id))
+    .then(authedUser => {
+      console.log("Successfully logged in with id: " + authedUser.id);
+      checkLoggedIn();
+    })
     .catch(err => console.error("Failed to login: " + err));
+}
+
+function logout() {
+  Stitch.defaultAppClient.auth.logout()
+    .then(() => {
+      alert("You have been logged out");
+      checkLoggedIn();
+    })
+    .catch(err => {
+      console.error("Error logging out: ", err);
+    });
 }
 
 function register(email, password) {
@@ -219,7 +233,7 @@ function register(email, password) {
       alert("Please check your email to confirm your account");
     })
     .catch(err => {
-      console.log("Error registering new user: ", err);
+      console.error("Error registering new user: ", err);
     });
 }
 

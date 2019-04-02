@@ -5,7 +5,7 @@
   <meta charset="utf-8"/>
   <link rel="stylesheet" type="text/css" href="index.css">
   <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.1.1/stitch.js"></script>
-  <script type="text/javascript" src="scripts.js"></script>
+  <script src="scripts.js"></script>
   <script type="text/javascript">    
     function genHeroStatsFields() {
       var field = document.getElementById("hRarity")
@@ -132,14 +132,16 @@
       }
 
       function show(id) {
-        var e = document.getElementById(id);
         var divs = document.getElementsByClassName("hideable");
         //console.log(divs);
         for(var i = 0; i < divs.length; i++) {
           //console.log(x);
           divs[i].style.display = "none";
         }
-        e.style.display = "block";
+        if(id != "none") {
+          var e = document.getElementById(id);
+          e.style.display = "block";
+        }
         if (id == "addSkill") {
           showSkillSubForms();
         }
@@ -412,8 +414,14 @@
       }
 
       function init() {
-        show("addHero");
-        genHeroStatsFields();
+        //console.log(Stitch.defaultAppClient.auth.user);
+        if(Stitch.defaultAppClient.auth.user) {
+          show("addHero");
+          genHeroStatsFields();
+        } else {
+          show("none");
+          document.getElementById("buttons").innerHTML = "You must be logged in as an administrator to view this page.";
+        }
       }
     </script>
   </head>
@@ -423,13 +431,14 @@
       <a href="./index.html">Return</a>
     </div>
 
-    
-    <input type="submit" value="Add a Hero" onclick="show('addHero')">
-    <input type="submit" value="Edit Heroes" onclick="show('editHeroes');getHeroData()">
-    <input type="submit" value="Add a Skill" onclick="show('addSkill')">
-    <input type="submit" value="Edit Skills" onclick="show('editHeroes')">
-    <input type="submit" value="Add a Stage" onclick="show('addStage')">
-    <input type="submit" value="Edit Stages" onclick="show('editHeroes')">
+    <div id="buttons">
+      <input type="submit" value="Add a Hero" onclick="show('addHero')">
+      <input type="submit" value="Edit Heroes" onclick="show('editHeroes');getHeroData()">
+      <input type="submit" value="Add a Skill" onclick="show('addSkill')">
+      <input type="submit" value="Edit Skills" onclick="show('editHeroes')">
+      <input type="submit" value="Add a Stage" onclick="show('addStage')">
+      <input type="submit" value="Edit Stages" onclick="show('editHeroes')">
+    </div>
     
     <div id="addHero" class="hideable">
       <h1 class="add">Add a Hero</h1>
