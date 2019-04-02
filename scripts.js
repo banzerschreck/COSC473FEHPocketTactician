@@ -1,8 +1,6 @@
-/* 
- * TODO:
- */
 const heroesURL = 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/473pockettactician-jcxsp/service/http/incoming_webhook/getHeroes';
 const skillsURL = 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/473pockettactician-jcxsp/service/http/incoming_webhook/getSkills';
+const APP_ID = "473pockettactician-jcxsp";
 
 var heroData = new Object();
 /*
@@ -31,11 +29,11 @@ function displayHeroData(heroid) {
   
   console.log("Displaying hero data for id = ", heroid);  
 
-  s += "<img src=\"data/" + hero.assets.main + "\"/><br />";
+  s += "<img src=\"../data/" + hero.assets.main + "\"/><br />";
   //name and title
   s+= "<h2>"+hero.name+": "+hero.title+"</h2><br />";
   //weapon, color, and movement
-  s+= "<img src=\'data/assets/skills/"+hero.color+hero.weapon+".png\'><img src=\'data/assets/skills/"+hero.movetype+".png\'><br />";
+  s+= "<img src=\'../data/assets/skills/"+hero.color+hero.weapon+".png\'><img src=\'../data/assets/skills/"+hero.movetype+".png\'><br />";
   //stats
   s+= "<h3>Stats</h3>";
   s += "<table><tr><th>Rarity/Lvl</th><th>HP</th><th>Atk</th><th>Spd</th><th>Def</th><th>Res</th></tr>";
@@ -66,8 +64,8 @@ function displayHeroData(heroid) {
   console.log(hero.skills);
   for (const o of hero.skills) {
     s += "<tr><td>"+o.name+"</td>";
-    s += "<td><img src=\"data/assets/ui/stars-" + o.rarity+"star.png\"></img></td>";
-    s += "<td><img src=\"data/assets/skills/" + o.type+".png\"></td></tr>";
+    s += "<td><img src=\"../data/assets/ui/stars-" + o.rarity+"star.png\"></img></td>";
+    s += "<td><img src=\"../data/assets/skills/" + o.type+".png\"></td></tr>";
   }
   s+="</table>";
   document.getElementById("hero").innerHTML = s;
@@ -197,4 +195,79 @@ function displaySkillData(skillId) {
     s += "Range: " + skill.range.$numberInt + "<br />";
   }
   document.getElementById("skill").innerHTML = s;
+}
+//======================STITCH USER AUTH/REGISTRATION=========================================
+const {
+  Stitch,
+  UserPasswordAuthProviderClient
+} = stitch;
+Stitch.initializeDefaultAppClient(APP_ID);
+const emailPassClient = Stitch.defaultAppClient.auth.getProviderClient(UserPasswordAuthProviderClient.factory);
+
+function confirmEmail() {
+  const url = window.location.search;
+  const params = new URLSearchParams(url);
+  const token = params.get('token');
+  const tokenId = params.get('tokenId');
+  emailPassClient
+    .confirmUser(token, tokenId)
+    .then(() => displayResult('success'))
+    .catch(err => displayResult('error', err))
+}
+
+function register(email, password) {
+  emailPassClient.registerWithEmail(email, password)
+    .then(() => {
+      console.log("Successfully sent account confirmation email!");
+      alert("Please check your email to confirm your account");
+      document.getElementById("confirm").setInnerHTML("Please check your email to confirm your account!");
+    })
+    .catch(err => {
+      console.log("Error registering new user: ", err);
+    });
+}
+
+function login(email, password) {
+  const credential = new stitch.UserPasswordCredential(email, password);
+  app.auth.loginWithCredential(credential)
+    .then(authedUser => console.log("Successfully logged in with id: ${authedUser.id}"))
+    .catch(err => console.error("Failed to login: ${err}"));
+}
+      
+function checkPasswords() {
+  const pass1 = document.getElementById("pass1");
+  const pass2 = document.getElementById("pass2");
+  if (pass1.value != pass2.value) pass2.setCustomValidity("Passwords must match");
+  else pass2.setCustomValidity('');
+}
+
+function resetPassword() {
+  // Parse the URL query parameters
+  const url = window.location.search;
+  const params = new URLSearchParams(url);
+  const token = params.get('token');
+  const tokenId = params.get('tokenId');
+  const newPassword = document.getElementById("pass2").value;
+
+  // Confirm the user's email/password account
+  const emailPassClient = stitch.defaultAppClient.auth
+    .getProviderClient(UserPasswordAuthProviderClient.factory);
+
+  emailPassClient.resetPassword(token, tokenId, newPassword).then(() => {
+    console.log("Successfully reset password!");
+  }).catch(err => {
+    console.log("Error resetting password:", err);
+  });
+}
+
+function sendPassResetEmail(email) {
+  const emailPassClient = stitch.Stitch.defaultAppClient.auth
+    .getProviderClient(UserPasswordAuthProviderClient.factory);
+
+  emailPassClient.sendResetPasswordEmail(email)
+    .then(() => {
+      console.log("Successfully sent password reset email!");
+    }).catch(err => {
+      console.log("Error sending password reset email:", err);
+    });
 }
