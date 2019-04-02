@@ -1,0 +1,201 @@
+
+
+      body {
+        background: url("images/Aether Raids/Bg_SkyCastle_00.png") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        margin: 0px;
+        padding: 0px;
+        height: 3000px;
+        font-family: sans-serif;
+  
+      }
+
+      .mainImg {
+        text-align: center;
+      }
+
+      .title {
+        color: white;
+        text-shadow: rgb(0, 0, 0) 2px 2px 0px, 
+        rgb(0, 0, 0) 2px -2px 0px, 
+        rgb(0, 0, 0) -2px 2px 0px, 
+        rgb(0, 0, 0) -2px -2px 0px, 
+        rgb(0, 0, 0) 2px 0px 0px, 
+        rgb(0, 0, 0) 0px 2px 0px, 
+        rgb(0, 0, 0) -2px 0px 0px, 
+        rgb(0, 0, 0) 0px -2px 0px;
+        font-size: 38px;
+        margin-top: 100px;
+        padding: 50px;
+/*        height: 110px;*/
+        text-align: center;
+        letter-spacing: 2px;
+        background: url(images/TitleTop.png) no-repeat center;
+      }
+
+      .title2 {
+        color: white;
+        text-shadow: rgb(0, 0, 0) 2px 2px 0px, 
+        rgb(0, 0, 0) 2px -2px 0px, 
+        rgb(0, 0, 0) -2px 2px 0px, 
+        rgb(0, 0, 0) -2px -2px 0px, 
+        rgb(0, 0, 0) 2px 0px 0px, 
+        rgb(0, 0, 0) 0px 2px 0px, 
+        rgb(0, 0, 0) -2px 0px 0px, 
+        rgb(0, 0, 0) 0px -2px 0px;
+        font-size: 38px;
+        margin: 0px;
+        padding: 50px;
+        text-align: center;
+        letter-spacing: 2px;
+        background: url(images/LoginImage.png) no-repeat center;
+      }
+
+      .add {
+        color: white;
+        text-shadow: rgb(0, 0, 0) 2px 2px 0px, 
+        rgb(0, 0, 0) 2px -2px 0px, 
+        rgb(0, 0, 0) -2px 2px 0px, 
+        rgb(0, 0, 0) -2px -2px 0px, 
+        rgb(0, 0, 0) 2px 0px 0px, 
+        rgb(0, 0, 0) 0px 2px 0px, 
+        rgb(0, 0, 0) -2px 0px 0px, 
+        rgb(0, 0, 0) 0px -2px 0px;
+        font-size: 38px;
+        margin-top: 100px;
+        padding: 50px;
+        text-align: center;
+        background: url(images/TitleTop.png) no-repeat center;
+
+
+    }
+
+    .option {
+        margin: 10px;
+        text-align: center;
+        height: 30px;
+        list-style-type: none;
+    }
+
+      .items {
+        list-style-type: none;
+        text-align: center;
+        letter-spacing: 2px;
+        background: url("images/items1.png") no-repeat center center;
+        padding: 70px;
+        text-shadow: rgb(0, 0, 0) 2px 2px 0px, 
+        rgb(0, 0, 0) 2px -2px 0px, 
+        rgb(0, 0, 0) -2px 2px 0px, 
+        rgb(0, 0, 0) -2px -2px 0px, 
+        rgb(0, 0, 0) 2px 0px 0px, 
+        rgb(0, 0, 0) 0px 2px 0px, 
+        rgb(0, 0, 0) -2px 0px 0px, 
+        rgb(0, 0, 0) 0px -2px 0px;
+      }
+
+      a:link {
+        color: white;
+        font-size: 24pt;
+        background-color: none;
+        text-decoration: none;
+        font-family: sans-serif;
+        
+      }
+
+      a:visited {
+        color: white;
+        font-size: 24pt;
+        background-color: none;
+        text-decoration: none;
+        font-family: sans-serif;
+      }
+
+      .return {
+        color: white;
+        text-shadow: rgb(0, 0, 0) 2px 2px 0px, 
+        rgb(0, 0, 0) 2px -2px 0px, 
+        rgb(0, 0, 0) -2px 2px 0px, 
+        rgb(0, 0, 0) -2px -2px 0px, 
+        rgb(0, 0, 0) 2px 0px 0px, 
+        rgb(0, 0, 0) 0px 2px 0px, 
+        rgb(0, 0, 0) -2px 0px 0px, 
+        rgb(0, 0, 0) 0px -2px 0px;
+        font-size: 38px;
+        margin: 0px;
+        padding: 50px;
+        letter-spacing: 2px;
+        background: url(images/return2.png) no-repeat;
+        background-position: left;
+      }
+
+      .banner {
+        color: white;
+        text-shadow: rgb(0, 0, 0) 2px 2px 0px, 
+        rgb(0, 0, 0) 2px -2px 0px, 
+        rgb(0, 0, 0) -2px 2px 0px, 
+        rgb(0, 0, 0) -2px -2px 0px, 
+        rgb(0, 0, 0) 2px 0px 0px, 
+        rgb(0, 0, 0) 0px 2px 0px, 
+        rgb(0, 0, 0) -2px 0px 0px, 
+        rgb(0, 0, 0) 0px -2px 0px;
+        font-size: 30px;
+        margin: 0px;
+        padding: 60px;
+/*        height: 110px;*/
+        text-align: center;
+        letter-spacing: 2px;
+        background: url(images/smallbanner.png) no-repeat center;
+        
+
+      }
+
+         .form {
+            color: white;
+            font-size: 22px;
+            text-shadow: rgb(0, 0, 0) 2px 2px 0px, 
+            rgb(0, 0, 0) 2px -2px 0px, 
+            rgb(0, 0, 0) -2px 2px 0px, 
+            rgb(0, 0, 0) -2px -2px 0px, 
+            rgb(0, 0, 0) 2px 0px 0px, 
+            rgb(0, 0, 0) 0px 2px 0px, 
+            rgb(0, 0, 0) -2px 0px 0px, 
+            rgb(0, 0, 0) 0px -2px 0px;
+            position: relative;
+            text-align: center;
+            color: white;
+      }
+
+         .centered {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: left;
+            line-height: 1.5;
+      }
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
