@@ -206,8 +206,8 @@ const emailPassClient = Stitch.defaultAppClient.auth.getProviderClient(UserPassw
 
 function login(email, password) {
   const credential = new stitch.UserPasswordCredential(email, password);
-  app.auth.loginWithCredential(credential)
-    .then(authedUser => console.log("Successfully logged in with id: ${authedUser.id}"))
+  Stitch.defaultAppClient.auth.loginWithCredential(credential)
+    .then(authedUser => console.log("Successfully logged in with id: " + authedUser.id))
     .catch(err => console.error("Failed to login: ${err}"));
 }
 
@@ -231,7 +231,14 @@ function confirmEmail() {
   emailPassClient
     .confirmUser(token, tokenId)
     .then(() => alert('Successfully confirmed your email, you may close this page.'))
-    .catch(err => console.err("Unable to register user, " + err))
+    .catch(err => console.error("Unable to register user, " + err))
+}
+
+function resendConfirmEmail(email) {
+  emailPassClient
+    .resendConfirmationEmail(email)
+    .then(() => alert("Successfully resent confirmation email"))
+    .catch(err => console.error("Unable to send confirmation email, " + err))
 }
 
 function displayResult(res, err) {

@@ -10,6 +10,11 @@
 <body onload="confirmEmail()">
   <a href="./index.html"><input type="submit" value="Return"></a>
   <div id="message"></div>
+  <h3>Resend Confirmation Email</h3>
+  <form onsubmit="resendConfirmEmail(email.value); return false">
+    Email: <input type="email" name="email">
+    <input type="submit" value="Resend Email">
+  </form>
 </body>
 </html>
 
