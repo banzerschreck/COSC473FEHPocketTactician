@@ -1,10 +1,6 @@
-/* 
- * TODO:
- */
 const heroesURL = 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/473pockettactician-jcxsp/service/http/incoming_webhook/getHeroes';
 const skillsURL = 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/473pockettactician-jcxsp/service/http/incoming_webhook/getSkills';
 const APP_ID = "473pockettactician-jcxsp";
-
 
 var heroData = new Object();
 /*
@@ -200,7 +196,7 @@ function displaySkillData(skillId) {
   }
   document.getElementById("skill").innerHTML = s;
 }
-
+//======================STITCH USER AUTH/REGISTRATION=========================================
 const {
   Stitch,
   UserPasswordAuthProviderClient
