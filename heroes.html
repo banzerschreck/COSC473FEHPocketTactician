@@ -1,39 +1,33 @@
-﻿<html>
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>View Heroes</title>
-    <script type="text/javascript" src="scripts.js"></script>
-    <script>
-      function init() {
-        fetch(heroesURL)
-        .then(res => res.json())
-        .then((res) => {
-          console.log(res);
-          heroData = res;
-          displayHeroesList();
-        });
-      }
-    </script>
-    <style>
-      td {
-        border: 1px solid black;
-      }
-    </style>
-  </head>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>View Heroes</title>
+  <link rel="stylesheet" type="text/css" href="index.css">
+  <script type="text/javascript" src="scripts.js"></script>
+  <script>
+    function init() {
+      fetch(heroesURL)
+      .then(res => res.json())
+      .then((res) => {
+        console.log(res);
+        heroData = res;
+        displayHeroesList();
+      });
+    }
+  </script>
+</head>
 
-  <body onload="init();">
-    <nav>
-      <ul>
-        <li><a href="./index.html">Return</a></li>
-      </ul>
-    </nav>
-    <h1>Select a Hero:</h1>
-    <div id="select">
+<body onload="init();">
+ <div class="return" >
+  <a href="./index.html">Return</a>
+</div>
+<h1 class="title">Select a Hero</h1>
+<div id="select">
 
-    </div>
+</div>
 
-    <div id="hero">
+<div id="hero">
 
-    </div>
-  </body>
+</div>
+</body>
 </html>
