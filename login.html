@@ -10,17 +10,21 @@
 <body>
   <a href="./index.html"><input type="submit" value="Return"></a>
   <h3>Login</h3>
-  <form onsubmit="login(email, password)">
-    Email:<input type="text" name="email" required><br />
+  <form onsubmit="login(email.value, password.value)">
+    Email:<input type="email" name="email" required><br />
     Password:<input type="password" name="password" required><br />
     <input type="submit" value="Login">
   </form>
   
-  <a href="./reset.html">Reset your password</a>
+  <h3>Reset your password</h3>
+  <form onsubmit="sendPassResetEmail(email.value)">
+    Email:<input type="email" name="email" required><br />
+    <input type="submit" value="Reset Password">
+  </form>
   <!--a href="recover.html?f=pass">Forgot password?</a>
   <a href="recover.html?f=name">Forgot username?</a--->
   
-  <form method="POST" onsubmit="register(email, pass2)">
+  <form onsubmit="register(email.value, pass2.value)">
     <h3>Register an Account</h3>
     Email:<input type="email" id="email" required><br />
     Password:<input type="password" id="pass1" onchange="checkPasswords()" required><br />
