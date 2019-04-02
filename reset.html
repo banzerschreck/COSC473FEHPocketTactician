@@ -8,7 +8,7 @@
   <script src="scripts.js"></script>
 </head>
 <body>
-  <form onsubmit="resetPassword()" method="post">
+  <form onsubmit="resetPassword(); return false">
     Enter New Password:<input type="password" name="pass1" onchange="checkPasswords()" required><br />
     Confirm Password:<input type="password" name="pass2" onchange="checkPasswords()" required><br />
     <input type="submit" value="Reset Password">
