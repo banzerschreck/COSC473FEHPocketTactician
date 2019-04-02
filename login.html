@@ -3,8 +3,8 @@
   <title>Login or Register</title>
   <link rel="stylesheet" type="text/css" href="index.css">
   <meta charset="utf-8"/>
-  <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.3.0/stitch.js" type="module"></script>
-  <script src='createAccount.js' type='text/javascript'></script> 
+  <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.3.2/stitch.js"></script>
+  <script src='scripts.js'></script> 
 </head>
 
 <body>
@@ -15,29 +15,37 @@
   <div class="form">
     <img src="images/form2.png">
     <div class="centered">
-      <form method="POST" action="login(username, email)">
-        Username:<input type="text" name="username" required><br />
+      <form onsubmit="login(email.value, password.value); return false">
+        Email:<input type="email" name="email" required><br />
         Password:<input type="password" name="password" required><br />
         <input type="submit" value="Login">
       </form>
-      <a href="recover.html?f=pass">Forgot password?</a>
-      <a href="recover.html?f=name">Forgot username?</a>
     </div>
   </div>
   
-  <form method="POST" action="register(username, email, password">
-    <h3 class="title2">Register an Account</h3>
-    <div class="form">
-      <img src="images/form2.png">
-      <div class="centered">
-        Username:<input type="text" id="username" required><br />
-        Email:<input type="email" id="email" required><br />
-        Password:<input type="password" id="password" required><br />
-        Confirm Password:<input type="password" id="" required><br />
-        <button onclick='createAccount();'>Register</button>
-      </div>
+  
+  <h3 class="title2">Forgot Password?</h3>
+  <div class="form">
+    <img src="images/form2.png">
+    <div class="centered">
+      <form onsubmit="sendPassResetEmail(email.value); return false">
+        Email:<input type="email" name="email" required><br />
+        <input type="submit" value="Reset Password">
+      </form>
     </div>
-    <!-- <input type="submit" value="Register"> -->
-  </form>
+  </div>
+  
+  <h3 class="title2">Register an Account</h3>
+  <div class="form">
+    <img src="images/form2.png">
+    <div class="centered">  
+      <form onsubmit="register(email.value, pass2.value); return false">
+        Email:<input type="email" id="email" required><br />
+        Password:<input type="password" id="pass1" onchange="checkPasswords()" required><br />
+        Confirm Password:<input type="password" id="pass2" onchange="checkPasswords()" required><br />
+        <input type="submit" value="Register">
+      </form>
+    </div>
+  </div>
 </body>
 </html>

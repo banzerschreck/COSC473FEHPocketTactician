@@ -211,8 +211,6 @@ function login(email, password) {
     .catch(err => console.error("Failed to login: " + err));
 }
 
-
-
 function register(email, password) {
   console.log("Registering " + email + ", " + password);
   emailPassClient.registerWithEmail(email, password)
