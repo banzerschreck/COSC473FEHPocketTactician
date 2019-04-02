@@ -4,3 +4,5 @@
 .vs/COSC473FEHPocketTactician/v15/.suo
 .vs/COSC473FEHPocketTactician/v15/.suo
 .vs/slnx.sqlite
+*.sqlite
+.vs/COSC473FEHPocketTactician/v15/.suo
