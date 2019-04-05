@@ -5,7 +5,7 @@
   <link rel="stylesheet" type="text/css" href="index.css">
   <script type="text/javascript" src="scripts.js"></script>
   <script>
-    function init() {
+    window.onload = function () {
       fetch(heroesURL)
       .then(res => res.json())
       .then((res) => {
@@ -13,21 +13,47 @@
         heroData = res;
         displayHeroesList();
       });
+      //hide hero div until user selects a hero
+      document.getElementById("hero").className = "hidden";
     }
   </script>
 </head>
 
-<body onload="init();">
- <div class="return" >
-  <a href="./index.html">Return</a>
-</div>
-<h1 class="title">Select a Hero</h1>
-<div id="select">
+<body>
+  <div class="return" >
+    <a href="./index.html">Return</a>
+  </div>
+  <h1 class="title">Select a Hero</h1>
+  <div id="select">
+    <ul id="heroesList">
+    
+    </ul>
+  </div>
 
-</div>
-
-<div id="hero">
-
-</div>
+  <div id="hero">
+    <img id="heroImg"><br />
+    <h2 id="heroNameAndTitle"></h2>
+    <img id="heroWeapon"><img id="heroMoveType">
+    <h3>Stats</h3>
+    <table id="heroStatsTable">
+      <tr>
+        <th>Rarity/Lvl</th>
+        <th>HP</th>
+        <th>Atk</th>
+        <th>Spd</th>
+        <th>Def</th>
+        <th>Res</th>
+      </tr>
+      
+    </table>
+    <h3>Skills</h3>
+    <table id="heroSkillsTable">
+      <tr>
+        <th>Skill Name</th>
+        <th>Rarity</th>
+        <th>Skill Type</th>
+      </tr>
+    </table>
+  </div>
 </body>
 </html>
