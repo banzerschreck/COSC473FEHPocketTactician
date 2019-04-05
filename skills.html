@@ -1,32 +1,63 @@
 <html>
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>View Skills</title>
-    <link rel="stylesheet" type="text/css" href="index.css">
-    <script type="text/javascript" src="scripts.js"></script>
-    <script>
-      function init(){
-        fetch(skillsURL)
-        .then(res => res.json())
-        .then((res) => {
-          console.log(res);
-          skillsData = res;
-          displaySkillsList();
-        });
-      }
-    </script>
-  </head>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>View Skills</title>
+  <link rel="stylesheet" type="text/css" href="index.css">
+  <script type="text/javascript" src="scripts.js"></script>
+  <script>
+    window.onload = function() {
+      fetch(skillsURL)
+      .then(res => res.json())
+      .then((res) => {
+        console.log(res);
+        skillsData = res;
+        displaySkillsList();
+      });
+      
+      document.getElementById("skill").className = "hidden";
+    }
+  </script>
+</head>
   
-  <body onload="init();">
-<div class="return" >
-    <a href="./index.html">Return</a>
-    </div>
+<body>
+  <div class="return" >
+  <a href="./index.html">Return</a>
+  </div>
 
-    <h1 class="title">Select a Skill</h1>
-    <div id="select">
+  <h1 class="title">Select a Skill</h1>
+  <div id="select">
+    <ul id="skillsList">
+    
+    </ul>
+  </div>
+    
+  <div id="skill">
+    <h3 id="skillName"></h3>
+    <img id="skillClass"><br />
+    Effect: <span id="skillEffect"></span><br />
+    SP: <span id="skillSP"></span><br />
+    Inheritable: <span id="skillInheritable"></span><br />
+    <div id="skillIsWeapon">
+      Stats: <span id="skillStats"></span>
+      <div id="skillHasRefines">
+        <h3>Refines</h3>
+        Refine Type: <span id="skillRefineType"></span><br />
+        Cost: <span id="skillRefineCost"></span><br />
+        <table id="skillRefinesTable">
+          <tr>
+            <th>Refine</th>
+            <th>Stats</th>
+            <th>Effect</th>
+          </tr>
+        </table>
+      </div>
     </div>
-
-    <div id="skill">
+    <div id="skillIsSpecial">
+      Cooldown: <span id="skillCooldown"></span><br />
     </div>
-  </body>
+    <div id="skillIsAssist">
+      Range: <span id="skillRange"></span><br />
+    </div>
+  </div>
+</body>
 </html>

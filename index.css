@@ -189,10 +189,22 @@
       color: black;
     }
     
-    #heroStatsTable tr td {
+    #heroStatsTable td {
       border: 1px solid black;
     }
     
-    #heroSkillsTable tr td {
+    #heroSkillsTable td {
+      border: 1px solid black;
+    }
+    
+    #skillsList li a {
+      color: black;
+    }
+    
+    #skillRefinesTableNewEffectSpan {
+      color: green;
+    }
+    
+    #skillRefinesTable td {
       border: 1px solid black;
     }
