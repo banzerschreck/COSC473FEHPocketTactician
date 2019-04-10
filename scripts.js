@@ -407,7 +407,7 @@ const {
   Stitch,
   UserPasswordAuthProviderClient
 } = stitch;
-Stitch.initializeDefaultAppClient(APP_ID);
+const client = Stitch.initializeDefaultAppClient(APP_ID);
 const emailPassClient = Stitch.defaultAppClient.auth.getProviderClient(UserPasswordAuthProviderClient.factory);
 
 function login(email, password) {
@@ -499,4 +499,55 @@ function checkPasswords() {
   const pass2 = document.getElementById("pass2");
   if (pass1.value != pass2.value) pass2.setCustomValidity("Passwords must match");
   else pass2.setCustomValidity('');
+}
+
+/*==========================Manage Heroes===================================*/
+function loadNewHeroes() {
+  const list = document.getElementById("newHeroes");
+  for (i in heroData) {
+    const newOption = document.createElement("option");
+    newOption.value = i;
+    newOption.text = heroData[i].name + ": " + heroData[i].title;
+    list.add(newOption);
+  }
+}
+
+function addYourHero() {
+  const heroVal = document.getElementById("newHeroes").value;
+  const newHero = heroData[heroVal];
+  newHero._ownerid = Stitch.defaultAppClient.auth.user.id;
+  console.log(newHero);
+  const db = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('PocketTactician');
+  db.collection('Users').insertOne(newHero)
+    .then(() => {
+      alert("Successfully added new hero!");
+      loadYourHeroes();
+    })
+    .catch(err => {
+      alert("Error communicating with database, check console for details.");
+      console.error(err);
+    });
+}
+
+/*
+ * loads saved heroes from database
+ * return: array of all heroes in your database
+ */
+function loadYourHeroes() {
+  const yourHeroesList = document.getElementById("yourHeroes");
+  yourHeroesList.innerHTML = "";
+  const db = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('PocketTactician');
+  db.collection('Users').find({ _ownerid: Stitch.defaultAppClient.auth.user.id }).asArray()
+    .then(res => {
+      for (i in res) {
+        var yourHero = document.createElement("li");
+        yourHero.innerHTML = res[i].name + ": " + res[i].title;
+        yourHeroesList.appendChild(yourHero);
+      }
+      return res;
+    });
+}
+
+function editYourHeroes() {
+
 }

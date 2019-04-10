@@ -1,4 +1,4 @@
-<html>
+﻿<html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>FEH Pocket Tactician</title>
@@ -6,16 +6,16 @@
     <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.3.2/stitch.js"></script>
     <script src="scripts.js"></script>
     <script>
-      function init() {
+      window.onload = function() {
         if(!Stitch.defaultAppClient.auth.user) {
-          //console.log("hiding admin link");
-          document.getElementById("test").style.display = "none";
+          document.getElementById("admin").className = "hidden";
+          document.getElementById("manageHeroes").className = "hidden";
         }
       }
     </script>
   </head>
   
-  <body onload="init()">
+  <body>
     <div class="title">
       <p>Fire Emblem Heroes Pocket Tactician!</p>
     </div>
@@ -25,10 +25,11 @@
     <nav>
       <ul class="nav">
         <li class="items"><a href="login.html">Login or Register</a></li>
+        <li class="items" id="manageHeroes"><a href="manageheroes.html">Manage Heroes</a></li>
         <li class="items"><a href="heroes.html">View Heroes</a></li>
         <li class="items"><a href="skills.html">View Skills</a></li>
         <li class="items"><a href="privacypolicy.html">Privacy Policy</a></li>
-        <li class="items" id="test"><a href="admin.html">Admin Page</a></li>
+        <li class="items" id="admin"><a href="admin.html">Admin Page</a></li>
       </ul>
     </nav>
   </body>

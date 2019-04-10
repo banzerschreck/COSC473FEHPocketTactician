@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 <head>
   <title>Login or Register</title>
   <link rel="stylesheet" type="text/css" href="index.css">
@@ -6,28 +6,28 @@
   <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.3.2/stitch.js"></script>
   <script src='scripts.js'></script> 
   <script>
-    function checkLoggedIn() {
+    window.onload = function () {
       const loginForm = document.getElementById("login");
       const logoutForm = document.getElementById("logout");
       
-      console.log(Stitch.defaultAppClient.auth.user);
-      if(Stitch.defaultAppClient.auth.user) {
-        loginForm.style.display = "none";
-        logoutForm.style.display = "block";
+      //console.log(Stitch.defaultAppClient.auth.user);
+      if (Stitch.defaultAppClient.auth.user) {
+        loginForm.className = "hidden";
+        logoutForm.className = "shown";
       } else {
-        loginForm.style.display = "block";
-        logoutForm.style.display = "none";
+        loginForm.className = "shown";
+        logoutForm.className = "hidden";
       }
     }
   </script>
 </head>
 
-<body onload="checkLoggedIn()">
+<body>
   <div class="return" >
     <a href="./index.html">Return</a>
   </div>
   
-  <div id="login"">
+  <div id="login">
     <h3 class="title2">Login</h3>
     <div class="form">
       <img src="images/form2.png">

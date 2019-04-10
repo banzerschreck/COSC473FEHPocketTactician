@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
   <title>FEH Pocket Tactician - Admin Page</title>
   <meta charset="utf-8"/>
   <link rel="stylesheet" type="text/css" href="index.css">
-  <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.1.1/stitch.js"></script>
+  <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.3.2/stitch.js"></script>
   <script src="scripts.js"></script>
   <script type="text/javascript">    
     function genHeroStatsFields() {
@@ -254,25 +254,24 @@
           const client = stitch.Stitch.initializeDefaultAppClient('473pockettactician-jcxsp');
           const db = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('PocketTactician');
           //login with anonymous credentials (we'll change this next iteration)
-          client.auth.loginWithCredential(new stitch.AnonymousCredential()
-            ).then(user =>
-            //insert hero into collection
-            db.collection('Heroes').insertOne(JSON.parse(data))
-            ).then(
-            db.collection('Heroes').find({name:document.getElementById('hName').value}).asArray(),
-            ).then(found => {
+          client.auth.loginWithCredential(new stitch.AnonymousCredential())
+            .then(user =>//insert hero into collection
+              db.collection('Heroes').insertOne(JSON.parse(data)))
+            .then(db.collection('Heroes').find({ name: document.getElementById('hName').value }).asArray())
+            .then(found => {
             //return success message to user
-            if(found) {
-              alert("Successfully added to collection!"),
-              location.reload()
-            } else {
-              alert("Failed to add to collection, but no error was returned. Please check Stitch logs for more info")
-            }
-          }).catch(err => {
+              if(found) {
+                alert("Successfully added to collection!"),
+                location.reload()
+              } else {
+                alert("Failed to add to collection, but no error was returned. Please check Stitch logs for more info")
+              }
+            })
+            .catch(err => {
             //return failure message to user
-            alert("Failed to add Hero, check console for details"),
-            console.error(err)
-          });
+              alert("Failed to add Hero, check console for details"),
+              console.error(err)
+            });
         }
       }
       
@@ -355,25 +354,22 @@
           const client = stitch.Stitch.initializeDefaultAppClient('473pockettactician-jcxsp');
           const db = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('PocketTactician');
           //login with anonymous credentials (we'll change this next iteration)
-          client.auth.loginWithCredential(new stitch.AnonymousCredential()
-            ).then(user =>
-            //insert skill into collection
-            db.collection('Skills').insertOne(JSON.parse(data))
-            ).then(
-            db.collection('Skills').find({name:document.getElementById('sName').value}).asArray(),
-            ).then(found => {
-            //return success message to user
-            if(found) {
-              alert("Successfully added to collection!"),
-              location.reload()
-            } else {
-              alert("Failed to add to collection, but no error was returned. Please check Stitch logs for more info")
-            }
-          }).catch(err => {
-            //return failure message to user
-            alert("Failed to add Skill, check console for details"),
-            console.error(err)
-          });
+          client.auth.loginWithCredential(new stitch.AnonymousCredential())
+            .then(user =>//insert skill into collection
+              db.collection('Skills').insertOne(JSON.parse(data)))
+            .then(db.collection('Skills').find({ name: document.getElementById('sName').value }).asArray())
+            .then(found => {//return success message to user
+              if(found) {
+                alert("Successfully added to collection!"),
+                location.reload()
+              } else {
+                alert("Failed to add to collection, but no error was returned. Please check Stitch logs for more info")
+              }
+            })
+            .catch(err => {//return failure message to user
+              alert("Failed to add Skill, check console for details"),
+              console.error(err)
+            });
         }
       }
       

@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <title>Manage Your Heroes</title>
+  <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.3.2/stitch.js"></script>
+  <script src="scripts.js"></script>
+  <link rel="stylesheet" type="text/css" href="index.css" />
+  <script>
+    window.onload = function () {
+      console.log(Stitch.defaultAppClient.auth.user);
+      if (Stitch.defaultAppClient.auth.user) {
+        document.getElementById("notLoggedIn").className = "hidden";
+        document.getElementById("loggedIn").className = "shown";
+      } else {
+        document.getElementById("notLoggedIn").className = "shown";
+        document.getElementById("loggedIn").className = "hidden";
+      }
+
+      loadYourHeroes();
+      //load list of heroes
+      fetch(heroesURL)
+        .then(res => res.json())
+        .then((res) => {
+          console.log(res);
+          heroData = res;
+          loadNewHeroes();
+        });
+      //load list of skills
+      fetch(skillsURL)
+        .then(res => res.json())
+        .then((res) => {
+          console.log(res);
+          skillsData = res;
+          //function call to do things with the skillsData object we just got
+        });
+    }
+  </script>
+</head>
+<body>
+  <div class="return">
+    <a href="./index.html">Return</a>
+  </div>
+
+  <div id="notLoggedIn">
+    <p>Please <a href="login.html">login</a> to view this page.</p>
+  </div>
+
+  <div id="loggedIn">
+    <h1>Your Heroes</h1>
+    <ul id="yourHeroes"></ul>
+    <div id="editHero">
+      <h1>Edit Hero</h1>
+      <h2 id="yourHeroNameAndTitle"></h2>
+      <h3>Stats</h3>
+      <table id="yourHeroStatsTable">
+        <tr>
+          <th>HP</th>
+          <th>Atk</th>
+          <th>Spd</th>
+          <th>Def</th>
+          <th>Res</th>
+        </tr>
+      </table>
+      <h3>Skills</h3>
+      <table id="yourHeroSkillsTable">
+        <tr>
+          <th>Skill Name</th>
+          <th>Skill Type</th>
+        </tr>
+      </table>
+      <select id="newSkills"></select>
+      <input type="button" value="Add New Skill" onclick="addNewSkill()"/>
+    </div>
+
+    <h1>Add New Heroes</h1>
+    <select id="newHeroes">
+
+    </select>
+    <input type="button" value="Add New Hero" onclick="addYourHero()"/>
+  </div>
+</body>
+</html>
