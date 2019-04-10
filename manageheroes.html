@@ -9,7 +9,7 @@
   <link rel="stylesheet" type="text/css" href="index.css" />
   <script>
     window.onload = function () {
-      console.log(Stitch.defaultAppClient.auth.user);
+      //console.log(Stitch.defaultAppClient.auth.user);
       if (Stitch.defaultAppClient.auth.user) {
         document.getElementById("notLoggedIn").className = "hidden";
         document.getElementById("loggedIn").className = "shown";
@@ -23,7 +23,7 @@
       fetch(heroesURL)
         .then(res => res.json())
         .then((res) => {
-          console.log(res);
+          console.log("Fetched Heroes list: ", res);
           heroData = res;
           loadNewHeroes();
         });
@@ -31,7 +31,7 @@
       fetch(skillsURL)
         .then(res => res.json())
         .then((res) => {
-          console.log(res);
+          console.log("Fetched Skills list: ", res);
           skillsData = res;
           //function call to do things with the skillsData object we just got
         });
@@ -49,18 +49,47 @@
 
   <div id="loggedIn">
     <h1>Your Heroes</h1>
-    <ul id="yourHeroes"></ul>
-    <div id="editHero">
+    <ul id="yourHeroesList"></ul>
+
+    <div id="editHero" class="hidden">
       <h1>Edit Hero</h1>
       <h2 id="yourHeroNameAndTitle"></h2>
+      <img id="yourHeroRarity" />
+      <select id="changeHeroRarity"></select>
       <h3>Stats</h3>
       <table id="yourHeroStatsTable">
         <tr>
+          <th></th>
           <th>HP</th>
           <th>Atk</th>
           <th>Spd</th>
           <th>Def</th>
           <th>Res</th>
+        </tr>
+        <tr id="statsRow"></tr>
+        <tr>
+          <td>Boon:</td>
+          <td><input type="radio" name="hpRadios" value="boon" /></td>
+          <td><input type="radio" name="atkRadios" value="boon" /></td>
+          <td><input type="radio" name="spdRadios" value="boon" /></td>
+          <td><input type="radio" name="defRadios" value="boon" /></td>
+          <td><input type="radio" name="resRadios" value="boon" /></td>
+        </tr>
+        <tr>
+          <td>Neutral:</td>
+          <td><input type="radio" name="hpRadios" value="neut" /></td>
+          <td><input type="radio" name="atkRadios" value="neut" /></td>
+          <td><input type="radio" name="spdRadios" value="neut" /></td>
+          <td><input type="radio" name="defRadios" value="neut" /></td>
+          <td><input type="radio" name="resRadios" value="neut" /></td>
+        </tr>
+        <tr>
+          <td>Bane:</td>
+          <td><input type="radio" name="hpRadios" value="bane" /></td>
+          <td><input type="radio" name="atkRadios" value="bane" /></td>
+          <td><input type="radio" name="spdRadios" value="bane" /></td>
+          <td><input type="radio" name="defRadios" value="bane" /></td>
+          <td><input type="radio" name="resRadios" value="bane" /></td>
         </tr>
       </table>
       <h3>Skills</h3>

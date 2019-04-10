@@ -417,7 +417,10 @@ function login(email, password) {
       console.log("Successfully logged in with id: " + authedUser.id);
       checkLoggedIn();
     })
-    .catch(err => console.error("Failed to login: " + err));
+    .catch(err => {
+      alert("Login failed: " + err);
+      console.error(err);
+    });
 }
 
 function logout() {
@@ -515,8 +518,31 @@ function loadNewHeroes() {
 function addYourHero() {
   const heroVal = document.getElementById("newHeroes").value;
   const newHero = heroData[heroVal];
+  //change id, add owner id
   newHero._ownerid = Stitch.defaultAppClient.auth.user.id;
-  console.log(newHero);
+  delete newHero._id;
+  //remove possible IVs from stats property, replace with neutral 5* lv 40 values
+  var newStats = new Object();
+  if (newHero.hasIV) {
+    newStats.hp = heroData[heroVal].stats[1].hp[1];
+    newStats.atk = heroData[heroVal].stats[1].atk[1];
+    newStats.spd = heroData[heroVal].stats[1].spd[1];
+    newStats.def = heroData[heroVal].stats[1].def[1];
+    newStats.res = heroData[heroVal].stats[1].res[1];
+  } else {
+    newStats.hp = heroData[heroVal].stats[1].hp;
+    newStats.atk = heroData[heroVal].stats[1].atk;
+    newStats.spd = heroData[heroVal].stats[1].spd;
+    newStats.def = heroData[heroVal].stats[1].def;
+    newStats.res = heroData[heroVal].stats[1].res;
+  }
+  newHero.stats = newStats;
+  //change rarity to 5*
+  newHero.rarity = 5;
+  //todo: need way to pick a weapon as equipped? maybe skills[3]?
+  //todo: need way to link skills in heroData to object in skillData
+  //all done! add to collection
+  console.log("Adding new hero: ", newHero);
   const db = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('PocketTactician');
   db.collection('Users').insertOne(newHero)
     .then(() => {
@@ -534,20 +560,59 @@ function addYourHero() {
  * return: array of all heroes in your database
  */
 function loadYourHeroes() {
-  const yourHeroesList = document.getElementById("yourHeroes");
+  const yourHeroesList = document.getElementById("yourHeroesList");
   yourHeroesList.innerHTML = "";
   const db = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('PocketTactician');
-  db.collection('Users').find({ _ownerid: Stitch.defaultAppClient.auth.user.id }).asArray()
+  db.collection('Users').find().asArray()
     .then(res => {
       for (i in res) {
         var yourHero = document.createElement("li");
-        yourHero.innerHTML = res[i].name + ": " + res[i].title;
+        var yourHeroLink = document.createElement("a");
+        yourHeroLink.href = "javascript:editYourHeroes(" + i + ")";
+        yourHeroLink.innerHTML = res[i].name + ": " + res[i].title;
+        yourHero.appendChild(yourHeroLink);
         yourHeroesList.appendChild(yourHero);
       }
-      return res;
+      console.log("Found user's heroes: ", res);
+      yourHeroes = res;
+    })
+    .catch(err => {
+      alert("Error communicating with database while fetching user's heroes: " + err);
+      console.error(err);
     });
 }
 
-function editYourHeroes() {
+var yourHeroes = new Object();
+function editYourHeroes(i) {
+  console.log("Editing hero: ", yourHeroes[i]);
+  document.getElementById("editHero").className = "shown";
+  //name and title
+  document.getElementById("yourHeroNameAndTitle").innerHTML = yourHeroes[i].name + ": " + yourHeroes[i].title;
+  //set rarity
+  document.getElementById("yourHeroRarity").src = "data/assets/ui/stars-" + yourHeroes[i].rarity + "star.png";
+  //set stats
+  //todo: move th's so they don't get deleted when table is regenerated for units with/without iv's
+  var statsRow = document.getElementById("statsRow");
+  statsRow.innerHTML = "";
+  var empty = document.createElement("td");
+  var statsRowHP = document.createElement("td");
+  statsRowHP.innerHTML = yourHeroes[i].stats.hp;
+  var statsRowAtk = document.createElement("td");
+  statsRowAtk.innerHTML = yourHeroes[i].stats.atk;
+  var statsRowSpd = document.createElement("td");
+  statsRowSpd.innerHTML = yourHeroes[i].stats.spd;
+  var statsRowDef = document.createElement("td");
+  statsRowDef.innerHTML = yourHeroes[i].stats.def;
+  var statsRowRes = document.createElement("td");
+  statsRowRes.innerHTML = yourHeroes[i].stats.res;
+  statsRow.appendChild(empty);
+  statsRow.appendChild(statsRowHP);
+  statsRow.appendChild(statsRowAtk);
+  statsRow.appendChild(statsRowSpd);
+  statsRow.appendChild(statsRowDef);
+  statsRow.appendChild(statsRowRes);
 
+  if (yourHeroes[i].hasIV) {
+    //todo: move radio tr's into here
+  }
 }

@@ -6,7 +6,8 @@
   <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.3.2/stitch.js"></script>
   <script src='scripts.js'></script> 
   <script>
-    window.onload = function () {
+    window.onload = checkLoggedIn;
+      function checkLoggedIn() {
       const loginForm = document.getElementById("login");
       const logoutForm = document.getElementById("logout");
       
@@ -41,7 +42,7 @@
     </div>
   </div>
   
-  <div id="logout" style="display:none">
+  <div id="logout">
     <h3 class="title2" onclick="logout()">Logout</h3>
   </div>
   
