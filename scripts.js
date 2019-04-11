@@ -432,10 +432,10 @@ function loadNewHeroes() {
 
 function addYourHero() {
   const heroVal = document.getElementById("newHeroes").value;
-  const newHero = heroData[heroVal];
+  const newHero = JSON.parse(JSON.stringify(heroData[heroVal]));
   //change id, add owner id
-  newHero._ownerid = Stitch.defaultAppClient.auth.user.id;
   delete newHero._id;
+  newHero._ownerid = Stitch.defaultAppClient.auth.user.id;
   //remove possible IVs from stats property, replace with neutral 5* lv 40 values
   var newStats = new Object();
   if (newHero.hasIV) {
@@ -454,7 +454,71 @@ function addYourHero() {
   newHero.stats = newStats;
   //change rarity to 5*
   newHero.rarity = 5;
-  //todo: need way to pick skills as "equipped" (last available skill of that class?)
+  newHero.boon = "neut";
+  newHero.bane = "neut";
+  //skills
+  newHero.skills = new Object();
+  var rarity = 0;
+  var index = -1;
+  //weapon
+  var weapons = heroData[heroVal].skills.filter(obj => {
+    return obj.type === "Weapon";
+  });
+  console.log(weapons);
+  for (var i in weapons) {
+    if (weapons[i].rarity > rarity) index = i;
+  }
+  newHero.skills.weapon = weapons[index];
+  //assist
+  rarity = 0;
+  index = -1;
+  var assists = heroData[heroVal].skills.filter(obj => {
+    return obj.type === "Assist";
+  });
+  for (var i in assists) {
+    if (assists[i].rarity > rarity) index = i;
+  }
+  newHero.skills.assist = assists[index];
+  //special
+  rarity = 0;
+  index = -1;
+  var specials = heroData[heroVal].skills.filter(obj => {
+    return obj.type === "Special";
+  });
+  for (var i in specials) {
+    if (specials[i].rarity > rarity) index = i;
+  }
+  newHero.skills.special = specials[index];
+  //a
+  rarity = 0;
+  index = -1;
+  var as = heroData[heroVal].skills.filter(obj => {
+    return obj.type === "A";
+  });
+  for (var i in as) {
+    if (as[i].rarity > rarity) index = i;
+  }
+  newHero.skills.a = as[index];
+  //b
+  rarity = 0;
+  index = -1;
+  var bs = heroData[heroVal].skills.filter(obj => {
+    return obj.type === "B";
+  });
+  for (var i in bs) {
+    if (bs[i].rarity > rarity) index = i;
+  }
+  newHero.skills.b = bs[index];
+  //c
+  rarity = 0;
+  index = -1;
+  var cs = heroData[heroVal].skills.filter(obj => {
+    return obj.type === "C";
+  });
+  for (var i in cs) {
+    if (cs[i].rarity > rarity) index = i;
+  }
+  newHero.skills.c = cs[index];
   //todo: need way to link skills in heroData to object in skillData to grab description and type and etc
   //all done! add to collection
   console.log("Adding new hero: ", newHero);
@@ -499,43 +563,164 @@ function loadYourHeroes() {
 
 var yourHeroes = new Object();
 function editYourHeroes(i) {
-  console.log("Editing hero: ", yourHeroes[i]);
+  var templateHero = heroData.filter(obj => {
+    return obj.name === yourHeroes[i].name && obj.title === yourHeroes[i].title;
+  })[0];
+  console.log("Template hero: ", templateHero);
+  console.log("Editing hero #" + i + ": ", yourHeroes[i]);
   document.getElementById("editHero").className = "shown";
   //name and title
   document.getElementById("yourHeroNameAndTitle").innerHTML = yourHeroes[i].name + ": " + yourHeroes[i].title;
   //set rarity
-  document.getElementById("yourHeroRarity").src = "data/assets/ui/stars-" + yourHeroes[i].rarity + "star.png";
-  //todo: popuate "changeHeroRarity" select with options based on possible rarities - would be nice to get "template" hero from heroData
-  //set stats
-  //todo: move th's so they don't get deleted when table is regenerated for units with/without iv's
-  //todo: updated displayed stats based on equipped skills
-  var statsRow = document.getElementById("statsRow");
-  statsRow.innerHTML = "";
-  var empty = document.createElement("td");
-  var statsRowHP = document.createElement("td");
-  statsRowHP.innerHTML = yourHeroes[i].stats.hp;
-  var statsRowAtk = document.createElement("td");
-  statsRowAtk.innerHTML = yourHeroes[i].stats.atk;
-  var statsRowSpd = document.createElement("td");
-  statsRowSpd.innerHTML = yourHeroes[i].stats.spd;
-  var statsRowDef = document.createElement("td");
-  statsRowDef.innerHTML = yourHeroes[i].stats.def;
-  var statsRowRes = document.createElement("td");
-  statsRowRes.innerHTML = yourHeroes[i].stats.res;
-  statsRow.appendChild(empty);
-  statsRow.appendChild(statsRowHP);
-  statsRow.appendChild(statsRowAtk);
-  statsRow.appendChild(statsRowSpd);
-  statsRow.appendChild(statsRowDef);
-  statsRow.appendChild(statsRowRes);
+  var yourHeroRarity = document.getElementById("yourHeroRarity");
+  yourHeroRarity.src = "data/assets/ui/stars-" + yourHeroes[i].rarity + "star.png";
+  var changeHeroRarity = document.getElementById("changeHeroRarity");
+  changeHeroRarity.innerHTML = "";
+  for (var j = 5; j >= templateHero.rarity.$numberInt; j--) {
+    var option = document.createElement("option");
+    option.value = j;
+    option.innerHTML = j;
+    if (j == yourHeroes[i].rarity) {
+      option.selected = "selected";
+    }
+    changeHeroRarity.appendChild(option);
+  }
+  changeHeroRarity.onchange = function () {
+    yourHeroes[i].rarity = parseInt(changeHeroRarity.value);
+    yourHeroRarity.src = "data/assets/ui/stars-" + yourHeroes[i].rarity + "star.png";
+    updateStats();
+  }
+  //set IVs
+  var boon = document.getElementById("boon");
+  var neut = document.getElementById("neut");
+  var bane = document.getElementById("bane");
+  if (!yourHeroes[i].hasIV) {
+    boon.disabled = true;
+    bane.disabled = true;
+    neut.checked = true;
+    neut.disabled = true;
+  } else {
+    neut.disabled = false;
+  }
+  if (yourHeroes[i].boon == "neut" && yourHeroes[i].bane == "neut") {
+    neut.checked = true;
+    handleIVChange();
+  } else {
+    for (var j, k = 0; j = boon.options[k]; k++) {
+      if (j.value == yourHeroes[i].boon) {
+        boon.selectedIndex = k;
+        break;
+      }
+    }
+    for (var j, k = 0; j = bane.options[k]; k++) {
+      if (j.value == yourHeroes[i].bane) {
+        bane.selectedIndex = k;
+        break;
+      }
+    }
+  }
+  updateStats();
+  handleIVChange();
+  document.getElementById("boon").onchange = handleIVChange;
+  document.getElementById("bane").onchange = handleIVChange;
+  document.getElementById("neut").onchange = handleIVChange;
+  
+  //weapon
+  var equippedWeapon = document.getElementById("equippedWeapon");
+  equippedWeapon.innerHTML = "";
+  var defaultWeapon = document.createElement("option");
+  if (yourHeroes[i].skills.weapon != null) defaultWeapon.innerHTML = yourHeroes[i].skills.weapon.name;
+  else defaultWeapon.innerHTML = "None";
+  equippedWeapon.appendChild(defaultWeapon);
+  //assist
+  var equippedAssist = document.getElementById("equippedAssist");
+  equippedAssist.innerHTML = "";
+  var defaultAssist = document.createElement("option");
+  if (yourHeroes[i].skills.assist != null) defaultAssist.innerHTML = yourHeroes[i].skills.assist.name;
+  else defaultAssist.innerHTML = "None";
+  equippedAssist.appendChild(defaultWeapon);
+  //special
+  var equippedSpecial = document.getElementById("equippedSpecial");
+  equippedSpecial.innerHTML = "";
+  var defaultSpecial = document.createElement("option");
+  if (yourHeroes[i].skills.special != null) defaultSpecial.innerHTML = yourHeroes[i].skills.special.name;
+  else defaultSpecial.innerHTML = "None";
+  equippedSpecial.appendChild(defaultWeapon);
+  //a
+  var equippedA = document.getElementById("equippedA");
+  equippedA.innerHTML = "";
+  var defaultA = document.createElement("option");
+  if (yourHeroes[i].skills.a != null) defaultA.innerHTML = yourHeroes[i].skills.a.name;
+  else defaultA.innerHTML = "None";
+  equippedA.appendChild(defaultA);
+  //b
+  var equippedB = document.getElementById("equippedB");
+  equippedB.innerHTML = "";
+  var defaultB = document.createElement("option");
+  if (yourHeroes[i].skills.b != null) defaultB.innerHTML = yourHeroes[i].skills.b.name;
+  else defaultB.innerHTML = "None";
+  equippedB.appendChild(defaultB);
+  //c
+  var equippedC = document.getElementById("equippedC");
+  equippedC.innerHTML = "";
+  var defaultC = document.createElement("option");
+  if (yourHeroes[i].skills.c != null) defaultC.innerHTML = yourHeroes[i].skills.c.name;
+  else defaultC.innerHTML = "None";
+  equippedC.appendChild(defaultC);
+  //seal
+  var equippedSeal = document.getElementById("equippedSeal");
+  equippedSeal.innerHTML = "";
+  var defaultSeal = document.createElement("option");
+  if (yourHeroes[i].skills.seal != null) defaultSeal.innerHTML = yourHeroes[i].skills.seal.name;
+  else defaultSeal.innerHTML = "None";
+  equippedSeal.appendChild(defaultSeal);
+  //todo: populate selects w/ possible skills to equip
 
-  if (yourHeroes[i].hasIV) {
-    //todo: move radio tr's into here
-    //todo: pre-check radio buttons based on hero's iv's - may need property in database?
-    //todo: limit boons and banes to only 1 boon and 1 bane - maybe switch to selects?
-    //todo: update displayed stats based on selected boon/bane
+  function updateStats() {
+    //5 => 1, 4 => 3, 3 => 5, 2 => 7, 1 => 9
+    var j = yourHeroes[i].rarity * -2 + 11;
+    if (yourHeroes[i].hasIV) {
+      var hp = 1, atk = 1, spd = 1, def = 1, res = 1;
+      if (yourHeroes[i].boon == "hp") hp++;
+      else if (yourHeroes[i].boon == "atk") atk++;
+      else if (yourHeroes[i].boon == "spd") spd++;
+      else if (yourHeroes[i].boon == "def") def++;
+      else if (yourHeroes[i].boon == "res") res++;
+      if (yourHeroes[i].bane == "hp") hp--;
+      else if (yourHeroes[i].bane == "atk") atk--;
+      else if (yourHeroes[i].bane == "spd") spd--;
+      else if (yourHeroes[i].bane == "def") def--;
+      else if (yourHeroes[i].bane == "res") res--;
+      document.getElementById("yourHeroHP").innerHTML = templateHero.stats[j].hp[hp].$numberInt;
+      document.getElementById("yourHeroAtk").innerHTML = templateHero.stats[j].atk[atk].$numberInt;
+      document.getElementById("yourHeroSpd").innerHTML = templateHero.stats[j].spd[spd].$numberInt;
+      document.getElementById("yourHeroDef").innerHTML = templateHero.stats[j].def[def].$numberInt;
+      document.getElementById("yourHeroRes").innerHTML = templateHero.stats[j].res[res].$numberInt;
+    } else {
+      document.getElementById("yourHeroHP").innerHTML = templateHero.stats[j].hp.$numberInt;
+      document.getElementById("yourHeroAtk").innerHTML = templateHero.stats[j].atk.$numberInt;
+      document.getElementById("yourHeroSpd").innerHTML = templateHero.stats[j].spd.$numberInt;
+      document.getElementById("yourHeroDef").innerHTML = templateHero.stats[j].def.$numberInt;
+      document.getElementById("yourHeroRes").innerHTML = templateHero.stats[j].res.$numberInt;
+    }
   }
 
-  //todo: populate equipped skills
-  //todo: populate selects possible skills to equip
+  function handleIVChange() {
+    if (neut.checked) {
+      boon.disabled = true;
+      bane.disabled = true;
+      yourHeroes[i].boon = "neut";
+      yourHeroes[i].bane = "neut";
+    } else {
+      boon.disabled = false;
+      bane.disabled = false;
+      if (boon.value == bane.value) {
+        bane.setCustomValidity("Boon and bane must be different");
+      } else {
+        yourHeroes[i].boon = boon.value;
+        yourHeroes[i].bane = bane.value;
+      }
+    }
+    updateStats();
+  }
 }

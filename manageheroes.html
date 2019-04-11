@@ -66,32 +66,32 @@
           <th>Def</th>
           <th>Res</th>
         </tr>
-        <tr id="statsRow"></tr>
         <tr>
-          <td>Boon:</td>
-          <td><input type="radio" name="hpRadios" value="boon" /></td>
-          <td><input type="radio" name="atkRadios" value="boon" /></td>
-          <td><input type="radio" name="spdRadios" value="boon" /></td>
-          <td><input type="radio" name="defRadios" value="boon" /></td>
-          <td><input type="radio" name="resRadios" value="boon" /></td>
-        </tr>
-        <tr>
-          <td>Neutral:</td>
-          <td><input type="radio" name="hpRadios" value="neut" /></td>
-          <td><input type="radio" name="atkRadios" value="neut" /></td>
-          <td><input type="radio" name="spdRadios" value="neut" /></td>
-          <td><input type="radio" name="defRadios" value="neut" /></td>
-          <td><input type="radio" name="resRadios" value="neut" /></td>
-        </tr>
-        <tr>
-          <td>Bane:</td>
-          <td><input type="radio" name="hpRadios" value="bane" /></td>
-          <td><input type="radio" name="atkRadios" value="bane" /></td>
-          <td><input type="radio" name="spdRadios" value="bane" /></td>
-          <td><input type="radio" name="defRadios" value="bane" /></td>
-          <td><input type="radio" name="resRadios" value="bane" /></td>
+          <td></td>
+          <td id="yourHeroHP"></td>
+          <td id="yourHeroAtk"></td>
+          <td id="yourHeroSpd"></td>
+          <td id="yourHeroDef"></td>
+          <td id="yourHeroRes"></td>
         </tr>
       </table>
+      <div id="yourHeroIVs">
+        <input type="checkbox" id="neut" /> Hero has neutral IVs<br />
+        Boon:<select id="boon">
+          <option value="hp">HP</option>
+          <option value="atk">Attack</option>
+          <option value="spd">Speed</option>
+          <option value="def">Defense</option>
+          <option value="res">Resistance</option>
+        </select>
+        Bane:<select id="bane">
+          <option value="hp">HP</option>
+          <option value="atk">Attack</option>
+          <option value="spd">Speed</option>
+          <option value="def">Defense</option>
+          <option value="res">Resistance</option>
+        </select>
+      </div>
       <h3>Skills</h3>
       <table id="yourHeroSkillsTable">
         <tr>
@@ -120,11 +120,10 @@
         </tr>
         <tr>
           <td>Seal:</td>
-          <td><select id="equippedS"></select></td>
+          <td><select id="equippedSeal"></select></td>
         </tr>
       </table>
-      <select id="newSkills"></select>
-      <input type="button" value="Add New Skill" onclick="addNewSkill()"/>
+      <input type="submit" value="Save Changes" />
     </div>
 
     <h1>Add New Heroes</h1>
