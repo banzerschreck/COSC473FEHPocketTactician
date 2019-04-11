@@ -7,9 +7,11 @@
     <script src="scripts.js"></script>
     <script>
       window.onload = function() {
-        if(!Stitch.defaultAppClient.auth.user) {
+        if (!Stitch.defaultAppClient.auth.user) {
           document.getElementById("admin").className = "hidden";
           document.getElementById("manageHeroes").className = "hidden";
+        } else if (!checkUserIsAdmin()) {
+          document.getElementById("admin").className = "hidden";
         }
       }
     </script>

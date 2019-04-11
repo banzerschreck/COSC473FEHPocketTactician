@@ -305,102 +305,6 @@ function displaySkillData(skillId) {
     const skillRange = document.getElementById("skillRange");
     skillRange.innerHTML = skill.range.$numberInt;
   }
-  /*s += "<h3>" + skill.name + "</h3>";
-  if(skill.class=="weapon") {
-    s += "<img src=\"data/assets/skills/" + skill.color + skill.type + ".png\"><br />";
-  } else {
-    s += "<img src=\"data/assets/skills/" + skill.class + ".png\"><br />";
-  }
-  skill.effect ? p = skill.effect : p = "";
-  s += "Effect: " + p + "<br />";
-  s += "SP: " + skill.sp.$numberInt + "<br />";
-  skill.inheritable ? p = "Yes" : p = "No";
-  s += "Can be inherited?: " + p + "<br />";
-  
-  if(skill.class=="weapon") {
-    s += "Stats: ";
-    s += skill.stats[0].$numberInt + ", ";
-    s += skill.stats[1].$numberInt + ", ";
-    s += skill.stats[2].$numberInt + ", ";
-    s += skill.stats[3].$numberInt + ", ";
-    s += skill.stats[4].$numberInt + "<br />";
-    if (skill.refines) {//Refines
-      s += "Refines: <br />";
-      s += "Refine Type: " + skill.refines.type;
-      s += " Refine Cost: " + skill.refines.cost.$numberInt;
-      s += "<table><tr><th>Refine</th><th>Stats</th>";
-      if (skill.refines.neweffect) {
-        p = skill.refines.neweffect ;
-        s += "<th>Effect</th></tr>";
-      } else {
-        p = "";
-        s += "</tr>";
-      }
-      //Eff refine
-      if (skill.refines.eff) {
-        s += "<tr><td>Effect</td><td>" + skill.refines.eff.stats[0].$numberInt + ", "
-          + skill.refines.eff.stats[1].$numberInt + ", "
-          + skill.refines.eff.stats[2].$numberInt + ", "
-          + skill.refines.eff.stats[3].$numberInt + ", "
-          + skill.refines.eff.stats[4].$numberInt + "</td>";
-        if (skill.effect) {
-          s += "<td>" + p + "<br /><span>" + skill.refines.eff.effect + "</span></td></tr>";
-        } else {
-          s += "</tr>";
-        }
-      }
-      //atk refine
-      s += "<tr><td>Attack</td><td>" + skill.refines.atk.stats[0].$numberInt + ", "
-        + skill.refines.atk.stats[1].$numberInt + ", "
-        + skill.refines.atk.stats[2].$numberInt + ", "
-        + skill.refines.atk.stats[3].$numberInt + ", "
-        + skill.refines.atk.stats[4].$numberInt + "</td>";
-      if (skill.effect) {
-        s += "<td>" + p + "</td></tr>";
-      } else {
-        s += "</tr>";
-      }
-      //spd refine
-      s += "<tr><td>Speed</td><td>" + skill.refines.spd.stats[0].$numberInt + ", "
-        + skill.refines.spd.stats[1].$numberInt + ", "
-        + skill.refines.spd.stats[2].$numberInt + ", "
-        + skill.refines.spd.stats[3].$numberInt + ", "
-        + skill.refines.spd.stats[4].$numberInt + "</td>";
-      if (skill.effect) {
-        s += "<td>" + p + "</td></tr>";
-      } else {
-        s += "</tr>";
-      }
-      //def refine
-      s += "<tr><td>Defense</td><td>" + skill.refines.def.stats[0].$numberInt + ", "
-        + skill.refines.def.stats[1].$numberInt + ", "
-        + skill.refines.def.stats[2].$numberInt + ", "
-        + skill.refines.def.stats[3].$numberInt + ", "
-        + skill.refines.def.stats[4].$numberInt + "</td>";
-      if (skill.effect) {
-        s += "<td>" + p + "</td></tr>";
-      } else {
-        s += "</tr>";
-      }
-      //res refine
-      s += "<tr><td>Resistance</td><td>" + skill.refines.res.stats[0].$numberInt + ", "
-        + skill.refines.res.stats[1].$numberInt + ", "
-        + skill.refines.res.stats[2].$numberInt + ", "
-        + skill.refines.res.stats[3].$numberInt + ", "
-        + skill.refines.res.stats[4].$numberInt + "</td>";
-      if (skill.effect) {
-        s += "<td>" + p + "</td></tr>";
-      } else {
-        s += "</tr>";
-      }
-      s += "</table>";
-    }
-  } else if(skill.class=="special") {
-    s += "Cooldown: " + skill.cooldown.$numberInt + "<br />";
-  } else if(skill.class=="assist") {
-    s += "Range: " + skill.range.$numberInt + "<br />";
-  }
-  document.getElementById("skill").innerHTML = s;*/
 }
 /*======================STITCH USER AUTH/REGISTRATION=========================================*/
 const {
@@ -504,6 +408,17 @@ function checkPasswords() {
   else pass2.setCustomValidity('');
 }
 
+function checkUserIsAdmin() {
+  //console.log(Stitch.defaultAppClient.auth.user);
+  if (Stitch.defaultAppClient.auth.user.id == "5ca376cee668456b3216dbaf" //gqpw@iup.edu
+    || Stitch.defaultAppClient.auth.user.id == "5ca3937e01fb6305e2268cfd" //hpcw@iup.edu
+    || Stitch.defaultAppClient.auth.user.id == "5ca3a59a490daf5027811f14") { //qyqs@iup.edu
+    //console.log("User recognized as administrator");
+    return true;
+  }
+  return false;
+}
+
 /*==========================Manage Heroes===================================*/
 function loadNewHeroes() {
   const list = document.getElementById("newHeroes");
@@ -539,8 +454,8 @@ function addYourHero() {
   newHero.stats = newStats;
   //change rarity to 5*
   newHero.rarity = 5;
-  //todo: need way to pick a weapon as equipped? maybe skills[3]?
-  //todo: need way to link skills in heroData to object in skillData
+  //todo: need way to pick skills as "equipped" (last available skill of that class?)
+  //todo: need way to link skills in heroData to object in skillData to grab description and type and etc
   //all done! add to collection
   console.log("Adding new hero: ", newHero);
   const db = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('PocketTactician');
@@ -590,8 +505,10 @@ function editYourHeroes(i) {
   document.getElementById("yourHeroNameAndTitle").innerHTML = yourHeroes[i].name + ": " + yourHeroes[i].title;
   //set rarity
   document.getElementById("yourHeroRarity").src = "data/assets/ui/stars-" + yourHeroes[i].rarity + "star.png";
+  //todo: popuate "changeHeroRarity" select with options based on possible rarities - would be nice to get "template" hero from heroData
   //set stats
   //todo: move th's so they don't get deleted when table is regenerated for units with/without iv's
+  //todo: updated displayed stats based on equipped skills
   var statsRow = document.getElementById("statsRow");
   statsRow.innerHTML = "";
   var empty = document.createElement("td");
@@ -614,5 +531,11 @@ function editYourHeroes(i) {
 
   if (yourHeroes[i].hasIV) {
     //todo: move radio tr's into here
+    //todo: pre-check radio buttons based on hero's iv's - may need property in database?
+    //todo: limit boons and banes to only 1 boon and 1 bane - maybe switch to selects?
+    //todo: update displayed stats based on selected boon/bane
   }
+
+  //todo: populate equipped skills
+  //todo: populate selects possible skills to equip
 }
