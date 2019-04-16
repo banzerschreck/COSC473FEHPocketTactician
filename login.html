@@ -15,9 +15,11 @@
       if (Stitch.defaultAppClient.auth.user) {
         loginForm.className = "hidden";
         logoutForm.className = "shown";
+        document.getElementById("forgotAndRegistration").className = "hidden";
       } else {
         loginForm.className = "shown";
         logoutForm.className = "hidden";
+        document.getElementById("forgotAndRegistration").className = "shown";
       }
     }
   </script>
