@@ -15,11 +15,11 @@
       if (Stitch.defaultAppClient.auth.user) {
         loginForm.className = "hidden";
         logoutForm.className = "shown";
-        document.getElementById("forgotAndRegistration").className = "shown";
+        document.getElementById("forgotAndRegistration").className = "hidden";
       } else {
         loginForm.className = "shown";
         logoutForm.className = "hidden";
-        document.getElementById("forgotAndRegistration").className = "hidden";
+        document.getElementById("forgotAndRegistration").className = "shown";
       }
     }
   </script>
@@ -48,7 +48,7 @@
     <h3 class="title2" onclick="logout()">Logout</h3>
   </div>
   
-  <div class="forgotAndRegistration">
+  <div id="forgotAndRegistration">
   <h3 class="title2">Forgot Password?</h3>
   <div class="form">
     <img src="images/form2.png">
