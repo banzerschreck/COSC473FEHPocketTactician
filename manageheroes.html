@@ -35,6 +35,20 @@
           skillsData = res;
           //function call to do things with the skillsData object we just got
         });
+
+      document.getElementById("boon").onchange = handleIVChange;
+      document.getElementById("bane").onchange = handleIVChange;
+      document.getElementById("neut").onchange = handleIVChange;
+
+      document.getElementById("saveChanges").onclick = saveYourHeroChanges;
+
+      document.getElementById("equippedWeapon").onchange = updateStats;
+      document.getElementById("equippedAssist").onchange = updateStats;
+      document.getElementById("equippedSpecial").onchange = updateStats;
+      document.getElementById("equippedA").onchange = updateStats;
+      document.getElementById("equippedB").onchange = updateStats;
+      document.getElementById("equippedC").onchange = updateStats;
+      document.getElementById("equippedSeal").onchange = updateStats;
     }
   </script>
 </head>
@@ -123,7 +137,7 @@
           <td><select id="equippedSeal"></select></td>
         </tr>
       </table>
-      <input type="submit" value="Save Changes" />
+      <input type="submit" value="Save Changes" id="saveChanges"/>
     </div>
 
     <h1>Add New Heroes</h1>
