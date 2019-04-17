@@ -331,6 +331,7 @@ function logout() {
   Stitch.defaultAppClient.auth.logout()
     .then(() => {
       alert("You have been logged out");
+      location.replace("./index.html");
       checkLoggedIn();
     })
     .catch(err => {
