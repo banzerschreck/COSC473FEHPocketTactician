@@ -13,11 +13,60 @@
         } else if (!checkUserIsAdmin()) {
           document.getElementById("admin").className = "hidden";
         }
+        if (Stitch.defaultAppClient.auth.user) {
+        document.getElementById("indexLogin").className = "hidden";
+      } else {
+        document.getElementById("indexLogin").className = "shown";
+      }
+      if (Stitch.defaultAppClient.auth.user) {
+        document.getElementById("navbarLogout").className = "shown";
+      } else {
+        document.getElementById("navbarLogout").className = "hidden";
+      }
+
+      document.getElementById("navbarLogout").addEventListener("click", logout);
+
       }
     </script>
+    <style>
+    .navbarUL {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+    }
+
+    .navbar {
+      float: left;
+    }
+
+    .navbar a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    .navbar a:hover:not(.active) {
+      background-color: #111;
+    }
+
+    .active {
+      background-color: #4CAF50;
+    }
+  </style>
   </head>
   
   <body>
+    <ul class="navbarUL">
+    <li class="navbar"><a class="active" href="./index.html">FEHPT</a></li>
+    <li class="navbar"><a href="./heroes.html">Heroes</a></li>
+    <li class="navbar"><a href="./skills.html">Skills</a></li>
+    <li class="navbar"id="navbarLogout" ><a href="#Logout">Logout</a></li>
+    <!-- <li class="navbar"><a href="#Login" onclick="login()">Login</a></li> -->
+  </ul>
     <div class="title">
       <p>Fire Emblem Heroes Pocket Tactician!</p>
     </div>
