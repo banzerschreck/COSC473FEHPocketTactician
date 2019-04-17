@@ -208,3 +208,25 @@
     #skillRefinesTable td {
       border: 1px solid black;
     }
+
+    #indexLogin {
+        list-style-type: none;
+        text-align: center;
+        letter-spacing: 2px;
+        background: url("images/items1.png") no-repeat center center;
+        padding: 70px;
+        text-shadow: rgb(0, 0, 0) 2px 2px 0px, 
+        rgb(0, 0, 0) 2px -2px 0px, 
+        rgb(0, 0, 0) -2px 2px 0px, 
+        rgb(0, 0, 0) -2px -2px 0px, 
+        rgb(0, 0, 0) 2px 0px 0px, 
+        rgb(0, 0, 0) 0px 2px 0px, 
+        rgb(0, 0, 0) -2px 0px 0px, 
+        rgb(0, 0, 0) 0px -2px 0px;
+    }
+
+    #navbarLogout {
+        text-align: right;
+        padding-top: 15px;
+        padding-right: 15px;
+    }
