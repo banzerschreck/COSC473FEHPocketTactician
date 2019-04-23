@@ -1,9 +1,10 @@
-<html>
+﻿<html>
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <title>View Heroes</title>
   <link rel="stylesheet" type="text/css" href="index.css">
   <script type="text/javascript" src="scripts.js"></script>
+  <script src="heroes.js"></script>
   <script>
     window.onload = function () {
       fetch(heroesURL)
@@ -32,7 +33,9 @@
   </div>
 
   <div id="hero">
-    <img id="heroImg"><br />
+    <div class="cropped">
+      <img id="heroImg">
+    </div>
     <h2 id="heroNameAndTitle"></h2>
     <img id="heroWeapon"><img id="heroMoveType">
     <h3>Stats</h3>

@@ -236,3 +236,16 @@
         padding-top: 15px;
         padding-right: 15px;
     }
+
+.cropped {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+}
+
+.cropped img {
+  width: 320%;
+  height: auto;
+  margin-left: -300px;
+}
