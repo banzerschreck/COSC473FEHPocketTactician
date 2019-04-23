@@ -2,13 +2,29 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Tactics Room</title>
+  <meta charset="utf-8" />
+  <title>Tactics Room</title>
+  <link rel="stylesheet" type="text/css" href="index.css" />
   <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.3.2/stitch.js"></script>
   <script src="scripts.js"></script>
-  <link rel="stylesheet" type="text/css" href="index.css" />
+  <script src="tacticsroom.js"></script>
+  <style>
+    td {
+      width: 50px;
+      height: 50px;
+      border: 1px solid black;
+      background-color: white;
+      text-align: center;
+      font-size: 24pt;
+    }
+  </style>
 </head>
 
 <body>
+<div id="notLoggedIn">
+  <p>Please login to view this page</p>
+</div>
+<div id="loggedIn">
   <div class="return">
     <a href="./index.html">Return</a>
   </div>
@@ -24,26 +40,83 @@
     </tr>
     <tr>
       <td>1</td>
+      <td id="A1"></td>
+      <td id="B1"></td>
+      <td id="C1"></td>
+      <td id="D1"></td>
+      <td id="E1"></td>
+      <td id="F1"></td>
     </tr>
     <tr>
       <td>2</td>
+      <td id="A2"></td>
+      <td id="B2"></td>
+      <td id="C2"></td>
+      <td id="D2"></td>
+      <td id="E2"></td>
+      <td id="F2"></td>
     </tr>
     <tr>
       <td>3</td>
+      <td id="A3"></td>
+      <td id="B3"></td>
+      <td id="C3"></td>
+      <td id="D3"></td>
+      <td id="E3"></td>
+      <td id="F3"></td>
     </tr>
     <tr>
       <td>4</td>
+      <td id="A4"></td>
+      <td id="B4"></td>
+      <td id="C4"></td>
+      <td id="D4"></td>
+      <td id="E4"></td>
+      <td id="F4"></td>
     </tr>
     <tr>
       <td>5</td>
+      <td id="A5"></td>
+      <td id="B5"></td>
+      <td id="C5"></td>
+      <td id="D5"></td>
+      <td id="E5"></td>
+      <td id="F5"></td>
     </tr>
     <tr>
       <td>6</td>
+      <td id="A6"></td>
+      <td id="B6"></td>
+      <td id="C6"></td>
+      <td id="D6"></td>
+      <td id="E6"></td>
+      <td id="F6"></td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td id="A7"></td>
+      <td id="B7"></td>
+      <td id="C7"></td>
+      <td id="D7"></td>
+      <td id="E7"></td>
+      <td id="F7"></td>
     </tr>
     <tr>
       <td>8</td>
+      <td id="A8"></td>
+      <td id="B8"></td>
+      <td id="C8"></td>
+      <td id="D8"></td>
+      <td id="E8"></td>
+      <td id="F8"></td>
     </tr>
   </table>
+  <label for="hero1">Hero 1</label><select id="hero1"></select>
+  <label for="hero2">Hero 2</label><select id="hero2"></select>
+  <label for="hero3">Hero 3</label><select id="hero3"></select>
+  <label for="hero4">Hero 4</label><select id="hero4"></select>
+  
   <ul id="moves"></ul>
+</div>
 </body>
 </html>

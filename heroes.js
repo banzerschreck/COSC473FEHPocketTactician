@@ -1,4 +1,29 @@
 var heroData = new Object();
+window.onload = checkLoggedIn;
+
+function checkLoggedIn() {
+  fetch(heroesURL)
+  .then(res => res.json())
+  .then((res) => {
+    console.log(res);
+    heroData = res;
+    displayHeroesList();
+  });
+  //hide hero div until user selects a hero
+  document.getElementById("hero").className = "hidden";
+  //nav bar stuff
+  document.getElementById("navbarLogout").addEventListener("click", logout);
+  document.getElementById("navbarLogin").addEventListener("click", toggleLogin);
+  if(!Stitch.defaultAppClient.auth.user) {//user is not logged in
+    document.getElementById("navbarLogin").className = "shown";
+    document.getElementById("navbarLogout").className = "hidden";
+  } else {//user is logged in
+    document.getElementById("navbarLogout").className = "shown";
+    document.getElementById("navbarLogin").className = "hidden";
+    document.getElementById("floatingLogin").className = "hidden";
+    document.getElementById("navbarLogoutAnchor").innerHTML = "Logged in as " + Stitch.defaultAppClient.auth.user.profile.data.email;
+  }
+}
 /*
  * builds list of heroes found in the database
  * items can be clicked to show that hero's data

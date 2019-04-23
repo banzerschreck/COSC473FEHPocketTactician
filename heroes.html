@@ -3,27 +3,29 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <title>View Heroes</title>
   <link rel="stylesheet" type="text/css" href="index.css">
+  <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.3.2/stitch.js"></script>
   <script type="text/javascript" src="scripts.js"></script>
   <script src="heroes.js"></script>
-  <script>
-    window.onload = function () {
-      fetch(heroesURL)
-      .then(res => res.json())
-      .then((res) => {
-        console.log(res);
-        heroData = res;
-        displayHeroesList();
-      });
-      //hide hero div until user selects a hero
-      document.getElementById("hero").className = "hidden";
-    }
-    
-  </script>
 </head>
 
 <body>
-  <div class="return" >
-    <a href="./index.html">Return</a>
+  <div id="navbarAndLogin">
+    <ul class="navbarUL">
+      <li class="navbar"><a href="./index.html">FEHPT</a></li>
+      <li class="navbar"><a class="active" href="./heroes.html">Heroes</a></li>
+      <li class="navbar"><a href="./skills.html">Skills</a></li>
+      <li class="navbar" id="navbarLogin"><a href="#Login">Login</a></li>
+      <li class="navbar" id="navbarLogout"><a href="#Logout" id="navbarLogoutAnchor"></a></li>
+    </ul>
+    <form id="floatingLogin" class="hidden" onsubmit="login(flEmail.value, flPassword.value)">
+      <label for="flEmail">Email:</label>
+      <input type="text" id="flEmail"></input><br />
+      <label for="flPassword">Password:</label>
+      <input type="password" id="flPassword"></input><br />
+      <a href="login.html#register">Register</a>
+      <a href="login.html#forgotAndRegistration">Forgot Password</a>
+      <input type="submit" value="Login"></input>
+    </form>
   </div>
   <h1 class="title">Select a Hero</h1>
   <div id="select">

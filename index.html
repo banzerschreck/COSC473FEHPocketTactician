@@ -8,15 +8,6 @@
     <script>
       window.onload = checkLoggedIn;
       
-      function toggleLogin() {
-        var floatingLogin = document.getElementById("floatingLogin");
-        if (floatingLogin.className == "shown") {
-          floatingLogin.className = "hidden";
-        } else if(floatingLogin.className == "hidden") {
-         floatingLogin.className = "shown";
-        }
-      }
-      
       function checkLoggedIn() {
         if (!Stitch.defaultAppClient.auth.user) {//user is not logged in
           document.getElementById("indexLogin").className = "shown";
@@ -46,63 +37,6 @@
         //document.getElementById("floatingLogin").addEventListener("submit", login(flEmail.value, flPassword.value));
       }
     </script>
-    <style>
-      #navbarAndLogin {
-        position: sticky;
-        top: 0;
-      }
-    
-      .navbarUL {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-color: #333;
-      }
-
-      .navbar {
-        float: left;
-      }
-
-      .navbar a {
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-      }
-
-      .navbar a:hover:not(.active) {
-        background-color: #111;
-      }
-
-      .active {
-        background-color: #4CAF50;
-      }
-      
-      #floatingLogin {
-        float: right;
-        background-color: #333;
-        text-align: right;
-        padding: 5px;
-        color: white;
-      }
-      #floatingLogin a {
-        font-size: 12pt;
-      }
-      #floatingLogin a:hover {
-        background-color: #111;
-      }
-      
-      #navbarLoggedInAs {
-        float: right;
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-      }
-    </style>
   </head>
   
   <body>

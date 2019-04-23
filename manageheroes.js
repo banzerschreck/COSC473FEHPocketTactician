@@ -1,3 +1,47 @@
+window.onload = function () {
+  //console.log(Stitch.defaultAppClient.auth.user);
+  if (Stitch.defaultAppClient.auth.user) {
+    document.getElementById("notLoggedIn").className = "hidden";
+    document.getElementById("loggedIn").className = "shown";
+  } else {
+    document.getElementById("notLoggedIn").className = "shown";
+    document.getElementById("loggedIn").className = "hidden";
+  }
+
+  loadYourHeroes();
+  //load list of heroes
+  fetch(heroesURL)
+    .then(res => res.json())
+    .then((res) => {
+      console.log("Fetched Heroes list: ", res);
+      heroData = res;
+      loadNewHeroes();
+    });
+  //load list of skills
+  fetch(skillsURL)
+    .then(res => res.json())
+    .then((res) => {
+      console.log("Fetched Skills list: ", res);
+      skillsData = res;
+      //function call to do things with the skillsData object we just got
+    });
+
+  document.getElementById("boon").onchange = handleIVChange;
+  document.getElementById("bane").onchange = handleIVChange;
+  document.getElementById("neut").onchange = handleIVChange;
+
+  document.getElementById("saveChanges").onclick = saveYourHeroChanges;
+  document.getElementById("deleteHero").onclick = deleteHero;
+
+  document.getElementById("equippedWeapon").onchange = updateStats;
+  document.getElementById("equippedAssist").onchange = updateStats;
+  document.getElementById("equippedSpecial").onchange = updateStats;
+  document.getElementById("equippedA").onchange = updateStats;
+  document.getElementById("equippedB").onchange = updateStats;
+  document.getElementById("equippedC").onchange = updateStats;
+  document.getElementById("equippedSeal").onchange = updateStats;
+}
+
 function loadNewHeroes() {
   const list = document.getElementById("newHeroes");
   for (i in heroData) {

@@ -2,32 +2,6 @@ const heroesURL = 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/473po
 const skillsURL = 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/473pockettactician-jcxsp/service/http/incoming_webhook/getSkills';
 const APP_ID = "473pockettactician-jcxsp";
 
-//code from https://yellowpencil.com/blog/cropping-images-with-javascript/
-/*function cropHeroImage(originalImagePath, target) {
-  var imgObject = new Image();
-  imgObject.src = "data/" + originalImagePath;
-  imgObject.onLoad = onImgLoaded();
-
-  function onImgLoaded() {
-    console.log(imgObject);
-    const x = 600, y = 25, width = 500, height = 500;
-    var tnCanvas = document.createElement('canvas');
-    var tnCanvasContext = tnCanvas.getContext('2d');
-    tnCanvas.width = width; tnCanvas.height = height;
-
-    var bufferCanvas = document.createElement('canvas');
-    var bufferContext = bufferCanvas.getContext('2d');
-    bufferCanvas.width = width;
-    bufferCanvas.height = height;
-    bufferContext.drawImage(imgObject, 0, 0);
-
-    tnCanvasContext.drawImage(bufferCanvas, x, y, width, height);
-
-    document.getElementById(target).src = tnCanvas.toDataURL();
-    //document.getElementById(target).src = imgObject.src;
-  }
-}*/
-
 /*======================STITCH USER AUTH/REGISTRATION=========================================*/
 const {
   Stitch,
@@ -140,4 +114,14 @@ function checkUserIsAdmin() {
     return true;
   }
   return false;
+}
+
+//===========================navbar stuff===============================================
+function toggleLogin() {
+  var floatingLogin = document.getElementById("floatingLogin");
+  if (floatingLogin.className == "shown") {
+    floatingLogin.className = "hidden";
+  } else if(floatingLogin.className == "hidden") {
+   floatingLogin.className = "shown";
+  }
 }

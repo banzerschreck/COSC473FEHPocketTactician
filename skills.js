@@ -1,5 +1,26 @@
-
 var skillsData = new Object();
+window.onload = function() {
+  fetch(skillsURL)
+  .then(res => res.json())
+  .then((res) => {
+    console.log(res);
+    skillsData = res;
+    displaySkillsList();
+  });
+  document.getElementById("skill").className = "hidden";
+  //nav bar stuff
+  document.getElementById("navbarLogout").addEventListener("click", logout);
+  document.getElementById("navbarLogin").addEventListener("click", toggleLogin);
+  if(!Stitch.defaultAppClient.auth.user) {//user is not logged in
+    document.getElementById("navbarLogin").className = "shown";
+    document.getElementById("navbarLogout").className = "hidden";
+  } else {//user is logged in
+    document.getElementById("navbarLogout").className = "shown";
+    document.getElementById("navbarLogin").className = "hidden";
+    document.getElementById("floatingLogin").className = "hidden";
+    document.getElementById("navbarLogoutAnchor").innerHTML = "Logged in as " + Stitch.defaultAppClient.auth.user.profile.data.email;
+  }
+}
 /* 
  * builds a clickable list of skills found in JSON database in a container called "select"
  */
