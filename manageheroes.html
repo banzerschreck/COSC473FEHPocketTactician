@@ -41,6 +41,7 @@
       document.getElementById("neut").onchange = handleIVChange;
 
       document.getElementById("saveChanges").onclick = saveYourHeroChanges;
+      document.getElementById("deleteHero").onclick = deleteHero;
 
       document.getElementById("equippedWeapon").onchange = updateStats;
       document.getElementById("equippedAssist").onchange = updateStats;
@@ -138,6 +139,7 @@
         </tr>
       </table>
       <input type="submit" value="Save Changes" id="saveChanges"/>
+      <input type="submit" value="Delete Hero" id="deleteHero"/>
     </div>
 
     <h1>Add New Heroes</h1>

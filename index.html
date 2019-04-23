@@ -6,67 +6,124 @@
     <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.3.2/stitch.js"></script>
     <script src="scripts.js"></script>
     <script>
-      window.onload = function() {
-        if (!Stitch.defaultAppClient.auth.user) {
+      window.onload = checkLoggedIn;
+      
+      function toggleLogin() {
+        var floatingLogin = document.getElementById("floatingLogin");
+        if (floatingLogin.className == "shown") {
+          floatingLogin.className = "hidden";
+        } else if(floatingLogin.className == "hidden") {
+         floatingLogin.className = "shown";
+        }
+      }
+      
+      function checkLoggedIn() {
+        if (!Stitch.defaultAppClient.auth.user) {//user is not logged in
+          document.getElementById("indexLogin").className = "shown";
+          document.getElementById("navbarLogin").className = "shown";
           document.getElementById("admin").className = "hidden";
           document.getElementById("manageHeroes").className = "hidden";
-        } else if (!checkUserIsAdmin()) {
-          document.getElementById("admin").className = "hidden";
+          document.getElementById("navbarLogout").className = "hidden";
+          document.getElementById("tacticsRoom").className = "hidden";
+        } else {//user is logged in
+          if (!checkUserIsAdmin()) {//user is logged in, but not an admin
+            document.getElementById("admin").className = "hidden";
+          } else {
+            document.getElementById("admin").className = "shown items";
+          }
+          document.getElementById("manageHeroes").className = "shown items";
+          document.getElementById("navbarLogout").className = "shown";
+          document.getElementById("tacticsRoom").className = "shown items";
+          document.getElementById("indexLogin").className = "hidden";
+          document.getElementById("navbarLogin").className = "hidden";
+          document.getElementById("floatingLogin").className = "hidden";
+          document.getElementById("navbarLogoutAnchor").innerHTML = "Logged in as " + Stitch.defaultAppClient.auth.user.profile.data.email;
+          //console.log(Stitch.defaultAppClient.auth.user);
         }
-        if (Stitch.defaultAppClient.auth.user) {
-        document.getElementById("indexLogin").className = "hidden";
-      } else {
-        document.getElementById("indexLogin").className = "shown";
-      }
-      if (Stitch.defaultAppClient.auth.user) {
-        document.getElementById("navbarLogout").className = "shown";
-      } else {
-        document.getElementById("navbarLogout").className = "hidden";
-      }
-
-      document.getElementById("navbarLogout").addEventListener("click", logout);
-
+        
+        document.getElementById("navbarLogout").addEventListener("click", logout);
+        document.getElementById("navbarLogin").addEventListener("click", toggleLogin);
+        //document.getElementById("floatingLogin").addEventListener("submit", login(flEmail.value, flPassword.value));
       }
     </script>
     <style>
-    .navbarUL {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background-color: #333;
-    }
+      #navbarAndLogin {
+        position: sticky;
+        top: 0;
+      }
+    
+      .navbarUL {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+      }
 
-    .navbar {
-      float: left;
-    }
+      .navbar {
+        float: left;
+      }
 
-    .navbar a {
-      display: block;
-      color: white;
-      text-align: center;
-      padding: 14px 16px;
-      text-decoration: none;
-    }
+      .navbar a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
 
-    .navbar a:hover:not(.active) {
-      background-color: #111;
-    }
+      .navbar a:hover:not(.active) {
+        background-color: #111;
+      }
 
-    .active {
-      background-color: #4CAF50;
-    }
-  </style>
+      .active {
+        background-color: #4CAF50;
+      }
+      
+      #floatingLogin {
+        float: right;
+        background-color: #333;
+        text-align: right;
+        padding: 5px;
+        color: white;
+      }
+      #floatingLogin a {
+        font-size: 12pt;
+      }
+      #floatingLogin a:hover {
+        background-color: #111;
+      }
+      
+      #navbarLoggedInAs {
+        float: right;
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+    </style>
   </head>
   
   <body>
-    <ul class="navbarUL">
-    <li class="navbar"><a class="active" href="./index.html">FEHPT</a></li>
-    <li class="navbar"><a href="./heroes.html">Heroes</a></li>
-    <li class="navbar"><a href="./skills.html">Skills</a></li>
-    <li class="navbar"id="navbarLogout" ><a href="#Logout">Logout</a></li>
-    <!-- <li class="navbar"><a href="#Login" onclick="login()">Login</a></li> -->
-  </ul>
+    <div id="navbarAndLogin">
+      <ul class="navbarUL">
+        <li class="navbar"><a class="active" href="./index.html">FEHPT</a></li>
+        <li class="navbar"><a href="./heroes.html">Heroes</a></li>
+        <li class="navbar"><a href="./skills.html">Skills</a></li>
+        <li class="navbar" id="navbarLogin"><a href="#Login">Login</a></li>
+        <li class="navbar" id="navbarLogout"><a href="#Logout" id="navbarLogoutAnchor"></a></li>
+      </ul>
+      <form id="floatingLogin" class="hidden" onsubmit="login(flEmail.value, flPassword.value)">
+        <label for="flEmail">Email:</label>
+        <input type="text" id="flEmail"></input><br />
+        <label for="flPassword">Password:</label>
+        <input type="password" id="flPassword"></input><br />
+        <a href="login.html#register">Register</a>
+        <a href="login.html#forgotAndRegistration">Forgot Password</a>
+        <input type="submit" value="Login"></input>
+      </form>
+    </div>
     <div class="title">
       <p>Fire Emblem Heroes Pocket Tactician!</p>
     </div>
@@ -77,6 +134,7 @@
       <ul class="nav">
         <li class="items" id="indexLogin"><a href="login.html">Login or Register</a></li>
         <li class="items" id="manageHeroes"><a href="manageheroes.html">Manage Heroes</a></li>
+        <li class="items" id="tacticsRoom"><a href="tacticsroom.html">Tactics Room</a></li>
         <li class="items"><a href="heroes.html">View Heroes</a></li>
         <li class="items"><a href="skills.html">View Skills</a></li>
         <li class="items"><a href="privacypolicy.html">Privacy Policy</a></li>

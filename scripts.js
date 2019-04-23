@@ -19,6 +19,49 @@ function displayHeroesList() {
     heroesList.appendChild(li);
   }
 }
+
+function preloadHeroImage(heroid) {
+  var loadTimer;
+  var imgObject = new Image();
+  imgObject.src = "data/" + heroData[heroid].assets.main;
+  imgObject.onLoad = onImgLoaded();
+  function onImgLoaded() {
+    if (loadTimer != null) clearTimeout(loadTimer);
+    if (!imgObject.complete) {
+      loadTimer = setTimeout(function() {
+        onImgLoaded();
+      }, 3);
+    } else {
+      onPreloadComplete();
+    }
+  }
+}
+function onPreloadComplete() {
+  //call the methods that will create a 64-bit version of thumbnail here.
+  var newImg = getImagePortion(imgObject, 0, 0, 300, 300, 2);
+
+  //place image in appropriate div
+  document.getElementById("heroImg").innerHTML = "<img alt=\"\" src=\""+newImg+"\" />";
+}
+function getImagePortion(imgObj, newWidth, newHeight, startX, startY, ratio){
+  /* the parameters: - the image element - the new width - the new height - the x point we start taking pixels - the y point we start taking pixels - the ratio */
+  //set up canvas for thumbnail
+  var tnCanvas = document.createElement('canvas');
+  var tnCanvasContext = canvas.getContext('2d');
+  tnCanvas.width = newWidth; tnCanvas.height = newHeight;
+
+  /* use the sourceCanvas to duplicate the entire image. This step was crucial for iOS4 and under devices. Follow the link at the end of this post to see what happens when you don’t do this */
+  var bufferCanvas = document.createElement('canvas');
+  var bufferContext = bufferCanvas.getContext('2d');
+  bufferCanvas.width = imgObj.width;
+  bufferCanvas.height = imgObj.height;
+  bufferContext.drawImage(imgObj, 0, 0);
+
+  /* now we use the drawImage method to take the pixels from our bufferCanvas and draw them into our thumbnail canvas */
+  tnCanvasContext.drawImage(bufferCanvas, startX,startY,newWidth * ratio, newHeight * ratio,0,0,newWidth,newHeight);
+  console.log(tnCanvas);
+  return tnCanvas.toDataURL();
+}
 /*
  * displays selected hero's data on the page inside of a container with id="hero"
  */
@@ -29,7 +72,7 @@ function displayHeroData(heroid) {
   const hero = heroData[heroid];
   //image
   const heroImg = document.getElementById("heroImg");
-  heroImg.src = "data/" + hero.assets.main;
+  //heroImg.src = "data/" + hero.assets.main;
   //name and title
   const heroNameAndTitle = document.getElementById("heroNameAndTitle");
   heroNameAndTitle.innerHTML = hero.name + ": " + hero.title;
@@ -560,6 +603,7 @@ function loadYourHeroes() {
       alert("Error communicating with database while fetching user's heroes: " + err);
       console.error(err);
     });
+  document.getElementById("editHero").className = "hidden";
 }
 
 var yourHeroes = new Object();
@@ -812,8 +856,6 @@ function updateStats() {
       skillRes += parseInt(seal.stats[4].$numberInt);
     }
   }
-
-
   //console.log("stats from skills: ", skillHP, skillAtk, skillSpd, skillDef, skillRes);
   yourHeroHP.innerHTML = skillHP + parseInt(yourHeroHP.innerHTML);
   yourHeroAtk.innerHTML = skillAtk + parseInt(yourHeroAtk.innerHTML);
@@ -866,6 +908,22 @@ function saveYourHeroChanges() {
   db.collection('Users').updateOne({_id:yourHero._id}, yourHero)
     .then(() => {
       alert("Successfully saved changes to " + yourHero.name + "!");
+      loadYourHeroes();
+    })
+    .catch(err => {
+      alert("Error communicating with database, check console for details.");
+      console.error(err);
+    });
+}
+
+function deleteHero() {
+  if(!confirm("Are you sure you want to delete " + yourHero.name + "?")) {
+    return;
+  }
+  const db = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('PocketTactician');
+  db.collection('Users').deleteOne({_id:yourHero._id})
+    .then(() => {
+      alert("Successfully deleted " + yourHero.name);
       loadYourHeroes();
     })
     .catch(err => {
