@@ -191,7 +191,7 @@ function addHeroToBoard() {
   if (document.getElementById("enemy5").selectedIndex > 0) {
     const e5 = heroData[document.getElementById("enemy5").selectedIndex - 1];
     const e5pic = document.createElement("img");
-    e5pic.src = "data/" + e1.assets.main;
+    e5pic.src = "data/" + e5.assets.main;
     const E8 = document.getElementById("E8");
     E8.innerHTML = "";
     E8.appendChild(e5pic);
