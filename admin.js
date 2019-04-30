@@ -258,14 +258,11 @@ function sRefineStatsTableEffect() {
   data += "\"hasIV\":" + document.getElementById("hIVs").checked;
   data += "}";
   console.log(JSON.parse(data));
-  alert("Sending Hero data to database: \n" + data);
-  /*
-  const client = stitch.Stitch.initializeDefaultAppClient('473pockettactician-jcxsp');
+  //alert("Sending Hero data to database: \n" + data);
+  //const client = stitch.Stitch.initializeDefaultAppClient('473pockettactician-jcxsp');
   const db = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('PocketTactician');
   //login with anonymous credentials (we'll change this next iteration)
-  client.auth.loginWithCredential(new stitch.AnonymousCredential())
-    .then(user =>//insert hero into collection
-      db.collection('Heroes').insertOne(JSON.parse(data)))
+  db.collection('Heroes').insertOne(JSON.parse(data))
     .then(db.collection('Heroes').find({ name: document.getElementById('hName').value }).asArray())
     .then(found => {
       //return success message to user
@@ -278,9 +275,9 @@ function sRefineStatsTableEffect() {
     })
     .catch(err => {
       //return failure message to user
-      alert("Failed to add Hero, check console for details"),
-        console.error(err)
-    });*/
+      alert("Failed to add Hero, check console for details");
+      console.error(err);
+    });
 }
 
 
@@ -360,12 +357,10 @@ function sendSkillData() {
     }
     console.log("Skill Data:\n" + data);
 
-    const client = stitch.Stitch.initializeDefaultAppClient('473pockettactician-jcxsp');
+    //const client = stitch.Stitch.initializeDefaultAppClient('473pockettactician-jcxsp');
     const db = client.getServiceClient(stitch.RemoteMongoClient.factory, 'mongodb-atlas').db('PocketTactician');
-    //login with anonymous credentials (we'll change this next iteration)
-    client.auth.loginWithCredential(new stitch.AnonymousCredential())
-      .then(user =>//insert skill into collection
-        db.collection('Skills').insertOne(JSON.parse(data)))
+    //login with anonymous credentials (we'll change this next iteration)//insert skill into collection
+    db.collection('Skills').insertOne(JSON.parse(data))
       .then(db.collection('Skills').find({ name: document.getElementById('sName').value }).asArray())
       .then(found => {//return success message to user
         if (found) {

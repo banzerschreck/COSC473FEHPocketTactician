@@ -105,7 +105,7 @@ function addYourHero() {
   rarity = 0;
   index = -1;
   var specials = heroData[heroVal].skills.filter(obj => {
-    return obj.type === "Special";
+    return obj.type === "special";
   });
   for (var i in specials) {
     if (specials[i].rarity > rarity) index = i;

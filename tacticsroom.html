@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -17,6 +17,10 @@
       text-align: center;
       font-size: 24pt;
     }
+
+    #emptyTD {
+      opacity: 0.0;
+    }
   </style>
 </head>
 
@@ -28,95 +32,115 @@
   <div class="return">
     <a href="./index.html">Return</a>
   </div>
-  <table id="tacticsTable">
-    <tr>
-      <td></td>
-      <td>A</td>
-      <td>B</td>
-      <td>C</td>
-      <td>D</td>
-      <td>E</td>
-      <td>F</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td id="A1"></td>
-      <td id="B1"></td>
-      <td id="C1"></td>
-      <td id="D1"></td>
-      <td id="E1"></td>
-      <td id="F1"></td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td id="A2"></td>
-      <td id="B2"></td>
-      <td id="C2"></td>
-      <td id="D2"></td>
-      <td id="E2"></td>
-      <td id="F2"></td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td id="A3"></td>
-      <td id="B3"></td>
-      <td id="C3"></td>
-      <td id="D3"></td>
-      <td id="E3"></td>
-      <td id="F3"></td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td id="A4"></td>
-      <td id="B4"></td>
-      <td id="C4"></td>
-      <td id="D4"></td>
-      <td id="E4"></td>
-      <td id="F4"></td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td id="A5"></td>
-      <td id="B5"></td>
-      <td id="C5"></td>
-      <td id="D5"></td>
-      <td id="E5"></td>
-      <td id="F5"></td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td id="A6"></td>
-      <td id="B6"></td>
-      <td id="C6"></td>
-      <td id="D6"></td>
-      <td id="E6"></td>
-      <td id="F6"></td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td id="A7"></td>
-      <td id="B7"></td>
-      <td id="C7"></td>
-      <td id="D7"></td>
-      <td id="E7"></td>
-      <td id="F7"></td>
-    </tr>
-    <tr>
-      <td>8</td>
-      <td id="A8"></td>
-      <td id="B8"></td>
-      <td id="C8"></td>
-      <td id="D8"></td>
-      <td id="E8"></td>
-      <td id="F8"></td>
-    </tr>
-  </table>
-  <label for="hero1">Hero 1</label><select id="hero1"></select>
-  <label for="hero2">Hero 2</label><select id="hero2"></select>
-  <label for="hero3">Hero 3</label><select id="hero3"></select>
-  <label for="hero4">Hero 4</label><select id="hero4"></select>
-  
-  <ul id="moves"></ul>
+  <h1>Setup</h1>
+  <label for="mapType">Map Type </label><select id="mapType">
+    <option value="normal">Normal</option>
+    <option value="ar">Aether Raids</option>
+    <option value="gc">Grand Conquests</option>
+  </select><br /><br />
+  <div id="pickHeroes">
+    <label for="hero1">Hero 1 </label><select id="hero1"><option>None</option></select><br />
+    <label for="hero2">Hero 2 </label><select id="hero2"><option>None</option></select><br />
+    <label for="hero3">Hero 3 </label><select id="hero3"><option>None</option></select><br />
+    <label for="hero4">Hero 4 </label><select id="hero4"><option>None</option></select><br />
+    <label for="hero5">Hero 5 </label><select id="hero5"><option>None</option></select><br />
+  </div><br />
+  <div id="pickEnemies">
+    <label for="enemy1">Enemy 1 </label><select id="enemy1"><option>None</option></select><br />
+    <label for="enemy2">Enemy 2 </label><select id="enemy2"><option>None</option></select><br />
+    <label for="enemy3">Enemy 3 </label><select id="enemy3"><option>None</option></select><br />
+    <label for="enemy4">Enemy 4 </label><select id="enemy4"><option>None</option></select><br />
+    <label for="enemy4">Enemy 5 </label><select id="enemy5"><option>None</option></select><br />
+    <label for="enemy4">Enemy 6 </label><select id="enemy6"><option>None</option></select><br />
+  </div><br />
+  <input type="button" id="start" value="Start battle!">
+  <div id="gameBoard">
+    <table id="tacticsTable">
+      <tr>
+        <td id="emptyTD"></td>
+        <td>A</td>
+        <td>B</td>
+        <td>C</td>
+        <td>D</td>
+        <td>E</td>
+        <td>F</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td><div id="A1" class="croppedsmall"></div></td>
+        <td><div id="B1" class="croppedsmall"></div></td>
+        <td><div id="C1" class="croppedsmall"></div></td>
+        <td><div id="D1" class="croppedsmall"></div></td>
+        <td><div id="E1" class="croppedsmall"></div></td>
+        <td><div id="F1" class="croppedsmall"></div></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><div id="A2" class="croppedsmall"></div></td>
+        <td><div id="B2" class="croppedsmall"></div></td>
+        <td><div id="C2" class="croppedsmall"></div></td>
+        <td><div id="D2" class="croppedsmall"></div></td>
+        <td><div id="E2" class="croppedsmall"></div></td>
+        <td><div id="F2" class="croppedsmall"></div></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><div id="A3" class="croppedsmall"></div></td>
+        <td><div id="B3" class="croppedsmall"></div></td>
+        <td><div id="C3" class="croppedsmall"></div></td>
+        <td><div id="D3" class="croppedsmall"></div></td>
+        <td><div id="E3" class="croppedsmall"></div></td>
+        <td><div id="F3" class="croppedsmall"></div></td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><div id="A4" class="croppedsmall"></div></td>
+        <td><div id="B4" class="croppedsmall"></div></td>
+        <td><div id="C4" class="croppedsmall"></div></td>
+        <td><div id="D4" class="croppedsmall"></div></td>
+        <td><div id="E4" class="croppedsmall"></div></td>
+        <td><div id="F4" class="croppedsmall"></div></td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><div id="A5" class="croppedsmall"></div></td>
+        <td><div id="B5" class="croppedsmall"></div></td>
+        <td><div id="C5" class="croppedsmall"></div></td>
+        <td><div id="D5" class="croppedsmall"></div></td>
+        <td><div id="E5" class="croppedsmall"></div></td>
+        <td><div id="F5" class="croppedsmall"></div></td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td><div id="A6" class="croppedsmall"></div></td>
+        <td><div id="B6" class="croppedsmall"></div></td>
+        <td><div id="C6" class="croppedsmall"></div></td>
+        <td><div id="D6" class="croppedsmall"></div></td>
+        <td><div id="E6" class="croppedsmall"></div></td>
+        <td><div id="F6" class="croppedsmall"></div></td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td><div id="A7" class="croppedsmall"></div></td>
+        <td><div id="B7" class="croppedsmall"></div></td>
+        <td><div id="C7" class="croppedsmall"></div></td>
+        <td><div id="D7" class="croppedsmall"></div></td>
+        <td><div id="E7" class="croppedsmall"></div></td>
+        <td><div id="F7" class="croppedsmall"></div></td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td><div id="A8" class="croppedsmall"></div></td>
+        <td><div id="B8" class="croppedsmall"></div></td>
+        <td><div id="C8" class="croppedsmall"></div></td>
+        <td><div id="D8" class="croppedsmall"></div></td>
+        <td><div id="E8" class="croppedsmall"></div></td>
+        <td><div id="F8" class="croppedsmall"></div></td>
+      </tr>
+    </table>
+    <h1>Moves</h1>
+    <ol id="moves"></ol>
+  </div>
 </div>
 </body>
 </html>
