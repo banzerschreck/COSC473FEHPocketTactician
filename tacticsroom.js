@@ -425,21 +425,21 @@ function addHeroToBoard() {
     A1.appendChild(h1pic);
   }
   if (document.getElementById("hero2").selectedIndex > 0) {
-    const hero2 = userData[document.getElementById("hero2").selectedIndex- 1];
+    const hero2 = userData[document.getElementById("hero2").selectedIndex - 1];
     const h2pic = document.createElement("img");
     h2pic.src = "data/" + hero2.assets.main;
     B1.innerHTML = "";
     B1.appendChild(h2pic);
   }
   if (document.getElementById("hero3").selectedIndex > 0) {
-    const hero3 = userData[document.getElementById("hero3").selectedIndex- 1];
+    const hero3 = userData[document.getElementById("hero3").selectedIndex - 1];
     const h3pic = document.createElement("img");
     h3pic.src = "data/" + hero3.assets.main;
     C1.innerHTML = "";
     C1.appendChild(h3pic);
   }
   if (document.getElementById("hero4").selectedIndex > 0) {
-    const hero4 = userData[document.getElementById("hero4").selectedIndex- 1];
+    const hero4 = userData[document.getElementById("hero4").selectedIndex - 1];
     const h4pic = document.createElement("img");
     h4pic.src = "data/" + hero4.assets.main;
     D1.innerHTML = "";
