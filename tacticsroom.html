@@ -10,6 +10,11 @@
   <script src="tacticsroom.js"></script>
   <style>
     td {
+      background-color: white;
+      border: 1px solid black;
+    }
+    
+    #tacticsTable td {
       width: 50px;
       height: 50px;
       border: 1px solid black;
@@ -34,26 +39,151 @@
   </div>
   <h1>Setup</h1>
   <label for="mapType">Map Type </label><select id="mapType">
-    <option value="normal">Normal</option>
+    <option value="arena">Arena</option>
     <option value="ar">Aether Raids</option>
-    <option value="gc">Grand Conquests</option>
+    <option value="gc" disabled>Grand Conquests</option>
   </select><br /><br />
   <div id="pickHeroes">
     <label for="hero1">Hero 1 </label><select id="hero1"><option>None</option></select><br />
+    <table id="hero1Stats" class="hidden">
+      <tr>
+        <td rowspan=4><div class="croppedsmall"><img id="h1Img"></div></td>
+        <td id="h1Name" colspan=2>Name:</td>
+        <td id="h1A">A:</td>
+        <td id="h1B">B:</td>
+        <td id="h1C">C:</td>
+        <td id="h1S">S:</td>
+      </tr>
+      <tr>
+        <td id="h1HP" colspan=2>HP:</td>
+        <td id="h1Weapon" colspan=4>Weapon:</td>
+      </tr>
+      <tr>
+        <td id="h1Atk">Atk:</td>
+        <td id="h1Spd">Spd:</td>
+        <td id="h1Assist" colspan=4>Assist:</td>
+      </tr>
+      <tr>
+        <td id="h1Def">Def:</td>
+        <td id="h1Res">Res:</td>
+        <td id="h1Special" colspan=4>Special:</td>
+      </tr>
+    </table>
+
     <label for="hero2">Hero 2 </label><select id="hero2"><option>None</option></select><br />
+    <table id="hero2Stats" class="hidden">
+      <tr>
+        <td rowspan=4><div class="croppedsmall"><img id="h2Img"></div></td>
+        <td id="h2Name" colspan=2>Name:</td>
+        <td id="h2A">A:</td>
+        <td id="h2B">B:</td>
+        <td id="h2C">C:</td>
+        <td id="h2S">S:</td>
+      </tr>
+      <tr>
+        <td id="h2HP" colspan=2>HP:</td>
+        <td id="h2Weapon" colspan=4>Weapon:</td>
+      </tr>
+      <tr>
+        <td id="h2Atk">Atk:</td>
+        <td id="h2Spd">Spd:</td>
+        <td id="h2Assist" colspan=4>Assist:</td>
+      </tr>
+      <tr>
+        <td id="h2Def">Def:</td>
+        <td id="h2Res">Res:</td>
+        <td id="h2Special" colspan=4>Special:</td>
+      </tr>
+    </table>
+
     <label for="hero3">Hero 3 </label><select id="hero3"><option>None</option></select><br />
+    <table id="hero3Stats" class="hidden">
+      <tr>
+        <td rowspan=4><div class="croppedsmall"><img id="h3Img"></div></td>
+        <td id="h3Name" colspan=2>Name:</td>
+        <td id="h3A">A:</td>
+        <td id="h3B">B:</td>
+        <td id="h3C">C:</td>
+        <td id="h3S">S:</td>
+      </tr>
+      <tr>
+        <td id="h3HP" colspan=2>HP:</td>
+        <td id="h3Weapon" colspan=4>Weapon:</td>
+      </tr>
+      <tr>
+        <td id="h3Atk">Atk:</td>
+        <td id="h3Spd">Spd:</td>
+        <td id="h3Assist" colspan=4>Assist:</td>
+      </tr>
+      <tr>
+        <td id="h3Def">Def:</td>
+        <td id="h3Res">Res:</td>
+        <td id="h3Special" colspan=4>Special:</td>
+      </tr>
+    </table>
+
     <label for="hero4">Hero 4 </label><select id="hero4"><option>None</option></select><br />
-    <label for="hero5">Hero 5 </label><select id="hero5"><option>None</option></select><br />
-  </div><br />
+    <table id="hero4Stats" class="hidden">
+      <tr>
+        <td rowspan=4><div class="croppedsmall"><img id="h4Img"></div></td>
+        <td id="h4Name" colspan=2>Name:</td>
+        <td id="h4A">A:</td>
+        <td id="h4B">B:</td>
+        <td id="h4C">C:</td>
+        <td id="h4S">S:</td>
+      </tr>
+      <tr>
+        <td id="h4HP" colspan=2>HP:</td>
+        <td id="h4Weapon" colspan=4>Weapon:</td>
+      </tr>
+      <tr>
+        <td id="h4Atk">Atk:</td>
+        <td id="h4Spd">Spd:</td>
+        <td id="h4Assist" colspan=4>Assist:</td>
+      </tr>
+      <tr>
+        <td id="h4Def">Def:</td>
+        <td id="h4Res">Res:</td>
+        <td id="h4Special" colspan=4>Special:</td>
+      </tr>
+    </table>
+
+    <label for="hero5">Hero 5 </label><select id="hero5" disabled><option>None</option></select><br />
+    <table id="hero1Stats" class="hidden">
+      <tr>
+        <td rowspan=4><div class="croppedsmall"><img id="h5Img"></div></td>
+        <td id="h5Name" colspan=2>Name:</td>
+        <td id="h5A">A:</td>
+        <td id="h5B">B:</td>
+        <td id="h5C">C:</td>
+        <td id="h5S">S:</td>
+      </tr>
+      <tr>
+        <td id="h5HP" colspan=2>HP:</td>
+        <td id="h5Weapon" colspan=4>Weapon:</td>
+      </tr>
+      <tr>
+        <td id="h5Atk">Atk:</td>
+        <td id="h5Spd">Spd:</td>
+        <td id="h5Assist" colspan=4>Assist:</td>
+      </tr>
+      <tr>
+        <td id="h5Def">Def:</td>
+        <td id="h5Res">Res:</td>
+        <td id="h5Special" colspan=4>Special:</td>
+      </tr>
+    </table>
+  </div>
+  <hr />
   <div id="pickEnemies">
     <label for="enemy1">Enemy 1 </label><select id="enemy1"><option>None</option></select><br />
     <label for="enemy2">Enemy 2 </label><select id="enemy2"><option>None</option></select><br />
     <label for="enemy3">Enemy 3 </label><select id="enemy3"><option>None</option></select><br />
     <label for="enemy4">Enemy 4 </label><select id="enemy4"><option>None</option></select><br />
-    <label for="enemy4">Enemy 5 </label><select id="enemy5"><option>None</option></select><br />
-    <label for="enemy4">Enemy 6 </label><select id="enemy6"><option>None</option></select><br />
-  </div><br />
-  <input type="button" id="start" value="Start battle!">
+    <label for="enemy4">Enemy 5 </label><select id="enemy5" disabled><option>None</option></select><br />
+    <label for="enemy4">Enemy 6 </label><select id="enemy6" disabled><option>None</option></select><br />
+  </div>
+  <input type="button" id="start" value="Start battle!"><hr />
   <div id="gameBoard">
     <table id="tacticsTable">
       <tr>
