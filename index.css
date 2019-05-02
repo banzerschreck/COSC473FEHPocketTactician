@@ -1,241 +1,246 @@
 
 
-      body {
-        background: url("images/Aether Raids/Bg_SkyCastle_00.png") no-repeat center center fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-        margin: 0px;
-        padding: 0px;
-        height: 3000px;
-        font-family: sans-serif;
+body {
+  background: url("images/Aether Raids/Bg_SkyCastle_00.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  margin: 0px;
+  padding: 0px;
+  height: 3000px;
+  font-family: sans-serif;
   
-      }
+}
 
-      .mainImg {
-        text-align: center;
-      }
+.mainImg {
+  text-align: center;
+}
 
-      .title {
-        color: white;
-        text-shadow: rgb(0, 0, 0) 2px 2px 0px, 
-        rgb(0, 0, 0) 2px -2px 0px, 
-        rgb(0, 0, 0) -2px 2px 0px, 
-        rgb(0, 0, 0) -2px -2px 0px, 
-        rgb(0, 0, 0) 2px 0px 0px, 
-        rgb(0, 0, 0) 0px 2px 0px, 
-        rgb(0, 0, 0) -2px 0px 0px, 
-        rgb(0, 0, 0) 0px -2px 0px;
-        font-size: 38px;
-        margin-top: 100px;
-        padding: 50px;
-/*        height: 110px;*/
-        text-align: center;
-        letter-spacing: 2px;
-        background: url(images/TitleTop.png) no-repeat center;
-      }
+.title {
+  color: white;
+  text-shadow: rgb(0, 0, 0) 2px 2px 0px, 
+  rgb(0, 0, 0) 2px -2px 0px, 
+  rgb(0, 0, 0) -2px 2px 0px, 
+  rgb(0, 0, 0) -2px -2px 0px, 
+  rgb(0, 0, 0) 2px 0px 0px, 
+  rgb(0, 0, 0) 0px 2px 0px, 
+  rgb(0, 0, 0) -2px 0px 0px, 
+  rgb(0, 0, 0) 0px -2px 0px;
+  font-size: 38px;
+  margin-top: 100px;
+  padding: 50px;
+  /*        height: 110px;*/
+  text-align: center;
+  letter-spacing: 2px;
+  background: url(images/TitleTop.png) no-repeat center;
+}
 
-      .title2 {
-        color: white;
-        text-shadow: rgb(0, 0, 0) 2px 2px 0px, 
-        rgb(0, 0, 0) 2px -2px 0px, 
-        rgb(0, 0, 0) -2px 2px 0px, 
-        rgb(0, 0, 0) -2px -2px 0px, 
-        rgb(0, 0, 0) 2px 0px 0px, 
-        rgb(0, 0, 0) 0px 2px 0px, 
-        rgb(0, 0, 0) -2px 0px 0px, 
-        rgb(0, 0, 0) 0px -2px 0px;
-        font-size: 38px;
-        margin: 0px;
-        padding: 50px;
-        text-align: center;
-        letter-spacing: 2px;
-        background: url(images/LoginImage.png) no-repeat center;
-      }
+.title2 {
+  color: white;
+  text-shadow: rgb(0, 0, 0) 2px 2px 0px, 
+  rgb(0, 0, 0) 2px -2px 0px, 
+  rgb(0, 0, 0) -2px 2px 0px, 
+  rgb(0, 0, 0) -2px -2px 0px, 
+  rgb(0, 0, 0) 2px 0px 0px, 
+  rgb(0, 0, 0) 0px 2px 0px, 
+  rgb(0, 0, 0) -2px 0px 0px, 
+  rgb(0, 0, 0) 0px -2px 0px;
+  font-size: 38px;
+  margin: 0px;
+  padding: 50px;
+  text-align: center;
+  letter-spacing: 2px;
+  background: url(images/LoginImage.png) no-repeat center;
+}
 
-      .add {
-        color: white;
-        text-shadow: rgb(0, 0, 0) 2px 2px 0px, 
-        rgb(0, 0, 0) 2px -2px 0px, 
-        rgb(0, 0, 0) -2px 2px 0px, 
-        rgb(0, 0, 0) -2px -2px 0px, 
-        rgb(0, 0, 0) 2px 0px 0px, 
-        rgb(0, 0, 0) 0px 2px 0px, 
-        rgb(0, 0, 0) -2px 0px 0px, 
-        rgb(0, 0, 0) 0px -2px 0px;
-        font-size: 38px;
-        margin-top: 100px;
-        padding: 50px;
-        text-align: center;
-        background: url(images/TitleTop.png) no-repeat center;
+.add {
+  color: white;
+  text-shadow: rgb(0, 0, 0) 2px 2px 0px, 
+  rgb(0, 0, 0) 2px -2px 0px, 
+  rgb(0, 0, 0) -2px 2px 0px, 
+  rgb(0, 0, 0) -2px -2px 0px, 
+  rgb(0, 0, 0) 2px 0px 0px, 
+  rgb(0, 0, 0) 0px 2px 0px, 
+  rgb(0, 0, 0) -2px 0px 0px, 
+  rgb(0, 0, 0) 0px -2px 0px;
+  font-size: 38px;
+  margin-top: 100px;
+  padding: 50px;
+  text-align: center;
+  background: url(images/TitleTop.png) no-repeat center;
+}
+
+.option {
+  margin: 10px;
+  text-align: center;
+  height: 30px;
+  list-style-type: none;
+}
+
+.items {
+  list-style-type: none;
+  text-align: center;
+  letter-spacing: 2px;
+  background: url("images/items1.png") no-repeat center center;
+  padding: 70px;
+  text-shadow: rgb(0, 0, 0) 2px 2px 0px, 
+  rgb(0, 0, 0) 2px -2px 0px, 
+  rgb(0, 0, 0) -2px 2px 0px, 
+  rgb(0, 0, 0) -2px -2px 0px, 
+  rgb(0, 0, 0) 2px 0px 0px, 
+  rgb(0, 0, 0) 0px 2px 0px, 
+  rgb(0, 0, 0) -2px 0px 0px, 
+  rgb(0, 0, 0) 0px -2px 0px;
+}
+
+a:link {
+  color: white;
+  text-decoration: none;
+  outline: 0;
+}
+
+a:visited {
+  color: white;
+  text-decoration: none;
+  outline: 0;
+}
+
+.items a:link {
+  font-size: 24pt;
+  background-color: none;
+
+}
+
+.items a:visited {
+  font-size: 24pt;
+  background-color: none;
+}
+
+.return {
+  color: white;
+  text-shadow: rgb(0, 0, 0) 2px 2px 0px, 
+  rgb(0, 0, 0) 2px -2px 0px, 
+  rgb(0, 0, 0) -2px 2px 0px, 
+  rgb(0, 0, 0) -2px -2px 0px, 
+  rgb(0, 0, 0) 2px 0px 0px, 
+  rgb(0, 0, 0) 0px 2px 0px, 
+  rgb(0, 0, 0) -2px 0px 0px, 
+  rgb(0, 0, 0) 0px -2px 0px;
+  font-size: 38px;
+  margin: 0px;
+  padding: 50px;
+  letter-spacing: 2px;
+  background: url(images/return2.png) no-repeat;
+  background-position: left;
+}
+
+.banner {
+  color: white;
+  text-shadow: rgb(0, 0, 0) 2px 2px 0px, 
+  rgb(0, 0, 0) 2px -2px 0px, 
+  rgb(0, 0, 0) -2px 2px 0px, 
+  rgb(0, 0, 0) -2px -2px 0px, 
+  rgb(0, 0, 0) 2px 0px 0px, 
+  rgb(0, 0, 0) 0px 2px 0px, 
+  rgb(0, 0, 0) -2px 0px 0px, 
+  rgb(0, 0, 0) 0px -2px 0px;
+  font-size: 30px;
+  margin: 0px;
+  padding: 60px;
+  /*        height: 110px;*/
+  text-align: center;
+  letter-spacing: 2px;
+  background: url(images/smallbanner.png) no-repeat center;
 
 
-    }
+}
 
-    .option {
-        margin: 10px;
-        text-align: center;
-        height: 30px;
-        list-style-type: none;
-    }
+.form {
+  color: white;
+  font-size: 22px;
+  text-shadow: rgb(0, 0, 0) 2px 2px 0px, 
+  rgb(0, 0, 0) 2px -2px 0px, 
+  rgb(0, 0, 0) -2px 2px 0px, 
+  rgb(0, 0, 0) -2px -2px 0px, 
+  rgb(0, 0, 0) 2px 0px 0px, 
+  rgb(0, 0, 0) 0px 2px 0px, 
+  rgb(0, 0, 0) -2px 0px 0px, 
+  rgb(0, 0, 0) 0px -2px 0px;
+  position: relative;
+  text-align: center;
+  color: white;
+}
 
-      .items {
-        list-style-type: none;
-        text-align: center;
-        letter-spacing: 2px;
-        background: url("images/items1.png") no-repeat center center;
-        padding: 70px;
-        text-shadow: rgb(0, 0, 0) 2px 2px 0px, 
-        rgb(0, 0, 0) 2px -2px 0px, 
-        rgb(0, 0, 0) -2px 2px 0px, 
-        rgb(0, 0, 0) -2px -2px 0px, 
-        rgb(0, 0, 0) 2px 0px 0px, 
-        rgb(0, 0, 0) 0px 2px 0px, 
-        rgb(0, 0, 0) -2px 0px 0px, 
-        rgb(0, 0, 0) 0px -2px 0px;
-      }
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: left;
+  line-height: 1.5;
+}
 
-      a:link {
-        color: white;
-        font-size: 24pt;
-        background-color: none;
-        text-decoration: none;
-        font-family: sans-serif;
-        
-      }
+.hidden {
+  display: none;
+}
 
-      a:visited {
-        color: white;
-        font-size: 24pt;
-        background-color: none;
-        text-decoration: none;
-        font-family: sans-serif;
-      }
+.shown {
+  display: block;
+}
+/*examples for getting elements generated by javascript*/
+#heroesList li a {
+  color: black;
+}
 
-      .return {
-        color: white;
-        text-shadow: rgb(0, 0, 0) 2px 2px 0px, 
-        rgb(0, 0, 0) 2px -2px 0px, 
-        rgb(0, 0, 0) -2px 2px 0px, 
-        rgb(0, 0, 0) -2px -2px 0px, 
-        rgb(0, 0, 0) 2px 0px 0px, 
-        rgb(0, 0, 0) 0px 2px 0px, 
-        rgb(0, 0, 0) -2px 0px 0px, 
-        rgb(0, 0, 0) 0px -2px 0px;
-        font-size: 38px;
-        margin: 0px;
-        padding: 50px;
-        letter-spacing: 2px;
-        background: url(images/return2.png) no-repeat;
-        background-position: left;
-      }
+#heroStatsTable td {
+  border: 1px solid black;
+}
 
-      .banner {
-        color: white;
-        text-shadow: rgb(0, 0, 0) 2px 2px 0px, 
-        rgb(0, 0, 0) 2px -2px 0px, 
-        rgb(0, 0, 0) -2px 2px 0px, 
-        rgb(0, 0, 0) -2px -2px 0px, 
-        rgb(0, 0, 0) 2px 0px 0px, 
-        rgb(0, 0, 0) 0px 2px 0px, 
-        rgb(0, 0, 0) -2px 0px 0px, 
-        rgb(0, 0, 0) 0px -2px 0px;
-        font-size: 30px;
-        margin: 0px;
-        padding: 60px;
-/*        height: 110px;*/
-        text-align: center;
-        letter-spacing: 2px;
-        background: url(images/smallbanner.png) no-repeat center;
-        
+#heroSkillsTable td {
+  border: 1px solid black;
+}
 
-      }
+#skillsList li a {
+  color: black;
+}
 
-         .form {
-            color: white;
-            font-size: 22px;
-            text-shadow: rgb(0, 0, 0) 2px 2px 0px, 
-            rgb(0, 0, 0) 2px -2px 0px, 
-            rgb(0, 0, 0) -2px 2px 0px, 
-            rgb(0, 0, 0) -2px -2px 0px, 
-            rgb(0, 0, 0) 2px 0px 0px, 
-            rgb(0, 0, 0) 0px 2px 0px, 
-            rgb(0, 0, 0) -2px 0px 0px, 
-            rgb(0, 0, 0) 0px -2px 0px;
-            position: relative;
-            text-align: center;
-            color: white;
-      }
+#skillRefinesTableNewEffectSpan {
+  color: green;
+}
 
-         .centered {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: left;
-            line-height: 1.5;
-      }
-    
-    .hidden {
-      display: none;
-    }
-    
-    .shown {
-      display: block;
-    }
-    /*examples for getting elements generated by javascript*/
-    #heroesList li a {
-      color: black;
-    }
-    
-    #heroStatsTable td {
-      border: 1px solid black;
-    }
-    
-    #heroSkillsTable td {
-      border: 1px solid black;
-    }
-    
-    #skillsList li a {
-      color: black;
-    }
-    
-    #skillRefinesTableNewEffectSpan {
-      color: green;
-    }
-    
-    #skillRefinesTable td {
-      border: 1px solid black;
-    }
+#skillRefinesTable td {
+  border: 1px solid black;
+}
 
-    #indexLogin {
-        list-style-type: none;
-        text-align: center;
-        letter-spacing: 2px;
-        background: url("images/items1.png") no-repeat center center;
-        padding: 70px;
-        text-shadow: rgb(0, 0, 0) 2px 2px 0px, 
-        rgb(0, 0, 0) 2px -2px 0px, 
-        rgb(0, 0, 0) -2px 2px 0px, 
-        rgb(0, 0, 0) -2px -2px 0px, 
-        rgb(0, 0, 0) 2px 0px 0px, 
-        rgb(0, 0, 0) 0px 2px 0px, 
-        rgb(0, 0, 0) -2px 0px 0px, 
-        rgb(0, 0, 0) 0px -2px 0px;
-    }
+#indexLogin {
+  list-style-type: none;
+  text-align: center;
+  letter-spacing: 2px;
+  background: url("images/items1.png") no-repeat center center;
+  padding: 70px;
+  text-shadow: rgb(0, 0, 0) 2px 2px 0px, 
+  rgb(0, 0, 0) 2px -2px 0px, 
+  rgb(0, 0, 0) -2px 2px 0px, 
+  rgb(0, 0, 0) -2px -2px 0px, 
+  rgb(0, 0, 0) 2px 0px 0px, 
+  rgb(0, 0, 0) 0px 2px 0px, 
+  rgb(0, 0, 0) -2px 0px 0px, 
+  rgb(0, 0, 0) 0px -2px 0px;
+}
 
-    #navbarLogout {
-        text-align: right;
-        padding-top: 15px;
-        padding-right: 15px;
-    }
-    
-    #navbarLogin {
-        text-align: right;
-        padding-top: 15px;
-        padding-right: 15px;
-    }
+#navbarLogout {
+  text-align: right;
+  padding-top: 15px;
+  padding-right: 15px;
+}
+
+#navbarLogin {
+  text-align: right;
+  padding-top: 15px;
+  padding-right: 15px;
+  font-size: 17px;
+}
 
 .cropped {
   position: relative;
@@ -250,22 +255,10 @@
   margin-left: -300px;
 }
 
-.croppedsmall {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  overflow: hidden;
-}
-.croppedsmall img {
-  width: 400%;
-  height: auto;
-  margin-top: -10px;
-  margin-left: -160px;
-}
-
 #navbarAndLogin {
   position: sticky;
   top: 0;
+  
 }
 
 .navbarUL {
@@ -286,14 +279,44 @@
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+  font-size: 17px;
 }
+
+#navbarLogin a:link {
+  display: block;
+  font-size: 17px;
+}
+
+#navbarLoggedInManage {
+  
+  font-size: 17px;
+  float: left;
+}
+
+#navbarLoggedInTactics {
+  
+  font-size: 17px;
+  float: left;
+}
+
+#navbarAdminLoggedIn a:link {
+  display: block;
+  font-size: 17px;
+  float: left;
+}
+#navbarAdminLoggedIn {
+  
+  font-size: 17px;
+  float: left;
+}
+
 
 .navbar a:hover:not(.active) {
   background-color: #111;
 }
 
 .active {
-  background-color: #4CAF50;
+  background-color: #66ccff;
 }
 
 #floatingLogin {
@@ -309,3 +332,26 @@
 #floatingLogin a:hover {
   background-color: #111;
 }
+
+#navbarLogoutAnchor
+{
+  font-size: 10px;
+  float: right;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
