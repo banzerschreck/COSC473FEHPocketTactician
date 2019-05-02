@@ -57,12 +57,14 @@
     </form>
   </div>
   <h1 class="title">Tactics Room</h1>
+<div class="tacticSetup">
   <label for="mapType">Map Type </label><select id="mapType">
     <option value="arena">Arena</option>
     <option value="ar">Aether Raids</option>
     <option value="gc" disabled>Grand Conquests</option>
   </select><br /><br />
-  <div id="pickHeroes">
+</div>
+  <div id="pickHeroes" class="tacticSetup">
     <label for="hero1">Hero 1 </label><select id="hero1"><option>None</option></select><br />
     <table id="hero1Stats" class="hidden">
       <tr>
@@ -194,7 +196,7 @@
     </table>
   </div>
   <hr />
-  <div id="pickEnemies">
+  <div id="pickEnemies" class="tacticSetup">
     <label for="enemy1">Enemy 1 </label><select id="enemy1"><option>None</option></select><br />
     <label for="enemy2">Enemy 2 </label><select id="enemy2"><option>None</option></select><br />
     <label for="enemy3">Enemy 3 </label><select id="enemy3"><option>None</option></select><br />
@@ -202,7 +204,7 @@
     <label for="enemy4">Enemy 5 </label><select id="enemy5" disabled><option>None</option></select><br />
     <label for="enemy4">Enemy 6 </label><select id="enemy6" disabled><option>None</option></select><br />
   </div>
-  <input type="button" id="start" value="Start battle!"><hr />
+  <input class="startButton" type="button" id="start" value="Start battle!"><hr />
   <div id="gameBoard">
     <table id="tacticsTable">
       <tr>
