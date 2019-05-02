@@ -405,3 +405,12 @@ a:visited {
    margin-right: 30%;
 }
 
+#tacticsTable {
+  margin-left: 28%;
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 30px;
+  border: 5px solid black;
+  background: #ccccb3;
+  position: absolute;
+}
