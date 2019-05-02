@@ -20,8 +20,8 @@ window.onload = function() {
     document.getElementById("floatingLogin").className = "hidden";
     document.getElementById("navbarLogoutAnchor").innerHTML = "Logged in as " + Stitch.defaultAppClient.auth.user.profile.data.email;
   }
-  
-  
+
+  document.getElementById("skillsList").addEventListener("change", displaySkillData);
 }
 /* 
  * builds a clickable list of skills found in JSON database in a container called "select"
