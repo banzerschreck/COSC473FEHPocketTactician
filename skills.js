@@ -28,27 +28,24 @@ window.onload = function() {
  */
 function displaySkillsList() {
   console.log("Building Skills list...");
-  const skillsList = document.getElementById("skillsList");
+  var skillsList = document.getElementById("skillsList");
   for (var i = 0; i < skillsData.length; i++) {
-    const li = document.createElement("li");
-    const a = document.createElement("a");
-    a.href = "javascript:displaySkillData(" + i + ")";
-    a.innerHTML = skillsData[i].name;
-    li.appendChild(a);
-    skillsList.appendChild(li);
+    var option = document.createElement("option");
+    option.innerHTML = skillsData[i].name;
+    skillsList.appendChild(option);
   }
 }
 /*
  * displays data for a given skill in a container called "skill"
  */
-function displaySkillData(skillId) {
+function displaySkillData() {
   document.getElementById("skill").className = "shown";
   //var s = "";
   //var p = "";
-  var skill = skillsData[skillId];
+  var skill = skillsData[document.getElementById("skillsList").selectedIndex - 1];
 
-  console.log("Displaying skill data for skill #", skillId);
-  console.log(skillsData[skillId]);
+  console.log("Displaying skill data", skill);
+  //console.log(skillsData[skillId]);
   //name
   const skillName = document.getElementById("skillName");
   skillName.innerHTML = skill.name;
