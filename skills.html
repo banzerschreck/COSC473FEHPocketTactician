@@ -1,4 +1,4 @@
-﻿<html>
+<html>
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <title>View Skills</title>
@@ -10,29 +10,35 @@
   
 <body>
   <div id="navbarAndLogin">
-    <ul class="navbarUL">
-      <li class="navbar"><a href="./index.html">FEHPT</a></li>
-      <li class="navbar"><a href="./heroes.html">Heroes</a></li>
-      <li class="navbar"><a class="active" href="./skills.html">Skills</a></li>
-      <li class="navbar" id="navbarLogin"><a href="#Login">Login</a></li>
-      <li class="navbar" id="navbarLogout"><a href="#Logout" id="navbarLogoutAnchor"></a></li>
-    </ul>
-    <form id="floatingLogin" class="hidden" onsubmit="login(flEmail.value, flPassword.value)">
-      <label for="flEmail">Email:</label>
-      <input type="text" id="flEmail"></input><br />
-      <label for="flPassword">Password:</label>
-      <input type="password" id="flPassword"></input><br />
-      <a href="login.html#register">Register</a>
-      <a href="login.html#forgotAndRegistration">Forgot Password</a>
-      <input type="submit" value="Login"></input>
-    </form>
-  </div>
+      <ul class="navbarUL">
+        <li class="navbar"><a href="./index.html">FEHPT</a></li>       
+        <li class="navbar" id="navbarLoggedInManage"><a href="./manageheroes.html">Manage Heroes</a></li>
+        <li class="navbar" id="navbarLoggedInTactics"><a href="./tacticsroom.html">Tactics Room</a></li>
+        <li class="navbar"><a href="./heroes.html">View Heroes</a></li>
+        <li class="navbar"><a class="active" href="./skills.html">View Skills</a></li>
+        <li class="navbar" id="navbarAdminLoggedIn"><a href="./admin.html">Admin</a></li>
+
+        <li class="navbar" id="navbarLogin"><a href="#Login">Login</a></li>
+        <li class="navbar" id="navbarLogout"><a href="#Logout" id="navbarLogoutAnchor"></a></li>
+      </ul>
+      <form id="floatingLogin" class="hidden" onsubmit="login(flEmail.value, flPassword.value)">
+        <label for="flEmail">Email:</label>
+        <input type="text" id="flEmail"></input><br />
+        <label for="flPassword">Password:</label>
+        <input type="password" id="flPassword"></input><br />
+        <a href="login.html#register">Register</a>
+        <a href="login.html#forgotAndRegistration">Forgot Password</a>
+        <input type="submit" value="Login"></input>
+      </form>
+    </div>
 
   <h1 class="title">Select a Skill</h1>
   <div id="select">
-    <ul id="skillsList">
-    
-    </ul>
+
+    <select id="skillsList">
+      <option >Select a Skill</option>
+    </select>
+
   </div>
     
   <div id="skill">
