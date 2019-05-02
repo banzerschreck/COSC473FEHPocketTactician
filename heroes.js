@@ -23,6 +23,8 @@ function checkLoggedIn() {
     document.getElementById("floatingLogin").className = "hidden";
     document.getElementById("navbarLogoutAnchor").innerHTML = "Logged in as " + Stitch.defaultAppClient.auth.user.profile.data.email;
   }
+
+  document.getElementById("heroesList").addEventListener("change", displayHeroData);
 }
 /*
  * builds list of heroes found in the database
@@ -32,26 +34,28 @@ function displayHeroesList() {
   console.log("Building Heroes list...");
   const heroesList = document.getElementById("heroesList");
   for (var i = 0; i < heroData.length; i++) {
-    var li = document.createElement("li");
-    var a = document.createElement("a");
-    a.href = "javascript:displayHeroData(" + i + ")";
-    a.appendChild(document.createTextNode(heroData[i].name + ": " + heroData[i].title));
-    li.appendChild(a);
-    heroesList.appendChild(li);
+    var option = document.createElement("option");
+   
+    option.appendChild(document.createTextNode(heroData[i].name + ": " + heroData[i].title));
+
+    heroesList.appendChild(option);
   }
 }
 
 /*
  * displays selected hero's data on the page inside of a container with id="hero"
  */
-function displayHeroData(heroid) {
+function displayHeroData() {
   document.getElementById("hero").className = "shown";
   //var s = "";
-  console.log("Displaying hero data for id = ", heroid);
-  const hero = heroData[heroid];
+  var hero = heroData[document.getElementById("heroesList").selectedIndex - 1];
+
+
+  console.log("Displaying hero data", hero);
+  //const hero = heroData[heroid];
   //image
   const heroImg = document.getElementById("heroImg");
-  heroImg.src = "data/" + heroData[heroid].assets.main;
+  heroImg.src = "data/" + hero.assets.main;
   //cropHeroImage(heroData[heroid].assets.main, "heroImg");
   //name and title
   const heroNameAndTitle = document.getElementById("heroNameAndTitle");
