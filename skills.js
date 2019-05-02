@@ -1,5 +1,7 @@
 var skillsData = new Object();
-window.onload = function() {
+window.onload = checkLoggedIn;
+
+function checkLoggedIn() {
   fetch(skillsURL)
   .then(res => res.json())
   .then((res) => {
@@ -14,10 +16,18 @@ window.onload = function() {
   if(!Stitch.defaultAppClient.auth.user) {//user is not logged in
     document.getElementById("navbarLogin").className = "shown";
     document.getElementById("navbarLogout").className = "hidden";
+    document.getElementById("navbarLoggedInManage").className = "hidden";
+    document.getElementById("navbarLoggedInTactics").className = "hidden";
+    document.getElementById("navbarAdminLoggedIn").className = "hidden";
   } else {//user is logged in
+    //user is admin
+    if(checkUserIsAdmin()) document.getElementById("navbarAdminLoggedIn").className = "shown navbar";
+    else document.getElementById("navbarAdminLoggedIn").className = "hidden";
     document.getElementById("navbarLogout").className = "shown";
     document.getElementById("navbarLogin").className = "hidden";
     document.getElementById("floatingLogin").className = "hidden";
+    document.getElementById("navbarLoggedInManage").className = "shown navbar";
+    document.getElementById("navbarLoggedInTactics").className = "shown navbar";
     document.getElementById("navbarLogoutAnchor").innerHTML = "Logged in as " + Stitch.defaultAppClient.auth.user.profile.data.email;
   }
 

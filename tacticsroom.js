@@ -9,6 +9,26 @@ var A7, B7, C7, D7, E7, F7;
 var A8, B8, C8, D8, E8, F8;
 
 window.onload = function () {
+  //nav bar stuff
+  document.getElementById("navbarLogout").addEventListener("click", logout);
+  document.getElementById("navbarLogin").addEventListener("click", toggleLogin);
+  if(!Stitch.defaultAppClient.auth.user) {//user is not logged in
+    document.getElementById("navbarLogin").className = "shown";
+    document.getElementById("navbarLogout").className = "hidden";
+    document.getElementById("navbarLoggedInManage").className = "hidden";
+    document.getElementById("navbarLoggedInTactics").className = "hidden";
+    document.getElementById("navbarAdminLoggedIn").className = "hidden";
+  } else {//user is logged in
+    //user is admin
+    if(checkUserIsAdmin()) document.getElementById("navbarAdminLoggedIn").className = "shown navbar";
+    else document.getElementById("navbarAdminLoggedIn").className = "hidden";
+    document.getElementById("navbarLogout").className = "shown";
+    document.getElementById("navbarLogin").className = "hidden";
+    document.getElementById("floatingLogin").className = "hidden";
+    document.getElementById("navbarLoggedInManage").className = "shown navbar";
+    document.getElementById("navbarLoggedInTactics").className = "shown active navbar";
+    document.getElementById("navbarLogoutAnchor").innerHTML = "Logged in as " + Stitch.defaultAppClient.auth.user.profile.data.email;
+  }
   //check if logged in
   if(Stitch.defaultAppClient.auth.user) {
     document.getElementById("loggedIn").className = "shown";

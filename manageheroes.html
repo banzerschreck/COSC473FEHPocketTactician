@@ -10,8 +10,27 @@
   <link rel="stylesheet" type="text/css" href="index.css" />
 </head>
 <body>
-  <div class="return">
-    <a href="./index.html">Return</a>
+  <div id="navbarAndLogin">
+    <ul class="navbarUL">
+      <li class="navbar"><a href="./index.html">FEHPT</a></li>       
+      <li class="navbar" id="navbarLoggedInManage"><a class="active" href="./manageheroes.html">Manage Heroes</a></li>
+      <li class="navbar" id="navbarLoggedInTactics"><a href="./tacticsroom.html">Tactics Room</a></li>
+      <li class="navbar"><a href="./heroes.html">View Heroes</a></li>
+      <li class="navbar"><a href="./skills.html">View Skills</a></li>
+      <li class="navbar" id="navbarAdminLoggedIn"><a href="./admin.html">Admin</a></li>
+
+      <li class="navbar" id="navbarLogin"><a href="#Login">Login</a></li>
+      <li class="navbar" id="navbarLogout"><a href="#Logout" id="navbarLogoutAnchor"></a></li>
+    </ul>
+    <form id="floatingLogin" class="hidden" onsubmit="login(flEmail.value, flPassword.value)">
+      <label for="flEmail">Email:</label>
+      <input type="text" id="flEmail"></input><br />
+      <label for="flPassword">Password:</label>
+      <input type="password" id="flPassword"></input><br />
+      <a href="login.html#register">Register</a>
+      <a href="login.html#forgotAndRegistration">Forgot Password</a>
+      <input type="submit" value="Login"></input>
+    </form>
   </div>
 
   <div id="notLoggedIn">

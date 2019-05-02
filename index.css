@@ -275,6 +275,19 @@ a:visited {
   margin-left: -300px;
 }
 
+.croppedsmall {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+}
+.croppedsmall img {
+  width: 400%;
+  height: auto;
+  margin-top: -10px;
+  margin-left: -160px;
+}
+
 #navbarAndLogin {
   position: sticky;
   top: 0;
