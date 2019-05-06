@@ -478,3 +478,47 @@ a:visited {
    margin-left: 36%;
    margin-right: 30%;
 }
+
+#yourHeroesList {
+   margin-left: 28%;
+  margin-right: 28%;
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 30px;
+  border: 5px solid black;
+  background: #ccccb3;
+}
+
+#editHero {
+   margin-left: 28%;
+  margin-right: 28%;
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 30px;
+  border: 5px solid black;
+  background: #ccccb3;
+}
+
+#yourHeroesList li a {
+  color: black;
+}
+
+#movesTitle {
+  padding: 10px;
+  margin-left: 38%;
+  margin-right: 38%;
+  border-radius: 30px;
+  border: 5px solid black;
+  background: #ccccb3;
+  color: white;
+  text-shadow: rgb(0, 0, 0) 2px 2px 0px, 
+  rgb(0, 0, 0) 2px -2px 0px, 
+  rgb(0, 0, 0) -2px 2px 0px, 
+  rgb(0, 0, 0) -2px -2px 0px, 
+  rgb(0, 0, 0) 2px 0px 0px, 
+  rgb(0, 0, 0) 0px 2px 0px, 
+  rgb(0, 0, 0) -2px 0px 0px, 
+  rgb(0, 0, 0) 0px -2px 0px;
+  text-align: center;
+
+}
