@@ -389,7 +389,6 @@ a:visited {
    *background: #66ccff;
    -webkit-appearance: none;
    outline: 0;
-
 }
 
 #select {
@@ -410,7 +409,7 @@ a:visited {
 }
 
 #tacticsTable {
-  margin-left: 28%;
+  margin-left: 21%;
   margin-top: 30px;
   padding: 20px;
   border-radius: 30px;
@@ -418,6 +417,7 @@ a:visited {
   background: #ccccb3;
   position: absolute;
 }
+
 #yourHeroesList {
    margin-left: 28%;
   margin-right: 28%;
@@ -438,21 +438,6 @@ a:visited {
   background: #ccccb3;
 }
 
-#yourHeroesList li a {
-  color: black;
-}
-
-#tacticsTable {
-  margin-left: 28%;
-  margin-top: 30px;
-  padding: 20px;
-  border-radius: 30px;
-  border: 5px solid black;
-  background: #ccccb3;
-  position: absolute;
-  overflow: none;
-}
-
 .tacticSetup {
   margin-left: 28%;
   margin-right: 28%;
@@ -461,8 +446,6 @@ a:visited {
   border-radius: 30px;
   border: 5px solid black;
   background: #ccccb3;
-  
-
 }
 
 .startButton {
@@ -477,30 +460,6 @@ a:visited {
    margin-top: 10px;
    margin-left: 36%;
    margin-right: 30%;
-}
-
-#yourHeroesList {
-   margin-left: 28%;
-  margin-right: 28%;
-  margin-top: 30px;
-  padding: 20px;
-  border-radius: 30px;
-  border: 5px solid black;
-  background: #ccccb3;
-}
-
-#editHero {
-   margin-left: 28%;
-  margin-right: 28%;
-  margin-top: 30px;
-  padding: 20px;
-  border-radius: 30px;
-  border: 5px solid black;
-  background: #ccccb3;
-}
-
-#yourHeroesList li a {
-  color: black;
 }
 
 #movesTitle {
@@ -520,5 +479,4 @@ a:visited {
   rgb(0, 0, 0) -2px 0px 0px, 
   rgb(0, 0, 0) 0px -2px 0px;
   text-align: center;
-
 }
